@@ -128,7 +128,7 @@ include 'db_connect.php';
             
             <div class="form-group col-md-4">
                             <label for="emp">Employee Number</label>
-                            <input type="text" class="form-control" id="emp" name="empnumber" placeholder="Enter employee number">
+                            <input type="text" class="form-control" id="emp" name="emp" placeholder="Enter employee number">
             </div>
 
 

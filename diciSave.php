@@ -9,7 +9,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 include 'db_connect.php';
 
-$empnumber = isset($_POST['empnumber']) ? $_POST['empnumber'] : '';
+$emp = isset($_POST['emp']) ? $_POST['emp'] : '';
 $name = isset($_POST['name']) ? $_POST['name'] : '';
 $reason = isset($_POST['reason']) ? $_POST['reason'] : '';
 $remark = isset($_POST['remark']) ? $_POST['remark'] : '';
@@ -47,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if ($response['success']) {
-    $query = "INSERT INTO `discipline` (`emp_num`, `name`, `reason`, `img`, `remark`) VALUES ('$empnumber', '$name', '$reason', '$image_name', '$remark')";
+    $query = "INSERT INTO `discipline` (`emp_num`, `name`, `reason`, `img`, `remark`) VALUES ('$emp', '$name', '$reason', '$image_name', '$remark')";
 } else {
-    $query = "INSERT INTO `discipline` (`emp_num`, `name`, `reason`, `img`, `remark`) VALUES ('$empnumber', '$name', '$reason', NULL, '$remark')";
+    $query = "INSERT INTO `discipline` (`emp_num`, `name`, `reason`, `img`, `remark`) VALUES ('$emp', '$name', '$reason', NULL, '$remark')";
 }
 
 if (mysqli_query($con, $query)) {
