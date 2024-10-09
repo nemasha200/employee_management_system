@@ -133,6 +133,18 @@ include 'db_connect.php';
             text-align: center;
         }
 
+        #fullNameInitials{
+            color: black;
+        }
+
+        #company{
+            color: black;
+        }
+
+        #department{
+            color: black;
+        }
+
         
     </style>
 
@@ -164,48 +176,18 @@ include 'db_connect.php';
             
             <div class="form-group col-md-9">
                 <label for="fullNameInitials">Name with Initials:</label>
-                <select class="form-control" id="fullNameInitials" name="nameinitial">
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT initial_name FROM  employer ");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resCom['initial_name'] ?>"><?php echo $resCom['initial_name'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
+                <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
             </div>
         </div>
         <div class="form-group col-md-13">
             <label for="company">Company:</label>
-            <select class="form-control" id="company" name="company">
-                <option value="" disabled selected>Select an option</option>
-                <?php 
-                $getEmp = mysqli_query($con,"SELECT * FROM sub_company");
-                while ($resCom = mysqli_fetch_array($getEmp)) {
-                ?>
-                <option value="<?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
-                <?php
-                }
-                ?>
-            </select>
+            <input type="text" class="form-control" id="company" name="company" readonly>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="department">Department<span style="color:red">*</span></label>
-                <select class="form-control" id="department" name="department">
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT dep_name FROM sub_department");
-                    while ($resDep = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resDep['dep_name'] ?>"><?php echo $resDep['dep_name'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
+                <input type="text" class="form-control" id="department" name="department" readonly>
             </div>
             <div class="form-group col-md-5">
                 <label for="dob">Date of Join</label>
@@ -305,6 +287,37 @@ include 'db_connect.php';
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#employNumber').change(function () {
+            var empNumber = $(this).val();
+
+            if (empNumber) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'getEmployeeDetails.php',
+                    data: { empnumber: empNumber },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#fullNameInitials').val(response.initial_name);
+                            $('#company').val(response.comp_num);
+                            $('#department').val(response.department);
+                        }
+                    },
+                    error: function () {
+                        alert('Error retrieving employee details');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 
 </body>
 
