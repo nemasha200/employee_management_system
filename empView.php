@@ -96,9 +96,9 @@ if(isset($_GET['user_id'])) {
             margin-top: 20px;
         }
 
-        /* Highlight the selected value with a yellow background */
-        #selectedValue {
-            background-color: aquamarine;
+        .highlight-green {
+            background-color: darkcyan;
+            color: white;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
@@ -127,17 +127,14 @@ if(isset($_GET['user_id'])) {
 
                
                     
-                <form id="myForm">
-            <div id="dropdownDiv">
+               
                 <div class="form-group">
                 <label for="company">Company</label>
-                <input type="text" class="form-control" id="company" name="company" value="<?php echo $res_user['comp_num']; ?>" readonly>
-                    
+                <!-- Display company name inside an h4 with green highlight -->
+                <h4 class="highlight-green" id="company" readonly><?php echo $res_user['comp_num']; ?></h4>    
                 </div>
-            </div>
-            <div id="selectionDisplay">
-                <h4 id="selectedValue"></h4>
-            </div>
+           
+            
             <h5><u>Employee Personal Details</u></h5><br>
 
                     <div class="form-group">
