@@ -22,131 +22,129 @@ include 'db_connect.php';
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">        
 </head>
 <style>
-        body {
-            margin: 0;
-            background-color: #dadce3;
-            background-image: url("black.jpg");
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    body {
+        margin: 0;
+        background-color: #dadce3;
+        background-image: url("black.jpg");
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-        .wrapper {
-            display: flex;
-            width: 100%;
-            height: 100%;
-        }
+    .wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
 
-        .sidebar {
-            height: 100%;
-            background-color: grey;
-            color: black;
-            padding-top: 20px;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-        }
+    .sidebar {
+        height: 100%;
+        background-color: grey;
+        color: black;
+        padding-top: 20px;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
 
-        .sidebar h4 {
-            padding-bottom: 20px;
-            font-size: 1.25rem;
-            text-transform: uppercase;
-            border-bottom: 1px solid #495057;
-            margin-bottom: 20px;
-            color: black;
-        }
+    .sidebar h4 {
+        padding-bottom: 20px;
+        font-size: 1.25rem;
+        text-transform: uppercase;
+        border-bottom: 1px solid #495057;
+        margin-bottom: 20px;
+        color: black;
+    }
 
-        .sidebar a {
-            background-color: #7fe7f5;
-            color: black;
-            display: block;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 10px;
-            transition: background-color 0.3s ease-in-out;
-        }
+    .sidebar a {
+        background-color: #7fe7f5;
+        color: black;
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 10px;
+        transition: background-color 0.3s ease-in-out;
+    }
 
-        .sidebar a:hover {
-            background-color: red;
-        }
+    .sidebar a:hover {
+        background-color: red;
+    }
 
-        .sidebar .submenu a {
-            padding-left: 40px;
-        }
+    .sidebar .submenu a {
+        padding-left: 40px;
+    }
 
-        .logo {
-            width: 30px;
-            height: auto;
-            display: inline-block;
-            margin-right: 10px;
-        }
+    .logo {
+        width: 30px;
+        height: auto;
+        display: inline-block;
+        margin-right: 10px;
+    }
 
-        .form-container {
-            margin-left: 250px; /* Adjusted for sidebar width */
-            padding: 30px;
-            background-color: whitesmoke;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: calc(100% - 250px); /* Adjust width for sidebar */
-            max-width: 800px;
-            margin: auto;
-        }
+    .form-container {
+        margin-left: 250px; /* Adjusted for sidebar width */
+        padding: 30px;
+        background-color: whitesmoke;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: calc(100% - 250px); /* Adjust width for sidebar */
+        max-width: 800px;
+        margin: auto;
+    }
 
-        .form-control {
-            color: white;
-            background-color: #343a40;
-        }
+    /* Set background color of general form controls */
+    .form-control {
+        color: white;
+        background-color: #343a40;
+    }
 
-        .form-control::placeholder {
-            color: #adb5bd;
-        }
+    .form-control::placeholder {
+        color: #adb5bd;
+    }
 
-        .form-group label {
-            color: #343a40;
-        }
+    .form-group label {
+        color: #343a40;
+    }
 
-        .btn-primary {
-            background-color: #a62411;
-            border: none;
-            display: block;
-            margin: 0 auto;
-        }
+    .btn-primary {
+        background-color: #a62411;
+        border: none;
+        display: block;
+        margin: 0 auto;
+    }
 
-        .btn-primary:hover {
-            background-color: #c82333;
-        }
+    .btn-primary:hover {
+        background-color: #c82333;
+    }
 
-        #selectionDisplay {
-            display: none;
-            margin-top: 20px;
-        }
+    #selectionDisplay {
+        display: none;
+        margin-top: 20px;
+    }
 
-        /* Highlight the selected value with a yellow background */
-        #selectedValue {
-            background-color: yellow;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
+    /* Highlight the selected value with a yellow background */
+    #selectedValue {
+        background-color: yellow;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+    }
 
-        #fullNameInitials{
-            color: black;
-        }
-
-        #company{
-            color: black;
-        }
-
-        #department{
-            color: black;
-        }
-
-        
-    </style>
+    /* Override specific fields with white background color */
+    #fullNameInitials,
+    #company,
+    #department,
+    #doj,
+    #designation,
+    #grade {
+        background-color: white;
+        color: black;
+    }
+</style>
 
 <body>
 <?php include 'submenubar.php';?>
@@ -158,6 +156,7 @@ include 'db_connect.php';
         <button type="button" class="btn btn-primary btn-small">View promotions</button>
     </a>
     <form id="registrationForm" method="POST" action="promoSave.php">
+
         <div class="form-row"> 
             <div class="form-group col-md-3">
                 <label for="employNumber">Employ Number:</label>
@@ -189,41 +188,25 @@ include 'db_connect.php';
                 <label for="department">Department<span style="color:red">*</span></label>
                 <input type="text" class="form-control" id="department" name="department" readonly>
             </div>
+
             <div class="form-group col-md-5">
                 <label for="dob">Date of Join</label>
-                <input type="date" class="form-control" id="dob" name="doj">
+                <input type="text" class="form-control" id="doj" name="doj" readonly>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="grade">Existing Grade<span style="color:red">*</span></label>
-                <select class="form-control" id="grade" name="grade">
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT job_title, grade FROM sub_division");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resCom['job_title']."/".$resCom['grade'] ?>"><?php echo $resCom['job_title']."/".$resCom['grade'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-            </div>
+                <input type="grade" class="form-control" id="grade" name="grade" readonly>
+        </div>
 
-            <div class="form-group col-md-3">
+
+        <div class="form-group col-md-3">
                 <label for="designation">Existing Designation<span style="color:red">*</span></label>
-                <select class="form-control" id="designation" name="designation">
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT desi_name FROM sub_designation");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resCom['desi_name'] ?>"><?php echo $resCom['desi_name'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
+                <input type="designation"  class="form-control" id="designation" name="designation" readonly>
+                    
+               
             </div>
 
             <div class="form-group col-md-3">
@@ -234,7 +217,7 @@ include 'db_connect.php';
                     $getEmp = mysqli_query($con,"SELECT job_title, grade FROM sub_division");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
-                    <option value="<?php echo $resCom['job_title']."/".$resCom['grade'] ?>"><?php echo $resCom['job_title']."/".$resCom['grade'] ?></option>
+                    <option value="<?php echo $resCom['grade'] ?>"><?php echo $resCom['grade'] ?></option>
                     <?php
                     }
                     ?>
@@ -307,6 +290,12 @@ include 'db_connect.php';
                             $('#fullNameInitials').val(response.initial_name);
                             $('#company').val(response.comp_num);
                             $('#department').val(response.department);
+                            $('#doj').val(response.doj);
+                            $('#grade').val(response.grade);
+                            $('#designation').val(response.designation);
+
+
+
                         }
                     },
                     error: function () {

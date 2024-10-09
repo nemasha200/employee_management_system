@@ -164,14 +164,26 @@ include 'db_connect.php';
             <div class="form-row">
 
             <div class="form-group col-md-4">
-                            <label for="emp">Employee Number</label>
-                            <input type="text" class="form-control" id="emp" name="emp" placeholder="Enter employee number">
+            <label for="employNumber">Employ Number:</label>
+                <select class="form-control" id="employNumber" name="emp">
+                    <option value="" disabled selected>Select an option</option>
+                    <?php 
+                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select> 
+                           
             </div>
 
 
             <div class="form-group col-md-8">
-                            <label for="fullNameInitials">Name with Initials</label>
-                            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" placeholder="Enter full name with initials">
+            <label for="fullNameInitials">Name with Initials:</label>
+            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
+                            
             </div>
 
             
@@ -180,30 +192,14 @@ include 'db_connect.php';
 
             <div class="form-row">
             <div class="form-group col-md-5">
-                            <label for="designation">Designation<span style="color:red">*</span></label>
-                            <select class="form-control" id="designation" name="designation">
-                            <option value="" disabled selected>Select an option</option>
-
-                            <?php 
-                        $getEmp = mysqli_query($con,"SELECT * FROM  sub_designation ");
-                        while ($resCom = mysqli_fetch_array($getEmp)) {
-                            ?>
-                        <option value="<?php echo $resCom['desi_name']?>"><?php echo $resCom['desi_name']?></option>
-
-                            <?php
-                        }
-                    ?>
-                            </select>
+                            
+                            <label for="designation"> Designation<span style="color:red">*</span></label>
+                            <input type="designation"  class="form-control" id="designation" name="designation" readonly>
                         </div>   
 
                 <div class="form-group col-md-6">
                     <label for="employment">Employment</label>
-                    <select class="form-control" id="employment" name="employment">
-                    <option value="" disabled selected>Select an option</option>
-                    <option>Permanent</option>
-                    <option>Contract</option>
-                    <option>Casual</option>
-                    </select>
+                    <input type="employment" class="form-control" id="employment" name="employment" readonly>
                 </div>
             </div>
             <br>
@@ -211,42 +207,17 @@ include 'db_connect.php';
             
 
     <div class="form-group row">
+
     <label for="transfer1" class="col-sm-3 col-form-label"><strong>Existing Section</strong></label>
     <div class="form-group col-md-4">
-                            <select class="form-control" id="department" name="exdepartment">
-                            <option value="" disabled selected> Department</option>
+          <input type="department" class="form-control" id="department" name="exdepartment" readonly>
 
-
-
-                            <?php 
-                        $getEmp = mysqli_query($con,"SELECT * FROM  sub_department");
-                        while ($resDep = mysqli_fetch_array($getEmp)) {
-                            ?>
-                        <option value="<?php echo $resDep['dep_name'] ?>"><?php echo $resDep['dep_name'] ?></option>
-
-                            <?php
-                        }
-                    ?>
-                            </select>
-
-
-                        </div>
+    </div>
 
          <div class="col-sm-4">
-                    <select class="form-control" id="dropdown" name="excompany">
-                    <option value="" disabled selected>Company</option>
-                    <?php 
-                        $getEmp = mysqli_query($con,"SELECT * FROM  sub_company");
-                        while ($resCom = mysqli_fetch_array($getEmp)) {
-                            ?>
-                        <option value="<?php echo $resCom['com_name'] ?>"><?php echo $resCom['com_name'] ?></option>
-
-                            <?php
-                        }
-                    ?>
-                            </select>
-                    </select>
-    </div>
+                    <input type="company" class="form-control" id="company" name="excompany" readonly>
+            
+        </div>
 </div>
 
     
@@ -322,20 +293,47 @@ include 'db_connect.php';
     </div>
     
 
-    <script>
-        document.getElementById('dropdown').addEventListener('change', function() {
-            var selected = this.options[this.selectedIndex].text;
-            document.getElementById('selectedValue').innerText = selected;
-            
-            // Show the h4 and hide the dropdown and label
-            document.getElementById('selectionDisplay').style.display = 'block';
-            document.getElementById('dropdownDiv').style.display = 'none';
-        });
-</script>
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#employNumber').change(function () {
+            var emp = $(this).val();
+
+            if (emp) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'getTransferDetails.php',
+                    data: { emp: employNumber  },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#fullNameInitials').val(response.initial_name);
+                            $('#designation').val(response.designation);
+                            $('#employment').val(response.emp_status);
+                            $('#department').val(response.department);
+                            $('#company').val(response.comp_num);
+
+
+
+                        }
+                    },
+                    error: function () {
+                        alert('Error retrieving employee details');
+                    }
+                });
+            }
+        });
+    });
+</script>
 
   
 

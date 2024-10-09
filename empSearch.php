@@ -129,7 +129,7 @@ if (!$con) {
             <thead>
                 <tr>                    
                     <th>Company</th>
-                    <th>Emp type</th>
+                    <th>Department</th>
                     <th>Emp number</th>
                     <th>EPF number</th>
                     <th>View</th>
@@ -143,13 +143,13 @@ if (!$con) {
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, emp_type, emp_num, epf FROM employer
+                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf FROM employer
                                                    WHERE emp_num LIKE '%$searchTerm%' 
                                                    OR comp_num LIKE '%$searchTerm%' 
-                                                   OR emp_type LIKE '%$searchTerm%' 
+                                                   OR department LIKE '%$searchTerm%' 
                                                    OR epf LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, emp_type, emp_num, epf FROM employer");
+                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf FROM employer");
                 }
 
                 // Check if the query was successful
@@ -162,7 +162,7 @@ if (!$con) {
                         ?>
                         <tr>
                             <td><?php echo $res_user['comp_num']; ?></td>
-                            <td><?php echo $res_user['emp_type']; ?></td>
+                            <td><?php echo $res_user['department']; ?></td>
                             <td><?php echo $res_user['emp_num']; ?></td>
                             <td><?php echo $res_user['epf']; ?></td>
                             <td>
