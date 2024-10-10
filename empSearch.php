@@ -49,16 +49,9 @@ if (!$con) {
         color: black !important;
     }
 
-    .btn-view {
-        background-color: green;
-        border: none;
-        color: white;
-    }
+  
 
-    .btn-view:hover {
-        background-color: darkgreen;
-    }
-
+   
     .dataTables_filter input {
         background-color: white !important;
     }
@@ -83,6 +76,8 @@ if (!$con) {
         justify-content: flex-end;
         margin-bottom: 15px;
     }
+
+   
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,7 +96,7 @@ if (!$con) {
 <script>
     $(document).ready(function () {
         $('#tableID').DataTable({
-            searching: false // Disable default searching, as we're handling it server-side
+            searching: false
         });
     });
 </script>
@@ -134,30 +129,27 @@ if (!$con) {
                     <th>EPF number</th>
                     <th>View</th>
                     <th>Update</th>
+                    <th>InActive</th>
+
                 </tr>
             </thead>
             <tbody>
                 <?php
-                // Initialize the search term
                 $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
-                // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf FROM employer
+                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf, isAct FROM employer
                                                    WHERE emp_num LIKE '%$searchTerm%' 
                                                    OR comp_num LIKE '%$searchTerm%' 
                                                    OR department LIKE '%$searchTerm%' 
                                                    OR epf LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf FROM employer");
+                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf, isAct FROM employer");
                 }
 
-                // Check if the query was successful
                 if (!$getuser) {
-                    // Display the error message if the query fails
                     echo "Error executing query: " . mysqli_error($con);
                 } else {
-                    // Fetch and display the results
                     while ($res_user = mysqli_fetch_array($getuser)) {
                         ?>
                         <tr>
@@ -171,7 +163,21 @@ if (!$con) {
                             <td>
                                 <a href="empUpdate.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-warning">Update</a>
                             </td>
-                        </tr>
+                            
+                            <td>
+    <?php
+    if ($res_user['isAct'] == 1) {
+        echo '<span class="btn btn-small" style="background-color: purple; color: white;">Active</span>';
+    } else {
+        echo '<span class="btn btn-small" style="background-color: blue; color: white;">Deactive</span>';
+    }
+    ?>
+</td>
+
+
+</td>
+
+                       
                         <?php
                     }
                 }

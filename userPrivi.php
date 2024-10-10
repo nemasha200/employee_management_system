@@ -135,7 +135,6 @@ include 'db_connect.php';
 
     <div class="container form-container">
 
-        <button class="back-button" onclick="window.history.back();">&larr;</button>
 
         <h2 class="text-center">Menubar User Permissions</h2>
         <form id="registrationForm" action="userpriviSave.php" method="POST">

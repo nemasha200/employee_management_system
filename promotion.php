@@ -86,17 +86,16 @@ include 'db_connect.php';
     }
 
     .form-container {
-        margin-left: 250px; /* Adjusted for sidebar width */
+        margin-left: 250px; 
         padding: 30px;
         background-color: whitesmoke;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: calc(100% - 250px); /* Adjust width for sidebar */
+        width: calc(100% - 250px); 
         max-width: 800px;
         margin: auto;
     }
 
-    /* Set background color of general form controls */
     .form-control {
         color: white;
         background-color: #343a40;
@@ -126,7 +125,6 @@ include 'db_connect.php';
         margin-top: 20px;
     }
 
-    /* Highlight the selected value with a yellow background */
     #selectedValue {
         background-color: yellow;
         padding: 10px;
@@ -134,7 +132,6 @@ include 'db_connect.php';
         text-align: center;
     }
 
-    /* Override specific fields with white background color */
     #fullNameInitials,
     #company,
     #department,
@@ -145,6 +142,8 @@ include 'db_connect.php';
         color: black;
     }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 
 <body>
 <?php include 'submenubar.php';?>
@@ -155,7 +154,7 @@ include 'db_connect.php';
     <a href="promosearch.php">
         <button type="button" class="btn btn-primary btn-small">View promotions</button>
     </a>
-    <form id="registrationForm" method="POST" action="promoSave.php">
+    <form id="promoForm" method="POST" action="promoSave.php">
 
         <div class="form-row"> 
             <div class="form-group col-md-3">
@@ -270,6 +269,94 @@ include 'db_connect.php';
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.getElementById('promoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var promotedGrade = document.getElementById('grade1').value.trim();
+        var promotedDesignation = document.getElementById('designation1').value.trim();
+        var action = document.getElementById('action').value.trim();
+        var dob1 = document.getElementById('dob1').value.trim();
+        var dob2 = document.getElementById('dob2').value.trim();
+        var remark = document.getElementById('remark').value.trim();
+
+        if (!promotedGrade) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a promoted grade.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!promotedDesignation) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a promoted designation.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!action) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the action (Promotion or Demotion).',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!dob1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the With Effect Date.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!dob2) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the Promoted Date.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!remark) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please enter a remark.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); 
+            }
+        });
+    });
+</script>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
