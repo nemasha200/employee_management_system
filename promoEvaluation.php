@@ -135,6 +135,13 @@ include 'db_connect.php';
             border-radius: 5px;
             text-align: center;
         }
+        #department{
+            color: black;
+        }
+        #fullNameInitials{
+            color: black;
+        }
+
 
         
     </style>
@@ -314,9 +321,7 @@ include 'db_connect.php';
                             $('#fullNameInitials').val(response.initial_name);
                             $('#company').val(response.comp_num);
                             $('#department').val(response.department);
-                            $('#doj').val(response.doj);
-                            $('#grade').val(response.grade);
-                            $('#designation').val(response.designation);
+                          
 
 
 

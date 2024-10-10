@@ -458,7 +458,6 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="row">
     <div class="col-md-12">
         <div class="form-group row align-items-start">
-            <!-- Remark label outside the input section -->
             <label for="remark" class="col-form-label col-md-2 text-left">Remark</label>
 
             <div class="col-md-10">
@@ -493,8 +492,10 @@ if (!isset($_SESSION['admin_id'])) {
 
           
             <div class="form-group col-md-12 text-center">
-    <!-- <button type="button" class="btn btn-primary btn-small" onclick="validateForm()">Submit</button> -->
     <button type="submit" onclick="validateForm()" class="btn btn-primary btn-small">Submit</button>
+
+   
+
 
 </div>
 </form>
@@ -502,47 +503,6 @@ if (!isset($_SESSION['admin_id'])) {
  </div>
 </div>
 
-
-<script>
-    function validateForm(event) {
-        event.preventDefault();  
-
-        let employeeType = document.querySelector('input[name="employeeType"]:checked');
-        let company = document.getElementById("dropdown").value.trim();
-        let empnumber = document.getElementById("employNumber").value.trim();
-        let epfnumber = document.getElementById("epfNumber").value.trim();
-        let fullname = document.getElementById("fullName").value.trim();
-        let nic = document.getElementById("nicNumber").value.trim();
-        let phonenumber = document.getElementById("phoneNumber").value.trim();
-        let landnumber = document.getElementById("phoneNumber1").value.trim();
-
-        if (!employeeType || company === "" || empnumber === "" || epfnumber === "" || fullname === "" || nic === "" || phonenumber === "") {
-            Swal.fire('Error', 'Please fill all required fields!', 'error');
-            return false;
-        }
-
-        if (/\s/.test(empnumber) || /\s/.test(epfnumber) || /\s/.test(nic) || /\s/.test(phonenumber) || (landnumber && /\s/.test(landnumber))) {
-            Swal.fire('Error', 'Fields like Employee Number, EPF Number, NIC, Mobile number, and Landline number cannot contain spaces!', 'error');
-            return false;
-        }
-
-        if (phonenumber.length !== 10 || isNaN(phonenumber)) {
-            Swal.fire('Error', 'Mobile number must be 10 digits and contain no spaces!', 'error');
-            return false;
-        }
-
-        if (landnumber && (landnumber.length !== 10 || isNaN(landnumber))) {
-            Swal.fire('Error', 'Landline number must be 10 digits and contain no spaces!', 'error');
-            return false;
-        }
-
-        Swal.fire('Success', 'All fields are valid and form is submitted!', 'success').then(() => {
-            document.getElementById("registrationForm").submit();
-        });
-    }
-
-    document.getElementById("registrationForm").addEventListener("submit", validateForm);
-</script>
 
 
 

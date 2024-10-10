@@ -135,7 +135,33 @@ include 'db_connect.php';
             border-radius: 5px;
             text-align: center;
         }
+        
+        #fullNameInitials{
+            color: black;
+        }
 
+              
+        #designation{
+            color: black;
+        }
+
+              
+        #employment{
+            color: black;
+        }
+
+              
+        #department{
+            color: black;
+        }
+
+        #company{
+            color: black;
+        }
+
+        #employNumber{
+            color: balck;
+        }
         
     </style>
 </head>
@@ -156,16 +182,14 @@ include 'db_connect.php';
             </a>
             <form id="registrationForm" method="POST" action="transferSave.php">
 
-           
-
-                
 
             
             <div class="form-row">
 
-            <div class="form-group col-md-4">
-            <label for="employNumber">Employ Number:</label>
-                <select class="form-control" id="employNumber" name="emp">
+
+            <div class="form-group col-md-3">
+                <label for="employNumber">Employ Number:</label>
+                <select class="form-control" id="employNumber" name="empnumber">
                     <option value="" disabled selected>Select an option</option>
                     <?php 
                     $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
@@ -175,8 +199,7 @@ include 'db_connect.php';
                     <?php
                     }
                     ?>
-                </select> 
-                           
+                </select>      
             </div>
 
 
@@ -185,8 +208,6 @@ include 'db_connect.php';
             <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
                             
             </div>
-
-            
             </div>
             
 
@@ -304,13 +325,13 @@ include 'db_connect.php';
 <script>
     $(document).ready(function () {
         $('#employNumber').change(function () {
-            var emp = $(this).val();
+            var empnumber = $(this).val();
 
-            if (emp) {
+            if (empnumber) {
                 $.ajax({
                     type: 'POST',
                     url: 'getTransferDetails.php',
-                    data: { emp: employNumber  },
+                    data: { empnumber: empnumber  },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
@@ -321,9 +342,6 @@ include 'db_connect.php';
                             $('#employment').val(response.emp_status);
                             $('#department').val(response.department);
                             $('#company').val(response.comp_num);
-
-
-
                         }
                     },
                     error: function () {
