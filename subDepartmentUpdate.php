@@ -12,7 +12,7 @@ if (!isset($_SESSION['admin_id'])) {
 include 'db_connect.php';
 $user_id = $_GET['user_id'];
 
-$getuser = mysqli_query($con, "SELECT `id`, `dep_num`, `dep_name` FROM `sub_department` WHERE `id`='$user_id'");
+$getuser = mysqli_query($con, "SELECT `sub_dep_id`, `dep_num`, `dep_name` FROM `sub_department` WHERE `sub_dep_id`='$user_id'");
 $res_user = mysqli_fetch_array($getuser);
 ?>
 

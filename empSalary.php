@@ -79,19 +79,24 @@ if (!isset($_SESSION['admin_id'])) {
             margin-top: 20px;
         }
 
-        /* Highlight the selected value with a yellow background */
-        #selectedValue {
-            background-color: yellow;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
+       
         hr {
             border: 1px solid #ccc;
             margin: 20px 0;
         }
+
+        #fullNameInitials{
+            color: black;
+        }
        
+        #company{
+            color:black;
+        }
+
+        #epf{
+            color: black;
+        }
+
     </style>
 </head>
 <body>
@@ -110,67 +115,70 @@ if (!isset($_SESSION['admin_id'])) {
                 </a>  
                 <form id="registrationForm" method="POST" action="salarySave.php" enctype="multipart/form-data">
 
-               
+                <div class="form-row">
+
+
+                <div class="form-group col-md-3">
+        <label for="empNumber">Employee Number :</label>
+        <select class="form-control" id="emp" name="empnumber">
+                    <option value="" disabled selected>Select an option</option>
+                    <?php 
+                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>         
+            
+            </div>
+    
+    <div class="form-group col-md-9">
+            <label for="fullNameInitials">Name with Initials :</label>
+            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
+    </div>
                     
-        <form id="myForm">
-            <div id="dropdownDiv">
+    </div> 
+
+
                 <div class="form-group">
                     <label for="dropdown">Company:</label>
-                    <select class="form-control" id="dropdown" name="company">
-                        <option value="" disabled selected>Select an option</option>
-                        <?php 
-                        $getEmp = mysqli_query($con,"SELECT * FROM  sub_company");
-                        while ($resCom = mysqli_fetch_array($getEmp)) {
-                            ?>
-                        <option value="<?php echo $resCom['com_number']."/".$resCom['com_name'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name'] ?></option>
-
-                            <?php
-                        }
-                    ?>
-                            </select>
-                    </select>
+                    <input type="text" class="form-control" id="company" name="company" readonly>
+                    
                 </div>
-            </div>
-            <div id="selectionDisplay">
-                <h4 id="selectedValue"></h4>
-            </div>
-
+           
+            
 
      <div class="form-row">
-    <div class="form-group col-md-3">
-        <label for="empNumber">Employee Number</label>
-        <input type="text" class="form-control" id="empNumber" name="empnumber" placeholder="Enter Employee number">
-    </div>
-    
-    <div class="form-group col-md-6">
-            <label for="fullNameInitials">Name with Initials</label>
-            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" placeholder="Enter full name with initials">
-    </div>
+   
 
     <div class="form-group col-md-3">
-        <label for="empNumber">EPF Number</label>
-        <input type="text" class="form-control" id="empNumber" name="epfnumber" placeholder="Enter epf number">
+        <label for="empNumber">EPF Number :</label>
+        <input type="text" class="form-control" id="epf" name="epfnumber" readonly>
     </div>
-</div>
+
 
 <div class="form-group col-md-5">
-        <label for="basic">Basic</label>
+        <label for="basic">Basic :</label>
         <input type="text" class="form-control" id="Basic" name="basic" placeholder="Enter basic">
 </div>
 
-<div class="form-group col-md-5">
-        <label for="bra">BRA</label>
+<div class="form-group col-md-4">
+        <label for="bra">BRA :</label>
         <input type="text" class="form-control" id="bra" name="bra" placeholder="Enter bra">
+</div>
+
 </div>
 
 <hr>
 
 <div class="row mb-3">
                 <div class="col-md-4">
-                    <label class="form-label"><strong>Fixed Allowance</strong></label>
+                    <label class="form-label"><strong>Fixed Allowance :</strong></label>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label"><strong>Amounts</strong></label>
+                    <label class="form-label"><strong>Amounts :</strong></label>
                 </div>
             </div>
 
@@ -293,10 +301,10 @@ if (!isset($_SESSION['admin_id'])) {
 
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <label class="form-label"><strong>Fixed deduction</strong></label>
+                    <label class="form-label"><strong>Fixed deduction :</strong></label>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label"><strong>Amounts</strong></label>
+                    <label class="form-label"><strong>Amounts :</strong></label>
                 </div>
             </div>
 
@@ -358,55 +366,73 @@ if (!isset($_SESSION['admin_id'])) {
 
             <hr>
 
-            
+            <div class="form-row">
+          
            
 <div class="form-group col-md-6">
-        <label for="Payment">Payment</label>
+        <label for="Payment">Payment :</label>
         <input type="text" class="form-control" id="Payment" name="payment" placeholder="Enter Payment">
 </div>
 
 <div class="form-group col-md-6">
-        <label for="Account">Account Number</label>
+        <label for="Account">Account Number :</label>
         <input type="text" class="form-control" id="Account" name="account" placeholder="Enter Account Number">
 </div>
 
+</div>
+
+<div class="form-row">
+
 <div class="form-group col-md-6">
-        <label for="Bank">Bank Name</label>
+        <label for="Bank">Bank Name :</label>
         <input type="text" class="form-control" id="Bank" name="bank" placeholder="Enter Bank name">
 </div>
 
 <div class="form-group col-md-6">
-        <label for="Branch">Branch Name</label>
+        <label for="Branch">Branch Name :</label>
         <input type="text" class="form-control" id="Branch" name="branch" placeholder="Enter Branch name ">
 </div>
 
-
+</div>
 
 <button type="submit" class="btn btn-primary btn-small">Submit</button>
 
            
 
 
-
-           
-
-<script>
-        document.getElementById('dropdown').addEventListener('change', function() {
-            var selected = this.options[this.selectedIndex].text;
-            document.getElementById('selectedValue').innerText = selected;
-            
-            // Show the h4 and hide the dropdown and label
-            document.getElementById('selectionDisplay').style.display = 'block';
-            document.getElementById('dropdownDiv').style.display = 'none';
-        });
-    </script>
-
-
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#emp').change(function () {
+            var empnumber = $(this).val();
+
+            if (empnumber) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'getSalarydetails.php', 
+                    data: { empnumber: empnumber },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#company').val(response.comp_num);
+                            $('#fullNameInitials').val(response.initial_name);
+                            $('#epf').val(response.epf);
+                        }
+                    },
+                    error: function () {
+                        alert('Error retrieving employee details');
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>
 <?php

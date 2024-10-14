@@ -133,13 +133,7 @@ include 'db_connect.php';
             margin-top: 20px;
         }
 
-        /* Highlight the selected value with a yellow background */
-        #selectedValue {
-            background-color: yellow;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
+       
     </style>
 </head>
 

@@ -122,10 +122,12 @@ include 'db_connect.php';
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>                    
-                    <th>Company number</th>
                     <th>Emp number</th>
-                    <th>Name</th>
+                    
+                    <th>Company</th>
                     <th>Department</th>
+                    <th>Name</th>
+
 
                     <th>View</th>
                     <th>Update</th>
@@ -138,28 +140,29 @@ include 'db_connect.php';
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT id, company, emp_num, name, designation FROM  transfers
+                    $getuser = mysqli_query($con, "SELECT id, emp_num, ex_department, ex_company, name FROM  transfers
                                                    WHERE emp_num LIKE '%$searchTerm%' 
-                                                   OR name LIKE '%$searchTerm%' 
-                                                   OR company LIKE '%$searchTerm%' 
-                                                   OR designation LIKE '%$searchTerm%'");
+                                                   OR ex_company LIKE '%$searchTerm%'
+                                                   OR ex_department LIKE '%$searchTerm%'
+                                                   OR name LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id, company, emp_num, name, designation FROM  transfers");
+                    $getuser = mysqli_query($con, "SELECT id, emp_num, ex_department, ex_company, name  FROM  transfers");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
                     ?>
                     <tr>
-                        <td><?php echo $res_user['company']; ?></td>
 
                         <td><?php echo $res_user['emp_num']; ?></td>
+                        <td><?php echo $res_user['ex_company']; ?></td>
+                        <td><?php echo $res_user['ex_department']; ?></td>
                         <td><?php echo $res_user['name']; ?></td>
-                        <td><?php echo $res_user['designation']; ?></td>
+
                         <td>
-                            <a href="promoView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
+                            <a href="transferView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
                         </td>
                         <td>
-                            <a href="promoUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
+                            <a href="transferUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
                         </td>
                     </tr>
                     <?php

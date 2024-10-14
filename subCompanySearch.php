@@ -116,7 +116,6 @@ include 'db_connect.php';
                     <th>Company number</th>
                     <th>Company name</th>
                     <th>Location</th>
-                    <th>View</th>
                     <th>Update</th>
                 </tr>
             </thead>
@@ -129,9 +128,7 @@ include 'db_connect.php';
                         <td><?php echo $res_user[1]; ?></td>
                         <td><?php echo $res_user[2]; ?></td>
                         <td><?php echo $res_user[3]; ?></td>
-                        <td>
-                            <a href="subCompanyView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
-                        </td>
+                        
                        
                         <td>
                             <a href="subcompanyUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
