@@ -115,7 +115,6 @@ include 'db_connect.php';
                 <tr>
                     <th>Job Category number</th>
                     <th>Joc category name</th>
-                    <th>View</th>
                     <th>Update</th>
                 </tr>
             </thead>
@@ -127,9 +126,7 @@ include 'db_connect.php';
                     <tr>
                         <td><?php echo $res_user[1]; ?></td>
                         <td><?php echo $res_user[2]; ?></td>
-                        <td>
-                            <a href="subJobView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
-                        </td>
+                      
                        
                         <td>
                             <a href="subJobUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>

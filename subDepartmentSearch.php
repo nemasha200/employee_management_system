@@ -111,24 +111,21 @@ include 'db_connect.php';
                 <tr>
                     <th>Department Number</th>
                     <th>Department Name</th>
-                    <th>View</th>
                     <th>Update</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $getuser = mysqli_query($con, "SELECT id, dep_num , dep_name FROM sub_department");
+                $getuser = mysqli_query($con, "SELECT sub_dep_id, dep_num , dep_name FROM sub_department");
                 while ($res_user = mysqli_fetch_array($getuser)) {
                     ?>
                     <tr>
                         <td><?php echo $res_user[1]; ?></td>
                         <td><?php echo $res_user[2]; ?></td>
-                        <td>
-                            <a href="subDepartmentView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
-                        </td>
+                       
                      
                         <td>
-                            <a href="subDepartmentUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
+                            <a href="subDepartmentUpdate.php?user_id=<?php echo $res_user['sub_dep_id']; ?>" class="btn btn-warning">Update</a>
                         </td>
                     </tr>
                     <?php

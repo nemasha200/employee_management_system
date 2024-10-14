@@ -2,9 +2,9 @@
 include './db_connect.php';
 
 if (isset($_POST['empnumber'])) {
-    $emp = $_POST['empnumber'];
+    $employ = $_POST['empnumber'];
 
-    $query = "SELECT initial_name, comp_num, department, doj, grade, designation FROM employer WHERE emp_num = '$emp'";
+    $query = "SELECT initial_name FROM employer WHERE emp_num = '$employ'";
     $result = mysqli_query($con, $query);
 
     if ($result) {
@@ -15,3 +15,4 @@ if (isset($_POST['empnumber'])) {
     }
 }
 ?>
+

@@ -122,11 +122,11 @@ include 'db_connect.php';
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>                    
-                    <th>Company</th>
                     <th>Emp number</th>
-                    <th>name</th>
-
+                    <th>Company</th>
                     <th>EPF number</th>
+
+                    <th>name</th>
 
                    
 
@@ -141,14 +141,14 @@ include 'db_connect.php';
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT id, company_num, emp_num FROM  salary
+                    $getuser = mysqli_query($con, "SELECT id, emp_num, company_num, epf , name   FROM  salary
                                                    WHERE emp_num LIKE '%$searchTerm%' 
                                                    OR company_num LIKE '%$searchTerm%' 
                                                    OR name LIKE '%$searchTerm%' 
                                                    OR epf LIKE '%$searchTerm%'");
                                                    
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id, company_num, emp_num, name, epf FROM  salary");
+                    $getuser = mysqli_query($con, "SELECT id, company_num, emp_num, epf,name FROM  salary");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
@@ -158,9 +158,10 @@ include 'db_connect.php';
 
                         <td><?php echo $res_user['emp_num']; ?></td>
 
-                        <td><?php echo $res_user['name']; ?></td>
 
                         <td><?php echo $res_user['epf']; ?></td>
+
+                        <td><?php echo $res_user['name']; ?></td>
 
                         <td>
                             <a href="promoView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>

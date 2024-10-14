@@ -142,7 +142,7 @@ if (!isset($_SESSION['admin_id'])) {
                    <input class="form-check-input" type="radio" name="employeeType" id="factory" value="Factory">
                    <label class="form-check-label" for="factory">Worker</label><br>
                    </div>
-                </div>
+                </div> 
                
 
                 <div class="form-group col-md-">
@@ -153,7 +153,8 @@ if (!isset($_SESSION['admin_id'])) {
                         $getEmp = mysqli_query($con,"SELECT * FROM  sub_company");
                         while ($resCom = mysqli_fetch_array($getEmp)) {
                             ?>
-                        <option value="<?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
+                            <!-- want to go company code only for employer table -->
+                        <option value="<?php echo $resCom['com_number'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
 
                             <?php
                         }
@@ -492,7 +493,7 @@ if (!isset($_SESSION['admin_id'])) {
 
           
             <div class="form-group col-md-12 text-center">
-    <button type="submit" onclick="validateForm()" class="btn btn-primary btn-small">Submit</button>
+    <button type="submit"  class="btn btn-primary btn-small">Submit</button>
 
    
 

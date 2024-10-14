@@ -129,7 +129,7 @@ if(isset($_GET['user_id'])) {
                     
                
                 <div class="form-group">
-                <label for="company">Company</label>
+                <label for="company">Company code</label>
                 <!-- Display company name inside an h4 with green highlight -->
                 <h4 class="highlight-green" id="company" readonly><?php echo $res_user['comp_num']; ?></h4>    
                 </div>
@@ -229,30 +229,7 @@ if(isset($_GET['user_id'])) {
     <input type="text" class="form-control" id="qualifications" name="qualifications" value="<?php echo $res_user['qulifications']; ?>" readonly>
 
 
-    <!-- <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="qualifications" id="masters" value="Masters">
-        <label class="form-check-label" for="masters">Masters</label>
-    </div>
-
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="qualifications" id="degree" value="Degree">
-        <label class="form-check-label" for="degree">Degree</label>
-    </div>
-
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="qualifications" id="diploma" value="Diploma/HND">
-        <label class="form-check-label" for="diploma">Diploma/HND</label><br>
-    </div>
-
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="qualifications" id="nvq" value="NVQ/Naita">
-        <label class="form-check-label" for="nvq">NVQ/Naita</label><br>
-    </div>
-
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="qualifications" id="other" value="Other Qualifications">
-        <label class="form-check-label" for="other">Other Qualifications</label><br>
-    </div> -->
+   
 </div>
 
       <div class="form-row">
@@ -449,197 +426,9 @@ if(isset($_GET['user_id'])) {
  </div>
 </div>
 
-<script>
-        document.getElementById('dropdown').addEventListener('change', function() {
-            var selected = this.options[this.selectedIndex].text;
-            document.getElementById('selectedValue').innerText = selected;
-            
-            // Show the h4 and hide the dropdown and label
-            document.getElementById('selectionDisplay').style.display = 'block';
-            document.getElementById('dropdownDiv').style.display = 'none';
-        });
-</script>
 
 
 
-<!-- jQuery Script -->
-<script>
-    $(document).ready(function() {
-        var ftcCounter = 1;  // To keep track of FTC rows
-
-        // Show FTC fields and Add button when FTC is selected
-        $('#recruitmentType').change(function() {
-            var selectedStatus = $(this).val();
-
-            if (selectedStatus === "ftc") {
-                $('#ftcFieldsContainer').show();
-                $('#addFtcRow').show();
-                addFtcRow(); // Add the first row (FTC1)
-            } else {
-                $('#ftcFieldsContainer').hide();
-                $('#addFtcRow').hide();
-                $('#ftcFieldsContainer').empty();  // Clear the FTC fields when not FTC
-                ftcCounter = 1;  // Reset counter
-            }
-        });
-
-        // Function to dynamically add FTC rows
-        function addFtcRow() {
-            var rowHtml = `
-                <div class="form-row" id="ftcRow${ftcCounter}">
-                    <h6 class="col-md-12">FTC${ftcCounter}</h6>
-                    <div class="form-group col-md-4">
-                        <label for="fromDate${ftcCounter}">From Date:</label>
-                        <input type="date" class="form-control" id="fromDate${ftcCounter}" name="fromDate${ftcCounter}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="toDate${ftcCounter}">To Date:</label>
-                        <input type="date" class="form-control" id="toDate${ftcCounter}" name="toDate${ftcCounter}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="epf${ftcCounter}">EPF Number:</label>
-                        <input type="text" class="form-control" id="epf${ftcCounter}" name="epf${ftcCounter}">
-                    </div>
-                </div>`;
-            
-            $('#ftcFieldsContainer').append(rowHtml);  // Add the new row
-            ftcCounter++;  // Increment counter for next row
-        }
-
-        // Button click event to add more FTC rows
-        $('#addFtcRow').click(function() {
-            addFtcRow();
-        });
-    });
-</script>
-
-
-    <!-- <script type="text/javascript">
-       function validateForm() {
-    var checked = true;
-    var fields = [
-        { id: 'employNumber', message: 'Employ Number field is empty or contains only spaces!' },
-        { id: 'companyNumber', message: 'Company Number field is empty or contains only spaces!' },
-        { id: 'fullName', message: 'Full Name field is empty or contains only spaces!' },
-        { id: 'nicNumber', message: 'NIC Number field is empty or contains only spaces!' },
-        { id: 'division', message: 'Division field is empty or contains only spaces!' },
-        { id: 'department', message: 'Department field is empty or contains only spaces!' },
-        { id: 'designation', message: 'Designation field is empty or contains only spaces!' },
-        { id: 'jobCategory', message: 'Job Category field is empty or contains only spaces!' },
-        { id: 'company', message: 'Company field is empty or contains only spaces!' }
-    ];
-
-    for (var i = 0; i < fields.length; i++) {
-        var field = document.getElementById(fields[i].id);
-        if (!field.value.trim()) { // Check if the field is empty or contains only spaces
-            checked = false;
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: fields[i].message         
-            });
-            return; // Stop further validation if one field is invalid
-        }
-    }
-
-    if (checked) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'All fields are correctly filled. Submitting...',
-        });
-
-        setTimeout(function() {
-            document.getElementById('registrationForm').submit();
-            alert('Your form has been successfully submitted');
-        }, 5000);
-    }
-}
-
-    </script>
-
-
-<script>
-    function handleEmployeeStatus() {
-        var status = document.getElementById("recruitmentType").value;
-        var ftcFields = document.getElementById("ftcFields");
-
-        if (status === "ftc") {
-            ftcFields.style.display = "block";
-        } else {
-            ftcFields.style.display = "none";
-        }
-    }
-</script>
- -->
-
-
-
-
-
-
-<!-- <script>
-        document.getElementById('dropdown').addEventListener('change', function() {
-            var selected = this.options[this.selectedIndex].text;
-            document.getElementById('selectedValue').innerText = selected;
-            
-            // Show the h4 and hide the dropdown and label
-            document.getElementById('selectionDisplay').style.display = 'block';
-            document.getElementById('dropdownDiv').style.display = 'none';
-        });
-</script>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const inputFields = document.querySelectorAll('#registrationForm .form-control');
-        const selectFields = document.querySelectorAll('#registrationForm select'); // Select dropdowns
-        const dateFields = document.querySelectorAll('#registrationForm input[type="date"]'); // Date fields
-
-        inputFields.forEach(function (field) {
-            field.addEventListener('input', function () {
-                // Check if the field has a value
-                if (field.value.trim() !== '') {
-                    field.style.backgroundColor = '#d4edda'; // Light green when filled
-                    field.style.color = '#000000'; // Set font color to black
-                } else {
-                    field.style.backgroundColor = '#343a40'; // Default background color when empty
-                    field.style.color = '#000000'; // Ensure font color stays black
-                }
-            });
-        });
-
-        selectFields.forEach(function (field) {
-            field.addEventListener('change', function () {
-                // Check if a valid selection is made
-                if (field.value.trim() !== '') {
-                    field.style.backgroundColor = '#d4edda'; // Light green when selected
-                    field.style.color = '#000000'; // Set font color to black
-                } else {
-                    field.style.backgroundColor = '#343a40'; // Default background color when empty
-                    field.style.color = '#000000'; // Ensure font color stays black
-                }
-            });
-        });
-
-        // Apply the same logic to date input fields
-        dateFields.forEach(function (field) {
-            // Add an event listener to detect input in the date field
-            field.addEventListener('input', function () {
-                // Check if the field has a value
-                if (field.value.trim() !== '') {
-                    field.style.backgroundColor = '#d4edda'; // Light green when filled
-                    field.style.color = '#000000'; // Set font color to black
-                } else {
-                    field.style.backgroundColor = '#343a40'; // Default background color when empty
-                    field.style.color = '#000000'; // Ensure font color stays black
-                }
-            });
-        });
-    });
-</script> -->
-
- 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

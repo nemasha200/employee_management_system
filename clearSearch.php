@@ -108,7 +108,7 @@ include 'db_connect.php';
 
 <div class="mainContainer">
     <div class="container">
-        <h1 class="text-black">clearance Details</h1>
+        <h1 class="text-black">Clearance Details</h1>
         
         <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">
@@ -121,14 +121,13 @@ include 'db_connect.php';
         <!-- Table -->
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
-                <tr>                    
-                    <th>Company</th>
+                <tr>
+                    <th>Emp number</th>
                     <th>Emp type</th>
-                    <th>Reference number</th>
+                    <th>Company</th>
 
-                    <th>Employee number</th>
-
-                   
+                    <th>Department</th>
+                    <th>Name</th>
 
                     <th>View</th>
                     <th>Update</th>
@@ -140,38 +139,32 @@ include 'db_connect.php';
                 $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
                 // Modify the query based on the search term
-                if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT id, company_num, emptype, ref_num, emp_num FROM  clearance
+                if (!empty($searchTerm)) {
+                    $getuser = mysqli_query($con, "SELECT id, emp_num, emptype ,company_num, section , fullname   FROM clearance 
                                                    WHERE emp_num LIKE '%$searchTerm%' 
-                                                   OR company_num LIKE '%$searchTerm%' 
                                                    OR emptype LIKE '%$searchTerm%' 
-                                                   OR ref_num LIKE '%$searchTerm%' 
 
-
-                                                   OR epf LIKE '%$searchTerm%'");
-                                                   
+                                                   OR name LIKE '%$searchTerm%' 
+                                                   OR company_num LIKE '%$searchTerm%' 
+                                                   OR department LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id, company_num, emptype, ref_num, emp_num FROM  clearance");
+                    $getuser = mysqli_query($con, "SELECT id,  emp_num, emptype , company_num, section , fullname FROM clearance");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
                     ?>
                     <tr>
+                        <td><?php echo $res_user['emp_num']; ?></td>
+                        <td><?php echo $res_user['emptype']; ?></td>
                         <td><?php echo $res_user['company_num']; ?></td>
 
-
-                        <td><?php echo $res_user['emptype']; ?></td>
-
-                        <td><?php echo $res_user['ref_num']; ?></td>
-
-                        <td><?php echo $res_user['emp_num']; ?></td>
-
-
+                        <td><?php echo $res_user['section']; ?></td>
+                        <td><?php echo $res_user['fullname']; ?></td>
                         <td>
-                            <a href="promoView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
+                            <a href=".php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
                         </td>
                         <td>
-                            <a href="promoUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
+                            <a href=".php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
                         </td>
                     </tr>
                     <?php

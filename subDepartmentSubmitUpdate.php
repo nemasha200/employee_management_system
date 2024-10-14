@@ -17,7 +17,7 @@ $Departmentnum = $_POST['Departmentnum'];
 $Departmentname = $_POST['Departmentname'];
 
 
-mysqli_query($con, "UPDATE `sub_department` SET `dep_num`='$Departmentnum', `dep_name`='$Departmentname'  WHERE `id`='$user_id'");
+mysqli_query($con, "UPDATE `sub_department` SET `dep_num`='$Departmentnum', `dep_name`='$Departmentname'  WHERE `sub_dep_id`='$user_id'");
 
 header("Location: subDepartmentSearch.php");
 exit();

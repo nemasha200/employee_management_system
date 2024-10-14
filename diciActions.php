@@ -106,6 +106,10 @@ include 'db_connect.php';
         .back-button:hover {
             background-color: #495057;
         }
+
+        #fullNameInitials{
+            color: black;
+        }
     </style>
 </head>
 
@@ -128,13 +132,24 @@ include 'db_connect.php';
             
             <div class="form-group col-md-4">
                             <label for="emp">Employee Number</label>
-                            <input type="text" class="form-control" id="emp" name="empnumber" placeholder="Enter employee number">
+                            <select class="form-control" id="emp" name="empnumber">
+
+                            <option value="" disabled selected>Select an option</option>
+                    <?php 
+                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>    
             </div>
 
 
             <div class="form-group col-md-8">
                             <label for="fullNameInitials">Name with Initials</label>
-                            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" placeholder="Enter full name with initials">
+                            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
             </div>
 
             
@@ -167,6 +182,34 @@ include 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#emp').change(function () {
+            var empnumber = $(this).val();
+
+            if (empnumber) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'getTransferDetails.php',
+                    data: { empnumber: empnumber  },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            $('#fullNameInitials').val(response.initial_name);
+                        }
+                    },
+                    error: function () {
+                        alert('Error retrieving employee details');
+                    }
+                });
+            }
+        });
+    });
+</script>
 
     
 

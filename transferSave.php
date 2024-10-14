@@ -13,8 +13,7 @@ if (!isset($_SESSION['admin_id'])) {
 include 'db_connect.php';
 
 
-$company = $_POST['company'];
-$emp = $_POST['emp'];
+$empnumber = $_POST['empnumber'];
 $nameinitial = $_POST['nameinitial'];
 $designation = $_POST['designation'];
 $employment = $_POST['employment'];
@@ -32,8 +31,8 @@ $remark = $_POST['remark'];
 
 
 
-mysqli_query($con,"INSERT INTO `transfers`(`company`, `emp_num`, `name`, `designation`, `employment`, `ex_department`, `ex_company`, `trans_department`, `trans_company`, `effect_date`, `req_date`, `approve_date`, `remark`) 
-VALUES ('$company', '$emp', '$nameinitial','$designation','$employment','$exdepartment','$excompany','$transdep','$transcom','$dob1','$dob2','$dob3','$remark')");
+mysqli_query($con,"INSERT INTO `transfers`( `emp_num`, `name`, `designation`, `employment`, `ex_department`, `ex_company`, `trans_department`, `trans_company`, `effect_date`, `req_date`, `approve_date`, `remark`) 
+VALUES ('$empnumber', '$nameinitial','$designation','$employment','$exdepartment','$excompany','$transdep','$transcom','$dob1','$dob2','$dob3','$remark')");
  
  header("Location: transers.php");
 exit();

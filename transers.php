@@ -152,7 +152,7 @@ include 'db_connect.php';
 
               
         #department{
-            color: black;
+            color: white;
         }
 
         #company{
@@ -162,7 +162,8 @@ include 'db_connect.php';
         #employNumber{
             color: balck;
         }
-        
+
+       
     </style>
 </head>
 
