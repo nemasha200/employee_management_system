@@ -136,7 +136,7 @@ include 'db_connect.php';
             text-align: center;
         }
         
-        #fullNameInitials{
+        #employNumber{
             color: black;
         }
 
@@ -152,7 +152,12 @@ include 'db_connect.php';
 
               
         #department{
-            color: white;
+            color: black;
+        }
+
+        #transdepartment{
+            color: black;
+
         }
 
         #company{
@@ -163,8 +168,24 @@ include 'db_connect.php';
             color: balck;
         }
 
+        #transdepartment {
+    color: white; /* Font color */
+    background-color: #343a40; /* Background color */
+}
+
+#transcompany {
+
+
+    
+    color: white; /* Font color */
+    background-color: #343a40; /* Background color */
+}
+
+
        
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -188,39 +209,42 @@ include 'db_connect.php';
             <div class="form-row">
 
 
-            <div class="form-group col-md-3">
-                <label for="employNumber">Employ Number:</label>
-                <select class="form-control" id="employNumber" name="empnumber">
+            
+
+            <div class="form-group col-md-12">
+            
+            <label for="fullNameInitials">Full Name :</label>
+                <select class="form-control" class="form-control" id="fullNameInitials" name="nameinitial"> 
+               
                     <option value="" disabled selected>Select an option</option>
                     <?php 
-                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
-                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
                     <?php
                     }
                     ?>
-                </select>      
-            </div>
-
-
-            <div class="form-group col-md-8">
-            <label for="fullNameInitials">Name with Initials:</label>
-            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
+                </select>   
                             
             </div>
+
+            
+ 
             </div>
             
 
             <div class="form-row">
-            <div class="form-group col-md-5">
-                            
-                            <label for="designation"> Designation<span style="color:red">*</span></label>
-                            <input type="designation"  class="form-control" id="designation" name="designation" readonly>
-                        </div>   
 
-                <div class="form-group col-md-6">
-                    <label for="employment">Employment</label>
+            <div class="form-group col-md-4">
+                <label for="employNumber">Employ Number :</label>
+                <input type="text" class="form-control" id="employNumber" name="empnumber" readonly>
+                      
+            </div>
+          
+
+                <div class="form-group col-md-7">
+                    <label for="employment">Employment :</label>
                     <input type="employment" class="form-control" id="employment" name="employment" readonly>
                 </div>
             </div>
@@ -230,14 +254,19 @@ include 'db_connect.php';
 
     <div class="form-group row">
 
-    <label for="transfer1" class="col-sm-3 col-form-label"><strong>Existing Section</strong></label>
-    <div class="form-group col-md-4">
+    <label for="transfer1" class="col-sm-3 col-form-label"><strong>Existing Section :</strong></label>
+    <div class="form-group col-md-3">
           <input type="department" class="form-control" id="department" name="exdepartment" readonly>
 
     </div>
 
-         <div class="col-sm-4">
+         <div class="col-sm-3">
                     <input type="company" class="form-control" id="company" name="excompany" readonly>
+            
+        </div>
+
+        <div class="col-sm-3">
+        <input type="designation"  class="form-control" id="designation" name="designation" readonly>
             
         </div>
 </div>
@@ -246,9 +275,9 @@ include 'db_connect.php';
     
 
 <div class="form-group row">
-    <label for="transfer2" class="col-sm-3 col-form-label"><strong>Transfer Request</strong></label>
-    <div class="form-group col-md-4">
-                            <select class="form-control" id="department" name="transdep">
+    <label for="transfer2" class="col-sm-3 col-form-label"><strong>Transfer Section :</strong></label>
+    <div class="form-group col-md-3">
+                            <select class="form-control" id="transdepartment" name="transdep">
                             <option value="" disabled selected> Department</option>
 
 
@@ -267,8 +296,8 @@ include 'db_connect.php';
 
                         </div>
     
-    <div class="col-sm-4">
-                    <select class="form-control" id="dropdown" name="transcom">
+    <div class="col-sm-3">
+                    <select class="form-control" id="transcompany" name="transcom">
                     <option value="" disabled selected>Company</option>
                     <?php 
                         $getEmp = mysqli_query($con,"SELECT * FROM  sub_company");
@@ -282,23 +311,39 @@ include 'db_connect.php';
                             </select>
                     </select>
     </div>
+
+    <div class="col-sm-3">
+                <select class="form-control" id="designation1" name="designation1">
+                    <option value="" disabled selected>Designation</option>
+                    <?php 
+                    $getEmp = mysqli_query($con,"SELECT desi_name FROM sub_designation");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                    <option value="<?php echo $resCom['desi_name'] ?>"><?php echo $resCom['desi_name'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+    </div>
+
+
 </div>
 
 <div class="form-row">
 
                         <div class="form-group col-md-4">
-                            <label for="dob">Effective Date</label>
-                            <input type="date" class="form-control" id="dob" name="dob1">
+                            <label for="dob">Effective Date :</label>
+                            <input type="date" class="form-control" id="dob1" name="dob1">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="dob">Requested Date</label>
-                            <input type="date" class="form-control" id="dob" name="dob2">
+                            <label for="dob">Requested Date :</label>
+                            <input type="date" class="form-control" id="dob2" name="dob2">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="dob">Approved Date</label>
-                            <input type="date" class="form-control" id="dob" name="dob3">
+                            <label for="dob">Approved Date :</label>
+                            <input type="date" class="form-control" id="dob3" name="dob3">
                         </div>
 
 
@@ -306,7 +351,7 @@ include 'db_connect.php';
                 
                 
                 <div class="form-group">
-                    <label for="remark">Remark</label>
+                    <label for="remark">Remark :</label>
                     <textarea class="form-control" id="remark" name="remark" rows="1" placeholder="Enter remark"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-small">Submit</button>
@@ -321,24 +366,112 @@ include 'db_connect.php';
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var transdepartment = document.getElementById('transdepartment').value.trim();
+        var transcompany = document.getElementById('transcompany').value.trim();
+        var dob1 = document.getElementById('dob1').value.trim();
+        var dob2 = document.getElementById('dob2').value.trim();
+        var dob3 = document.getElementById('dob3').value.trim();
+        var remark = document.getElementById('remark').value.trim();
+
+        if (!transdepartment) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Transfer department.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!transcompany) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Transfer company.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!dob1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the Effective Date.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!dob2) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the Requested Date.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!dob3) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the Approved Date.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!remark) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please enter a remark.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); 
+            }
+        });
+    });
+</script>
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#employNumber').change(function () {
-            var empnumber = $(this).val();
+        $('#fullNameInitials').change(function () {
+            var nameinitial = $(this).val();
 
-            if (empnumber) {
+            if (nameinitial) {
                 $.ajax({
                     type: 'POST',
                     url: 'getTransferDetails.php',
-                    data: { empnumber: empnumber  },
+                    data: { nameinitial: nameinitial  },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
-                            $('#fullNameInitials').val(response.initial_name);
+                            $('#employNumber').val(response.emp_num);
                             $('#designation').val(response.designation);
                             $('#employment').val(response.emp_status);
                             $('#department').val(response.department);

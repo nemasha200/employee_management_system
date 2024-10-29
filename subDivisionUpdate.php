@@ -100,17 +100,17 @@ $res_user = mysqli_fetch_array($getuser);
 <?php include 'logout.php';?> 
 
 <div class="container form-container">
-    <h2 class="text-center">jobGrade Registration Form</h2>
+    <h2 class="text-center">Job Grades Registration Form</h2>
     <a href="subDivisionSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View updated jobgrades</button>
+            <button type="button" class="btn btn-primary btn-small">View updated Jobgrades</button>
         </a><br><br>
         <form id="registrationForm" method="POST" action="subDivisionSubmitUpdate.php">
         <div class="form-group">
-                <label for="divisionNumber">Job Title</label>
+                <label for="divisionNumber">Reference Number</label>
                 <input type="text"    value="<?php echo $res_user['Job_title']; ?>"  class="form-control" id="divisionNumber" name="divisionumber" placeholder="Enter division number">
             </div><br>
             <div class="form-group">
-                <label for="divisionName">Grade</label>
+                <label for="divisionName">Job Grades</label>
                 <input type="text"  value="<?php echo $res_user['grade']; ?>"  class="form-control" id="divisionName" name="divisioname" placeholder="Enter division name">
                 
             </div><br>

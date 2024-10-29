@@ -109,12 +109,12 @@ include 'db_connect.php';
 <body>
     <div class="mainContainer">
     <div class="container mt-5">
-        <h1 class="text-black">Job category Details</h1>
+        <h1 class="text-black">Job Title Details</h1>
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Job Category number</th>
-                    <th>Joc category name</th>
+                    <th>Reference  number</th>
+                    <th>Job Titles</th>
                     <th>Update</th>
                 </tr>
             </thead>

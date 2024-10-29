@@ -85,7 +85,7 @@ if (!isset($_SESSION['admin_id'])) {
             margin: 20px 0;
         }
 
-        #fullNameInitials{
+        #emp{
             color: black;
         }
        
@@ -98,6 +98,9 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
     </style>
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -109,7 +112,7 @@ if (!isset($_SESSION['admin_id'])) {
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-10 form-container">
-                <h2 class="text-center">Employee Remunaration</h2>
+                <h2 class="text-center">Employee Remuneration</h2>
                 <a href="salarySearch.php">
                     <button type="button" class="btn btn-primary btn-small">View Benifits</button>
                 </a>  
@@ -118,26 +121,30 @@ if (!isset($_SESSION['admin_id'])) {
                 <div class="form-row">
 
 
-                <div class="form-group col-md-3">
-        <label for="empNumber">Employee Number :</label>
-        <select class="form-control" id="emp" name="empnumber">
-                    <option value="" disabled selected>Select an option</option>
+              
+    
+    <div class="form-group col-md-9">
+    <label for="fullNameInitials">Full Name :</label>
+                            <select class="form-control" id="fullNameInitials" name="nameinitial">
+
+                            <option value="" disabled selected>Select an option</option>
                     <?php 
-                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
-                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
                     <?php
                     }
                     ?>
-                </select>         
+                </select>   
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="empNumber">Employee Number :</label>
+        <input type="text" class="form-control" id="emp" name="empnumber" readonly>
+                      
             
             </div>
-    
-    <div class="form-group col-md-9">
-            <label for="fullNameInitials">Name with Initials :</label>
-            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
-    </div>
                     
     </div> 
 
@@ -165,7 +172,7 @@ if (!isset($_SESSION['admin_id'])) {
 </div>
 
 <div class="form-group col-md-4">
-        <label for="bra">BRA :</label>
+        <label for="bra">BRA(Budgetory Relief Allowance) :</label>
         <input type="text" class="form-control" id="bra" name="bra" placeholder="Enter bra">
 </div>
 
@@ -175,7 +182,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 <div class="row mb-3">
                 <div class="col-md-4">
-                    <label class="form-label"><strong>Fixed Allowance :</strong></label>
+                    <label class="form-label"><strong>Other Benifits :</strong></label>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label"><strong>Amounts :</strong></label>
@@ -197,7 +204,7 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="row mb-3">
                 <div class="col-md-4">
                     <!-- <input class="form-check-input" type="checkbox" id="allowance2"> -->
-                    <label class="form-check-label" for="allowance2">Budgetory Allowance</label>
+                    <label class="form-check-label" for="allowance2">Other amount</label>
                 </div>
                 <div class="col-md-3">
                     <input type="text" class="form-control" placeholder="Amount" name="amount2">
@@ -323,7 +330,7 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="row mb-3">
                 <div class="col-md-4">
                     <!-- <input class="form-check-input" type="checkbox" id="allowance2"> -->
-                    <label class="form-check-label" for="allowance2">Medical insurance</label>
+                    <label class="form-check-label" for="allowance2">Medical Insurance</label>
                 </div>
                 <div class="col-md-3">
                     <input type="text" class="form-control" placeholder="Amount" name="amount13">
@@ -366,12 +373,19 @@ if (!isset($_SESSION['admin_id'])) {
 
             <hr>
 
+            <h5><u>Bank Information</u></h5><br>
+
             <div class="form-row">
           
            
 <div class="form-group col-md-6">
-        <label for="Payment">Payment :</label>
-        <input type="text" class="form-control" id="Payment" name="payment" placeholder="Enter Payment">
+        <label for="Payment">Payment Method :</label>
+        <select class="form-control" id="Payment" name="payment">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="permanent">Cash</option>
+                        <option value="ftc">Cheque</option>
+                        <option value="casual">Bank transfer</option>
+                    </select>
 </div>
 
 <div class="form-group col-md-6">
@@ -404,24 +418,110 @@ if (!isset($_SESSION['admin_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var Basic = document.getElementById('Basic').value.trim();
+        var bra = document.getElementById('bra').value.trim();
+        var Payment = document.getElementById('Payment').value.trim();
+        var Account = document.getElementById('Account').value.trim();
+        var Bank = document.getElementById('Bank').value.trim();
+        var Branch = document.getElementById('Branch').value.trim();
+
+        if (!Basic) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Basic.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!bra) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Budgetory Relief Allowance.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!Payment) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the payment.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!Account) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the Account.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!Bank) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the Bank.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!Branch) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please enter a Branch.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); 
+            }
+        });
+    });
+</script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#emp').change(function () {
-            var empnumber = $(this).val();
+        $('#fullNameInitials').change(function () {
+            var nameinitial = $(this).val();
 
-            if (empnumber) {
+            if (nameinitial) {
                 $.ajax({
                     type: 'POST',
                     url: 'getSalarydetails.php', 
-                    data: { empnumber: empnumber },
+                    data: { nameinitial: nameinitial },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
                             $('#company').val(response.comp_num);
-                            $('#fullNameInitials').val(response.initial_name);
+                            $('#emp').val(response.emp_num);
                             $('#epf').val(response.epf);
                         }
                     },

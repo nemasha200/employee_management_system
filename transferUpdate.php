@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_id'])) {
 include 'db_connect.php';
 $user_id = $_GET['user_id'];
 
-$getuser = mysqli_query($con, "SELECT `id`,  `emp_num`, `name`, `designation`, `employment`, `ex_department`, `ex_company`, `trans_department`, `trans_company`, `effect_date`, `req_date`, `approve_date`, `remark` FROM `transfers` WHERE `id`='$user_id'");
+$getuser = mysqli_query($con, "SELECT `id`,  `emp_num`, `name`, `designation`, `employment`, `ex_department`, `ex_company`, `trans_department`, `trans_company`, `trans_designation`,`effect_date`, `req_date`, `approve_date`, `remark` FROM `transfers` WHERE `id`='$user_id'");
 $res_user = mysqli_fetch_array($getuser);
 ?>
 
@@ -158,7 +158,7 @@ include 'db_connect.php';
 
               
         #department{
-            color: white;
+            color: black;
         }
 
         #company{
@@ -194,58 +194,62 @@ include 'db_connect.php';
             <div class="form-row">
 
 
-            <div class="form-group col-md-3">
-                <label for="employNumber">Employ Number:</label>
-                <input type="text" value="<?php echo $res_user['emp_num']; ?>" class="form-control" id="employNumber" name="empnumber">
-
-                        
-            </div>
+            
 
 
-            <div class="form-group col-md-8">
-            <label for="fullNameInitials">Name with Initials:</label>
+            <div class="form-group col-md-12">
+            <label for="fullNameInitials">Full Name :</label>
             <input type="text" value="<?php echo $res_user['name']; ?>" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
                             
             </div>
+
             </div>
             
 
             <div class="form-row">
-            <div class="form-group col-md-5">
-                            
-                <label for="designation"> Designation<span style="color:red">*</span></label>
-                <input type="designation"  value="<?php echo $res_user['designation']; ?>" class="form-control" id="designation" name="designation" readonly>
-            </div>   
 
-                <div class="form-group col-md-6">
-                    <label for="employment">Employment</label>
+            <div class="form-group col-md-5">
+                <label for="employNumber">Employ Number :</label>
+                <input type="text" value="<?php echo $res_user['emp_num']; ?>" class="form-control" id="employNumber" name="empnumber" readonly>
+
+                        
+            </div>
+            
+
+                <div class="form-group col-md-7">
+                    <label for="employment">Employment :</label>
                     <input type="employment" value="<?php echo $res_user['employment']; ?>" class="form-control" id="employment" name="employment" readonly>
                 </div>
             </div>
-            <br>
+           
         
             
 
     <div class="form-group row">
 
-    <label for="transfer1" class="col-sm-3 col-form-label"><strong>Existing Section</strong></label>
-    <div class="form-group col-md-4">
+    <label for="transfer1" class="col-sm-3 col-form-label"><strong>Existing Section :</strong></label>
+    <div class="form-group col-md-3">
           <input type="department" value="<?php echo $res_user['ex_department']; ?>" class="form-control" id="department" name="exdepartment" readonly>
 
     </div>
 
-         <div class="col-sm-4">
+         <div class="col-sm-3">
                     <input type="company" value="<?php echo $res_user['ex_company']; ?>" class="form-control" id="company" name="excompany" readonly>
             
         </div>
+
+        <div class="form-group col-md-3">
+                            
+                <input type="designation"  value="<?php echo $res_user['designation']; ?>" class="form-control" id="designation" name="designation" readonly>
+            </div>   
 </div>
 
     
     
 
 <div class="form-group row">
-    <label for="transfer2" class="col-sm-3 col-form-label"><strong>Transfer Request</strong></label>
-    <div class="form-group col-md-4">
+    <label for="transfer2" class="col-sm-3 col-form-label"><strong>Transfer Section :</strong></label>
+    <div class="form-group col-md-3">
                             <select class="form-control" id="department" name="transdep">
 
 
@@ -267,7 +271,7 @@ include 'db_connect.php';
 
                         </div>
     
-    <div class="col-sm-4">
+    <div class="col-sm-3">
                     <select class="form-control" id="dropdown" name="transcom">
 
                     <?php
@@ -283,22 +287,41 @@ include 'db_connect.php';
                     ?>
                     </select>
     </div>
+
+    <div class="col-sm-3">
+    <select class="form-control" id="designation1" name="designation1">
+                    <?php 
+                    $getEmp = mysqli_query($con, "SELECT * FROM sub_designation");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                        <option value="<?php echo $resCom['desi_name']; ?>"
+                            <?php echo ($resCom['desi_name'] == $res_user['trans_designation']) ? 'selected' : ''; ?>>
+                            <?php echo $resCom['desi_name']; ?>
+                        </option>
+                    <?php
+                    }
+                    ?>
+                </select>
+
+                </div>
+
+
 </div>
 
 <div class="form-row">
 
                         <div class="form-group col-md-4">
-                            <label for="dob">Effective Date</label>
+                            <label for="dob">Effective Date :</label>
                             <input type="date" value="<?php echo $res_user['effect_date']; ?>" class="form-control" id="dob" name="dob1">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="dob">Requested Date</label>
+                            <label for="dob">Requested Date :</label>
                             <input type="date" value="<?php echo $res_user['req_date']; ?>" class="form-control" id="dob" name="dob2">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="dob">Approved Date</label>
+                            <label for="dob">Approved Date :</label>
                             <input type="date" value="<?php echo $res_user['approve_date']; ?>" class="form-control" id="dob" name="dob3">
                         </div>
 
@@ -307,7 +330,7 @@ include 'db_connect.php';
                 
                 
                 <div class="form-group">
-                    <label for="remark">Remark</label>
+                    <label for="remark">Remark :</label>
                     <textarea class="form-control" id="remark" name="remark" rows="1"><?php echo $res_user['remark']; ?></textarea>
                     </div>
 

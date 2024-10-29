@@ -138,13 +138,15 @@ include 'db_connect.php';
         #department{
             color: black;
         }
-        #fullNameInitials{
+        #employNumber{
             color: black;
         }
 
 
         
     </style>
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -153,7 +155,7 @@ include 'db_connect.php';
 <?php include 'logout.php';?> 
 
      
-        <div class="container form-container col-md-4">
+        <div class="container form-container col-md-6">
 
 
             
@@ -164,27 +166,38 @@ include 'db_connect.php';
             <form id="registrationForm" method="POST" action="evaluationSave.php">
                 
 
+        
+            <div class="form-row">
+                        
 
+                        <div class="form-group col-md-12">
+                        <label for="fullNameInitials">Full Name :</label>
+                        <select class="form-control" id="fullNameInitials" name="nameinitial">
+                    <option value="" disabled selected>Select an option</option>
+                    <?php 
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>    
+                
+                         </div>
+        
+                     </div>
            
             <div class="form-row">
 
             <div class="form-group col-md-5">
-                <label for="employNumber">Employ Number:</label>
-                <select class="form-control" id="employNumber" name="empnumber">
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>      
+                <label for="employNumber">Employ Number :</label>
+                <input type="text" class="form-control" id="employNumber" name="empnumber" readonly>
+                    
             </div>
 
             <div class="form-group col-md-7">
-                            <label for="department">Department<span style="color:red">*</span></label>
+                            <label for="department">Department :</label>
                             <input type="department" class="form-control" id="department" name="department" readonly>
             
 
@@ -192,68 +205,25 @@ include 'db_connect.php';
 </div>
 
             
-                <div class="form-row">
-                        
-
-                <div class="form-group col-md-12">
-                <label for="fullNameInitials">Name with Initials:</label>
-                <input type="name" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
-        
-                 </div>
-
-             </div>
 
 
-             
+            
 
 
-             <div class="form-row">
-
-<!-- <div class="form-group col-md-4">
-        <label for="dob">Date of join</label>
-        <input type="date" class="form-control" id="dob" name="dob">
-    </div>
-
-    
-
-
-
-                <div class="form-group col-md-4">
-                            <label for="designation">Designation<span style="color:red">*</span></label>
-                            <select class="form-control" id="designation" name="designation">
-                            <option value="" disabled selected>Select an option</option>
-
-                            <?php 
-                        $getEmp = mysqli_query($con,"SELECT * FROM  sub_designation ");
-                        while ($resCom = mysqli_fetch_array($getEmp)) {
-                            ?>
-                        <option value="<?php echo $resCom['desi_name']?>"><?php echo $resCom['desi_name']?></option>
-
-                            <?php
-                        }
-                    ?>
-                            </select>
-                        </div>    -->
-
-                        
-
-
-               
-</div>          
 
                     <div class="form-row">
 
                     <div class="form-group col-md-6">
-                            <label for="company">Evaluation Grading<span style="color:red">*</span></label>
+                            <label for="company">Evaluation Grading :</label>
                             <select class="form-control" id="grade" name="grade">
                             <option value="" disabled selected>Select an option</option>
 
 
                             <?php 
-                        $getEmp = mysqli_query($con,"SELECT * FROM  sub_division ");
+                        $getEmp = mysqli_query($con,"SELECT grade FROM  sub_division ");
                         while ($resCom = mysqli_fetch_array($getEmp)) {
                             ?>
-                        <option value="<?php echo $resCom['job_title']."/".$resCom['grade'] ?>"><?php echo $resCom['job_title']."/".$resCom['grade'] ?></option>
+                        <option value="<?php echo $resCom['grade'] ?>"><?php echo $resCom['grade'] ?></option>
 
                             <?php
                         }
@@ -264,7 +234,7 @@ include 'db_connect.php';
 
                    
                 <div class="form-group col-md-6">
-                            <label for="mark">Evaluation Mark</label>
+                            <label for="mark">Evaluation Mark :</label>
                             <input type="text" class="form-control" id="mark" name="mark" placeholder="Enter Evaluation Mark">
                 </div>
    
@@ -278,7 +248,7 @@ include 'db_connect.php';
 
                    
         <div class="form-group">
-                    <label for="remark">Remark</label>
+                    <label for="remark">Remark :</label>
                     <textarea class="form-control" id="remark" name="remark" rows="2" placeholder="Enter remark"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-small">Submit</button>
@@ -302,29 +272,85 @@ include 'db_connect.php';
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var grade = document.getElementById('grade').value.trim();
+        var mark = document.getElementById('mark').value.trim();
+        var remark = document.getElementById('remark').value.trim();
+        
+
+        if (!grade) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Evaluation grade.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!mark) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Evaluation mark.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!remark) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the remark.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+       
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); 
+            }
+        });
+    });
+</script>
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#employNumber').change(function () {
-            var empNumber = $(this).val();
+        $('#fullNameInitials').change(function () {
+            var nameinitial = $(this).val();
 
-            if (empNumber) {
+            if (nameinitial) {
                 $.ajax({
                     type: 'POST',
-                    url: 'getEmployeeDetails.php',
-                    data: { empnumber: empNumber },
+                    url: 'getTransferDetails.php',
+                    data: { nameinitial: nameinitial  },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
-                            $('#fullNameInitials').val(response.initial_name);
-                            $('#company').val(response.comp_num);
+                            $('#employNumber').val(response.emp_num);
+                            $('#designation').val(response.designation);
                             $('#department').val(response.department);
-                          
-
-
-
+                            $('#company').val(response.comp_num);
                         }
                     },
                     error: function () {
@@ -336,6 +362,8 @@ include 'db_connect.php';
     });
 </script>
 
+
+    
 
 
   

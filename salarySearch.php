@@ -30,13 +30,21 @@ include 'db_connect.php';
        margin-top: 10px; /* Reduce the gap from the top */
     }
     .table {
-        background-color: #32a9ad;
+        background-color: ghostwhite;
     }
+
+    .table th {
+        background-color: darkgrey; /* Set header background color */
+        color: black;
+     }
+
 
     body {
         margin: 0;
         padding: 0;
         background-color: gainsboro;
+        background-image: url("black.jpg");   
+
     }
 
     .text-black {
@@ -108,7 +116,7 @@ include 'db_connect.php';
 
 <div class="mainContainer">
     <div class="container">
-        <h1 class="text-black">Salary Details</h1>
+        <h3 class="text-white">Salary Details</h3>
         
         <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">
@@ -121,9 +129,10 @@ include 'db_connect.php';
         <!-- Table -->
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
-                <tr>                    
+                <tr> 
+                <th>Company</th>
+                  
                     <th>Emp number</th>
-                    <th>Company</th>
                     <th>EPF number</th>
 
                     <th>name</th>
@@ -164,10 +173,10 @@ include 'db_connect.php';
                         <td><?php echo $res_user['name']; ?></td>
 
                         <td>
-                            <a href="promoView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
+                            <a href="salaryView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger" style="background-color: green">View</a>
                         </td>
                         <td>
-                            <a href="promoUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
+                            <a href="salaryUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
                         </td>
                     </tr>
                     <?php

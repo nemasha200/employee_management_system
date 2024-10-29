@@ -101,7 +101,7 @@ $res_user = mysqli_fetch_array($getuser);
 
 <div class="container form-container">
     <h2 class="text-center">Department Registration Form</h2><br><br>
-    <a href="subCompanySearch.php">
+    <a href="subDepartmentSearch.php">
             <button type="button" class="btn btn-primary btn-small">View updated departments</button>
         </a>
         <form id="registrationForm" method="POST" action="subDepartmentSubmitUpdate.php">

@@ -30,13 +30,21 @@ include 'db_connect.php';
        margin-top: 10px; /* Reduce the gap from the top */
     }
     .table {
-        background-color: #32a9ad;
+        background-color: ghostwhite;
     }
+
+    .table th {
+        background-color: darkgrey; /* Set header background color */
+        color: black;
+     }
+
 
     body {
         margin: 0;
         padding: 0;
         background-color: gainsboro;
+        background-image: url("black.jpg");   
+
     }
 
     .text-black {
@@ -108,9 +116,8 @@ include 'db_connect.php';
 
 <div class="mainContainer">
     <div class="container">
-        <h1 class="text-black">Evaluation Details</h1>
+        <h3 class="text-white">Evaluation Details</h3>
         
-        <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
                 <input type="text" name="search" class="form-control" placeholder="Search Employee Details" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
@@ -125,7 +132,7 @@ include 'db_connect.php';
                     <th>Emp number</th>
                     <th>Name</th>
                     <th>Department</th>
-                    <th>Marks</th>
+                    <th>Evaluation Grade</th>
                     <th>View</th>
                     <th>Update</th>
                 </tr>
@@ -137,13 +144,13 @@ include 'db_connect.php';
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) {   
-                    $getuser = mysqli_query($con, "SELECT id,  emp_num, name, department,evalu_mark FROM  evaluation
+                    $getuser = mysqli_query($con, "SELECT id,  emp_num, name, department,evalu_grade FROM  evaluation
                                                    WHERE emp_num LIKE '%$searchTerm%' 
                                                    OR name LIKE '%$searchTerm%' 
-                                                   OR evalu_mark LIKE '%$searchTerm%'
+                                                   OR evalu_grade LIKE '%$searchTerm%'
                                                    OR department LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id,  emp_num, name, department, evalu_mark FROM  evaluation");
+                    $getuser = mysqli_query($con, "SELECT id,  emp_num, name, department, evalu_grade  FROM  evaluation");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
@@ -152,13 +159,13 @@ include 'db_connect.php';
                         <td><?php echo $res_user['emp_num']; ?></td>
                         <td><?php echo $res_user['name']; ?></td>
                         <td><?php echo $res_user['department']; ?></td>
-                        <td><?php echo $res_user['evalu_mark']; ?></td>
+                        <td><?php echo $res_user['evalu_grade']; ?></td>
 
                         <td>
-                            <a href="promoView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
+                            <a href="evaluationView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger" style="background-color: green">View</a>
                         </td>
                         <td>
-                            <a href="promoUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
+                            <a href="evaluationUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
                         </td>
                     </tr>
                     <?php

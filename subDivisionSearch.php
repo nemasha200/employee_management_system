@@ -112,8 +112,8 @@ include 'db_connect.php';
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th> job title</th>
-                    <th> grade</th>
+                    <th> Reference Number</th>
+                    <th> Job Grades</th>
                     <th>Update</th>
                 </tr>
             </thead>

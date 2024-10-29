@@ -162,12 +162,11 @@ include 'db_connect.php';
 
 
             
-            <h2 class="text-center">Promotion View Form</h2>
+            <h2 class="text-center">Promotion View</h2>
 
 
             <div class="form-group">
-                <label for="company">Company</label>
-                <!-- Display company name inside an h4 with green highlight -->
+                <label for="company">Company :</label>
                 <h4 class="highlight-green" id="company" readonly><?php echo $res_user['company']; ?></h4>
             </div>
 
@@ -175,28 +174,31 @@ include 'db_connect.php';
                 
 
             <div class="form-row"> 
+
+            <div class="form-group col-md-9">
+            <label for="fullNameInitials">Full Name :</label>
+            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" value="<?php echo $res_user['name']; ?>" readonly>
+               
+            </div> 
+
             <div class="form-group col-md-3">
-            <label for="employNumber">Employ Number </label>
+            <label for="employNumber">Employ Number :</label>
             <input type="text" class="form-control" id="employNumber" value="<?php echo $res_user['emp_num']; ?>" readonly>     
             </div>
             
-            <div class="form-group col-md-9">
-            <label for="fullNameInitials">Name with Initials</label>
-            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" value="<?php echo $res_user['name']; ?>" readonly>
-               
-            </div>
+            
         </div>
         
 
         <div class="form-row">
             <div class="form-group col-md-6">
-            <label for="department">Department<span style="color:red">*</span></label>
+            <label for="department">Department :</label>
             <input type="text" class="form-control" id="department" name="department" value="<?php echo $res_user['department']; ?>" readonly>
 
             </div>
 
             <div class="form-group col-md-5">
-            <label for="dob">Date of join</label>
+            <label for="dob">Date of join :</label>
             <input type="text" class="form-control" id="dob3" name="dob3" value="<?php echo $res_user['doj']; ?>" readonly>
                        
             </div>
@@ -204,28 +206,28 @@ include 'db_connect.php';
 
         <div class="form-row">
             <div class="form-group col-md-3">
-            <label for="company">Existing Grade<span style="color:red">*</span></label>
+            <label for="company">Existing Grade :</label>
             <input type="text" class="form-control" id="grade" name="garde" value="<?php echo $res_user['ex_grade']; ?>" readonly>
 
         </div>
 
 
         <div class="form-group col-md-3">
-        <label for="designation">Existing Designation<span style="color:red">*</span></label>
+        <label for="designation">Existing Designation :</label>
         <input type="text" class="form-control" id="designation" name="designation" value="<?php echo $res_user['ex_designation']; ?>" readonly>
 
                
             </div>
 
             <div class="form-group col-md-3">
-            <label for="grade1">Promoted Grade<span style="color:red">*</span></label>
+            <label for="grade1">Promoted Grade :</label>
             <input type="text" class="form-control" id="grade1" name="grade1" value="<?php echo $res_user['promo_grade']; ?>" readonly>
 
                 
             </div>
 
             <div class="form-group col-md-3">
-            <label for="designation">Promoted Designation<span style="color:red">*</span></label>
+            <label for="designation">Promoted Designation :</label>
             <input type="text" class="form-control" id="designation1" name="designation1" value="<?php echo $res_user['promo_designation']; ?>" readonly>
 
             </div>
@@ -233,25 +235,25 @@ include 'db_connect.php';
 
         <div class="form-row">
             <div class="form-group col-md-4">
-            <label for="designation">Promo action<span style="color:red">*</span></label>
+            <label for="designation">Promo action :</label>
             <input type="text" class="form-control" id="action" name="action" value="<?php echo $res_user['promo_action']; ?>" readonly>
 
             </div>
             <div class="form-group col-md-4">
-            <label for="dob">With effect Date</label>
+            <label for="dob">With effect Date :</label>
             <input type="text" class="form-control" id="dob1" name="dob1" value="<?php echo $res_user['promo_effect_date']; ?>" readonly>
 
                         
             </div>
             <div class="form-group col-md-4">
-            <label for="dob">Last promoted Date</label>
+            <label for="dob">Last promoted Date :</label>
             <input type="text" class="form-control" id="dob2" name="dob2" value="<?php echo $res_user['last_promo_date']; ?>" readonly>
                        
             </div>
         </div>
 
         <div class="form-group">
-        <label for="remark">Remark</label>
+        <label for="remark">Remark :</label>
         <input type="text" class="form-control" id="remark" name="remark" value="<?php echo $res_user['remark']; ?>" readonly>
         
         </div>

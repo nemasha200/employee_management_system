@@ -37,8 +37,10 @@ if (!isset($_SESSION['admin_id'])) {
         $designation = $_POST['designation'];
         $grade = $_POST['grade'];
         $jobcategory = $_POST['jobcategory'];
-        $vehiclenumber = $_POST['vehiclenumber'];
+        $lpd = $_POST['lpd'];
         $empstatus = $_POST['empstatus'];
+        $vehiclenumber = $_POST['vehiclenumber'];
+       
         $ot = $_POST['ot'];
         $remark1 = $_POST['remark1'];
         $remark2 = $_POST['remark2'];
@@ -52,13 +54,11 @@ if (!isset($_SESSION['admin_id'])) {
             $target_file = $target_dir . basename($_FILES["photo"]["name"]);
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-            // Allow only specific file formats
-            if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-                echo "Sorry, only JPG, JPEG, & PNG files are allowed.";
+            if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "pdf") {
+                echo "Sorry, only JPG, JPEG, PDF & PNG files are allowed.";
                 exit();
             }
 
-            // Move the uploaded file to the server
             if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
                 $img = basename($_FILES["photo"]["name"]); // Save image file name
             } else {
@@ -67,12 +67,11 @@ if (!isset($_SESSION['admin_id'])) {
             }
         }
 
-        // Prepare the SQL query to update the record
         $query = "UPDATE employer 
                   SET comp_num='$company', emp_type='$employeeType', emp_num='$empnumber', epf='$epfnumber', sex='$sex', marital_status='$marital', full_name='$fullname', 
                   initial_name='$nameinitial', dob='$dob', nic='$nic', drive_lic_num='$drive', permanat_address='$address1', current_address='$address2', qulifications='$qualifications', 
                   mobile='$phonenumber', landnumber='$landnumber', office_number='$officenumber', doj='$doj', recruitment_type='$recruitmentType', department='$department', designation='$designation', 
-                  grade='$grade', job_title='$jobcategory', vehicle_num='$vehiclenumber', emp_status='$empstatus', ot='$ot', remark1='$remark1', remark2='$remark2', remark3='$remark3'";
+                  grade='$grade', job_title='$jobcategory', last_promo='$lpd', emp_status='$empstatus', vehicle_num='$vehiclenumber',ot='$ot', remark1='$remark1', remark2='$remark2', remark3='$remark3'";
 
         // Only update the img field if a new image was uploaded
         if ($img != '') {

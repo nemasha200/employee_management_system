@@ -88,18 +88,18 @@ if (!isset($_SESSION['admin_id'])) {
 <?php include 'submenubar.php';?>
 
     <div class="container form-container">
-        <h2 class="text-center">Job Category Registration Form</h2>
+        <h2 class="text-center">Job Title Registration Form</h2>
         <a href="subJobSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View Job category Deatils</button>
+            <button type="button" class="btn btn-primary btn-small">View Job Title Details</button>
         </a><br><br>
         <form id="registrationForm" method="POST" action="subJobSave.php">
             <div class="form-group">
-                <label for="departmentNumber">Job Category Number</label>
-                <input type="text" class="form-control" id="jobnum" name="jobnum" placeholder="Enter job Category number">
+                <label for="departmentNumber">Reference Number</label>
+                <input type="text" class="form-control" id="jobnum" name="jobnum" placeholder="Enter reference number">
             </div><br>
             <div class="form-group">
-                <label for="departmentName">Job Category Name</label>
-                <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Enter job Category name">
+                <label for="departmentName">Job Title</label>
+                <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Enter job Title ">
             </div><br>
             <button type="submit" class="btn btn-primary btn-small">Submit</button>
         </form>

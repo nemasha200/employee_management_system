@@ -292,7 +292,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .card-body a.btn-link:hover {
-        background-color: #386870; /* Darker shade of green on hover */
+        background-color: mediumpurple; /* Darker shade of green on hover */
         color: black; /* Keep font color black on hover */
        }  
 
@@ -369,23 +369,14 @@ if (!isset($_SESSION['admin_id'])) {
             </section>
         </div>
 
-<!-- <div class="container mt-4">
-                
-                <div class="employee-system-header">
-                    
-                    <b>Employee Registration System</b><br>
-                    <h5>Welcome to the Employee Registration System!</h5>
-                  
-                    
-                </div>
-                <div class="buttons-right"></div> -->
+
             </div>
             <div class="container employee-system-section">
                 <!-- <h5>Overview Of the System</h5> -->
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card text-black mb-3">
-                            <div class="card-header"><h4>Total of the Employees</h4>
+                            <div class="card-header"><h4><center>Total of the Employees</center></h4>
                                 <a href="employer.php">
                                     <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
                                 </a>
@@ -397,9 +388,9 @@ if (!isset($_SESSION['admin_id'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card text-black mb-3">
-                            <div class="card-header"><h4>Total ActiveEmployees</h4>
+                            <div class="card-header"><h4><center>Total ActiveEmployees</center></h4>
                                 <a href="employer.php">
                                     <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
                                 </a>
@@ -411,19 +402,8 @@ if (!isset($_SESSION['admin_id'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card text-black mb-3">
-                            <div class="card-header"><h4>Half Register Employees</h4>
-                                <a href="employer.php">
-                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
-                                </a>
-                            </div>
-                            <div class="card-body">
-                            <h2>20</h2>
-                            <!-- <a href="subCompany.php" class="btn btn-go-subform">Go to Subform</a> -->
-                            </div>
-                        </div>
-                    </div>
+                   
+                    
                     
                 </div>
             </div>

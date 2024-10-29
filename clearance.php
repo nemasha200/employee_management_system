@@ -89,7 +89,7 @@ include 'db_connect.php';
        #designation{
         color:black;
        }
-       #fullName{
+       #empNumber{
         color:black;
        }
 
@@ -100,6 +100,10 @@ include 'db_connect.php';
     
        
     </style>
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
+    
 </head>
 
 <body>
@@ -117,26 +121,33 @@ include 'db_connect.php';
     <form id="registrationForm" method="POST" action="clearSave.php" enctype="multipart/form-data">
 
 
+
+    <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <select class="form-control" id="fullName" name="fullName">
+                    <option value="" disabled selected>Select an option</option>
+                    <?php 
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>    
+        </div>
+
     <div class="form-row">
 
     <div class="form-group col-md-4">
                 <label for="employeeNumber">Employee Number</label>
-                <select class="form-control" id="empNumber" name="empnumber">
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>      
+                <input type="text" class="form-control" id="empNumber" name="empnumber" readonly>
+                         
             </div>
 
             <div class="form-group col-md-4">
                 <label for="epfNumber">Reference Number</label>
-                <input type="text" class="form-control" id="epfNumber" name="refnumber" placeholder="Enter Reference number">
+                <input type="text" class="form-control" id="refNumber" name="refnumber" placeholder="Enter Reference number">
             </div>
 
            
@@ -150,22 +161,7 @@ include 'db_connect.php';
 
         
 
-        <div class="form-group">
-            <label for="employeeType"><strong>Employee Type:</strong></label>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="employeeType" id="staff" value="Staff" required>
-                <label class="form-check-label" for="staff">Staff</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="employeeType" id="ase" value="ASE">
-                <label class="form-check-label" for="ase">ASE</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="employeeType" id="factory" value="Factory">
-                <label class="form-check-label" for="factory">Factory</label><br>
-            </div>
-        </div>
-
+        
         <div class="form-group">
                 <label for="dropdown">Company:</label>
                 <input type="text" class="form-control" id="dropdown" name="company" readonly>
@@ -174,10 +170,7 @@ include 'db_connect.php';
 
        
 
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" class="form-control" id="fullName" name="fullName" readonly>
-        </div>
+       
 
         <div class="form-row">
             <div class="form-group col-md-5">
@@ -196,16 +189,17 @@ include 'db_connect.php';
         
 
         <div class="form-group col-md-8">  
-            <label for="headerGiven"><strong>Prior notice Given:</strong></label>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="headerYes" name="headerGiven" value="yes">
-                <label class="form-check-label" for="headerYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="headerNo" name="headerGiven" value="no">
-                <label class="form-check-label" for="headerNo">No</label>
-            </div>
-        </div>
+    <label for="headerGiven"><strong>Prior notice Given:</strong></label>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="headerYes" name="headerGiven" value="yes" required>
+        <label class="form-check-label" for="headerYes">Yes</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="headerNo" name="headerGiven" value="no" required>
+        <label class="form-check-label" for="headerNo">No</label>
+    </div>
+</div>
+
 
         <div class="form-group col-md-">
             <label for="remark">Remark</label>
@@ -220,25 +214,95 @@ include 'db_connect.php';
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var refNumber = document.getElementById('refNumber').value.trim();
+        var dob = document.getElementById('dob').value.trim();
+        // var head = document.getElementById('head').value.trim();
+        var head = document.querySelector('input[name="headerGiven"]:checked');
+
+
+        var remark = document.getElementById('remark').value.trim();
+
+        if (!refNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Reference Number.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!dob) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Resignation date.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+       
+
+if (!head) {
+    Swal.fire({
+        title: 'Validation Error!',
+        text: 'Please select the Prior notice Given.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+    return false;
+}
+
+
+        if (!remark) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please enter a remark.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); 
+            }
+        });
+    });
+</script>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#empNumber').change(function () {
-            var empnumber = $(this).val();
+        $('#fullName').change(function () {
+            var fullName = $(this).val();
 
-            if (empnumber) {
+            if (fullName) {
                 $.ajax({
                     type: 'POST',
-                    url: 'getTransferDetails.php',
-                    data: { empnumber: empnumber  },
+                    url: 'getClearancedetails.php',
+                    data: { fullName: fullName  },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
                             $('#dropdown').val(response.comp_num);
-                            $('#fullName').val(response.initial_name);
+                            $('#empNumber').val(response.emp_num);
                             $('#Section').val(response.department);
                             $('#designation').val(response.designation);
 

@@ -101,18 +101,18 @@ if (!isset($_SESSION['admin_id'])) {
 
 
     <div class="container form-container">
-        <h2 class="text-center">jobGrade Registration Form</h2>
+        <h2 class="text-center">Job Grades Registration Form</h2>
         <a href="subDivisionSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View jobGrade details</button>
+            <button type="button" class="btn btn-primary btn-small">View Job Grade details</button>
         </a><br><br>
         <form id="registrationForm" method="POST" action="subDivisionSave.php">
             <div class="form-group">
-                <label for="divisionNumber">Job Title</label>
-                <input type="text" class="form-control" id="divisionNumber" name="divisionumber" placeholder="Enter division number">
+                <label for="divisionNumber">Reference Number</label>
+                <input type="text" class="form-control" id="divisionNumber" name="divisionumber" placeholder="Enter refernce number">
             </div><br>
             <div class="form-group">
-                <label for="divisionName">Grade</label>
-                <input type="text" class="form-control" id="divisionName" name="divisioname" placeholder="Enter division name">
+                <label for="divisionName">Job Grades</label>
+                <input type="text" class="form-control" id="divisionName" name="divisioname" placeholder="Enter grade">
                 
             </div><br>
             <button type="submit" class="btn btn-primary btn-small">Submit</button>

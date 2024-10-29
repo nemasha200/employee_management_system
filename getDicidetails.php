@@ -1,10 +1,10 @@
 <?php
 include './db_connect.php';
 
-if (isset($_POST['empnumber'])) {
-    $employ = $_POST['empnumber'];
+if (isset($_POST['nameinitial'])) {
+    $name = $_POST['nameinitial'];
 
-    $query = "SELECT initial_name FROM employer WHERE emp_num = '$employ'";
+    $query = "SELECT full_name, emp_num FROM employer WHERE full_name = '$name'";
     $result = mysqli_query($con, $query);
 
     if ($result) {

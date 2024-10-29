@@ -107,10 +107,12 @@ include 'db_connect.php';
             background-color: #495057;
         }
 
-        #fullNameInitials{
+        #emp{
             color: black;
         }
     </style>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -130,26 +132,30 @@ include 'db_connect.php';
             
             <div class="form-row">
             
-            <div class="form-group col-md-4">
-                            <label for="emp">Employee Number</label>
-                            <select class="form-control" id="emp" name="empnumber">
+            
+
+
+            <div class="form-group col-md-8">
+                            <label for="fullNameInitials">Full Name :</label>
+                            <select class="form-control" id="fullNameInitials" name="nameinitial">
 
                             <option value="" disabled selected>Select an option</option>
                     <?php 
-                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
-                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
                     <?php
                     }
                     ?>
                 </select>    
             </div>
 
+            <div class="form-group col-md-4">
+                            <label for="emp">Employee Number :</label>
+                            <input type="text" class="form-control" id="emp" name="empnumber" readonly>
 
-            <div class="form-group col-md-8">
-                            <label for="fullNameInitials">Name with Initials</label>
-                            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
+                         
             </div>
 
             
@@ -160,19 +166,27 @@ include 'db_connect.php';
             <div class="form-row">
             
             <div class="form-group col-md-12">
-                            <label for="fullNameInitials">Reason</label>
-                            <input type="text" class="form-control" id="fullNameInitials" name="reason" placeholder="Enter Reason">
+                            <label for="fullNameInitials">Disciplinary issue :</label>
+                            <input type="text" class="form-control" id="reason" name="reason" placeholder="Enter Issue">
+            </div>
+</div>
+
+<div class="form-row">
+            
+            <div class="form-group col-md-12">
+                            <label for="fullNameInitials">Disciplinary Action :</label>
+                            <input type="text" class="form-control" id="reason1" name="reason1" placeholder="Enter Action">
             </div>
 </div>
             <div class="form-group">
-                    <label for="imageUpload">Upload Image</label>
-                            <input type="file" class="form-control-file" id="form-group" name="photo">
+                    <label for="imageUpload">Upload File : (Only Allowed pdf, jpg, jpeg, png formates)</label>
+                            <input type="file" class="form-control-file" id="group" name="photo">
                             
                             <div class="message" id="message"></div>
 
                 </div>
                 <div class="form-group">
-                    <label for="remark">Remark</label>
+                    <label for="remark">Remark :</label>
                     <textarea class="form-control" id="remark" name="remark" rows="2" placeholder="Enter remark"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-small">Submit</button>
@@ -183,23 +197,77 @@ include 'db_connect.php';
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var reason = document.getElementById('reason').value.trim();
+        var group = document.getElementById('group').value.trim();
+        var remark = document.getElementById('remark').value.trim();
+       
+        if (!reason) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a reason.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!group) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a photo.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!remark) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select the remark.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+       
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); 
+            }
+        });
+    });
+</script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#emp').change(function () {
-            var empnumber = $(this).val();
+        $('#fullNameInitials').change(function () {
+            var nameinitial = $(this).val();
 
-            if (empnumber) {
+            if (nameinitial) {
                 $.ajax({
                     type: 'POST',
-                    url: 'getTransferDetails.php',
-                    data: { empnumber: empnumber  },
+                    url: 'getDicidetails.php',
+                    data: { nameinitial: nameinitial  },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
-                            $('#fullNameInitials').val(response.initial_name);
+                            $('#emp').val(response.emp_num);
                         }
                     },
                     error: function () {

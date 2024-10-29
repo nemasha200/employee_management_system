@@ -106,11 +106,11 @@ $res_user = mysqli_fetch_array($getuser);
         </a><br><br>
         <form id="registrationForm" method="POST" action="subDesignationSubmitUpdate.php">
         <div class="form-group">
-                <label for="departmentNumber">Designation Number</label>
+                <label for="departmentNumber">Reference Number</label>
                 <input type="text" class="form-control" id="departmentNumber" name="depnumber" value="<?php echo $res_user['desi_num']; ?>" >
             </div><br>
             <div class="form-group">
-                <label for="departmentName">Designation Name</label>
+                <label for="departmentName">Designation</label>
                 <input type="text" class="form-control" id="departmentName" name="depname" value="<?php echo $res_user['desi_name']; ?>" >
             </div><br>
 

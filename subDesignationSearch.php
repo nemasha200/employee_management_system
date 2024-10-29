@@ -107,12 +107,12 @@ include 'db_connect.php';
 <body>
     <div class="mainContainer">
     <div class="container mt-5">
-        <h1 class="text-black">Designation Details</h1>
+        <h1 class="text-black">Designations Details</h1>
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Designation number</th>
-                    <th>Designation name</th>
+                    <th>Reference Number</th>
+                    <th>Designations</th>
                    
                     <th>Update</th>
                 </tr>

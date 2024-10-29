@@ -16,13 +16,13 @@ $user_id = $_GET['user_id'];
 $getuser = mysqli_query($con, "SELECT `empid`,  `comp_num`, `emp_type`, `emp_num`, `epf`, `sex`, `marital_status`,
  `full_name`, `initial_name`, `dob`, `nic`, `drive_lic_num`, `permanat_address`, `current_address`,
   `qulifications`, `mobile`, `landnumber`, `office_number`, `doj`, `recruitment_type`, `department`,
-   `designation`, `grade`, `job_title`, `vehicle_num`, `img`, `emp_status`, `ot`, `remark1`, `remark2`, `remark3` FROM `employer` WHERE empid = '$user_id'");
+   `designation`, `grade`, `job_title`, `last_promo`, `emp_status`, `vehicle_num`, `img`, `ot`, `remark1`, `remark2`, `remark3` FROM `employer` WHERE empid = '$user_id'");
 $res_user = mysqli_fetch_array($getuser);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php 
- 
+  
  include 'db_connect.php';
  
  ?>
@@ -134,7 +134,7 @@ $res_user = mysqli_fetch_array($getuser);
             <h5><u>Employee Personal Details</u></h5><br>
 
             <div class="form-group">
-                        <label for="employeeType"><strong>Employee Category:</strong></label>
+                        <label for="employeeType"><strong>Employee Category :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="employeeType" value="Staff" <?php echo ($res_user['emp_type'] == 'Staff') ? 'checked' : ''; ?> required>
                             <label class="form-check-label">Staff</label>
@@ -150,7 +150,7 @@ $res_user = mysqli_fetch_array($getuser);
                     </div>
 
             <div class="form-group">
-                    <label for="dropdown">Company:</label>
+                    <label for="dropdown">Company :</label>
                     <select class="form-control" id="company" name="company">
                     <?php
                     $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
@@ -181,20 +181,20 @@ $res_user = mysqli_fetch_array($getuser);
                 
                 
                         <div class="form-group col-md-6">
-                            <label for="employNumber">Employ Number </label>
+                            <label for="employNumber">Employ Number :</label>
                             <input type="text" value="<?php echo $res_user['emp_num']; ?>" class="form-control" id="employNumber" name="empnumber" placeholder="Enter employ number">
                 </div>
 
                        
 
                 <div class="form-group col-md-6">
-                            <label for="epfNumber">EPF Number</label>
+                            <label for="epfNumber">EPF Number :</label>
                             <input type="text" value="<?php echo $res_user['epf']; ?>" class="form-control" id="epfNumber" name="epfnumber" placeholder="Enter EPF number">
                 </div>
 
                  <!-- Gender -->
                  <div class="form-group">
-                        <label for="sex"><strong>Sex:</strong></label>
+                        <label for="sex"><strong>Sex :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="sex" value="Male" <?php echo ($res_user['sex'] == 'Male') ? 'checked' : ''; ?>>
                             <label class="form-check-label">Male</label>
@@ -210,7 +210,7 @@ $res_user = mysqli_fetch_array($getuser);
 
                      <!-- Marital Status -->
                     <div class="form-group">
-                        <label for="marital"><strong>Marital Status:</strong></label>
+                        <label for="marital"><strong>Marital Status :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="marital" value="single" <?php echo ($res_user['marital_status'] == 'single') ? 'checked' : ''; ?>>
                             <label class="form-check-label">Single</label>
@@ -229,13 +229,13 @@ $res_user = mysqli_fetch_array($getuser);
             </div>
 
             <div class="form-group col-md-">
-                            <label for="fullName">Full Name<span style="color:red">*</span></label>
+                            <label for="fullName">Full Name :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['full_name']; ?>" class="form-control" id="fullName" name="fullname" placeholder="Enter full name">
             </div>
 
             
             <div class="form-group col-md-">
-                            <label for="fullNameInitials">Name with Initials</label>
+                            <label for="fullNameInitials">Name with Initials :</label>
                             <input type="text" value="<?php echo $res_user['initial_name']; ?>" class="form-control" id="fullNameInitials" name="nameinitial" placeholder="Enter full name with initials">
             </div>
 
@@ -247,19 +247,19 @@ $res_user = mysqli_fetch_array($getuser);
             <div class="form-row">
 
             <div class="form-group col-md-4">
-                            <label for="dob">Date of Birth</label>
+                            <label for="dob">Date of Birth :</label>
                             <input type="date" value="<?php echo $res_user['dob']; ?>" class="form-control" id="dob" name="dob">
             </div>
 
                         
             <div class="form-group col-md-4">
-                            <label for="nicNumber">NIC Number<span style="color:red">*</span></label>
+                            <label for="nicNumber">NIC Number :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['nic']; ?>" class="form-control" id="nicNumber" name="nic" placeholder="Enter NIC number">
             </div>
 
                      
             <div class="form-group col-md-4">
-                            <label for="nicNumber">Driving License Number<span style="color:red">*</span></label>
+                            <label for="nicNumber">Driving License Number :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['drive_lic_num']; ?>" class="form-control" id="nicNumber" name="drive" placeholder="Enter Driving License number">
             </div>
                         
@@ -268,14 +268,14 @@ $res_user = mysqli_fetch_array($getuser);
             </div>
 
             <div class="form-group col-md-">
-                            <label for="address1">Permanent Address</label>
+                            <label for="address1">Permanent Address :</label>
                             <input type="text" value="<?php echo $res_user['permanat_address']; ?>" class="form-control" id="address1" name="address1" placeholder="Enter address 1">
             </div>
 
 
                     
             <div class="form-group col-md-">
-                            <label for="address2">Current Address</label>
+                            <label for="address2">Current Address :</label>
                             <input type="text" value="<?php echo $res_user['current_address']; ?>" class="form-control" id="address2" name="address2" placeholder="Enter address 2">
             </div>
        
@@ -283,7 +283,7 @@ $res_user = mysqli_fetch_array($getuser);
 
                     <!-- Qualifications -->
                     <div class="form-group">
-                        <label for="qualifications"><strong>Educational Qualifications:</strong></label>
+                        <label for="qualifications"><strong>Educational Qualifications :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" name="qualifications[]" value="Masters" <?php echo (strpos($res_user['qulifications'], 'Masters') !== false) ? 'checked' : ''; ?>>
                             <label class="form-check-label">Masters</label>
@@ -306,19 +306,19 @@ $res_user = mysqli_fetch_array($getuser);
 
                      
 <div class="form-group col-md-4">
-    <label for="phoneNumber">Mobile Number</label>
+    <label for="phoneNumber">Mobile Number :</label>
     <input type="text" value="<?php echo $res_user['mobile']; ?>" class="form-control" id="phoneNumber" name="phonenumber" placeholder="Enter mobile number">
 </div>
 
 
 <div class="form-group col-md-4">
-    <label for="phoneNumber1">Landphone Number</label>
+    <label for="phoneNumber1">Landphone Number :</label>
     <input type="text" value="<?php echo $res_user['landnumber']; ?>" class="form-control" id="phoneNumber1" name="landnumber" placeholder="Enter landphone number">
 </div>
 
 
 <div class="form-group col-md-4">
-    <label for="phoneNumber1">Office Number</label>
+    <label for="phoneNumber1">Office Number :</label>
     <input type="text" value="<?php echo $res_user['office_number']; ?>" class="form-control" id="phoneNumber1" name="officenumber" placeholder="Enter Office number">
 </div>
 
@@ -338,12 +338,12 @@ $res_user = mysqli_fetch_array($getuser);
 <div class="form-row">
 
 <div class="form-group col-md-4">
-<label for="dob">Date of Join</label>
+<label for="dob">Date of Join :</label>
 <input type="date" value="<?php echo $res_user['doj']; ?>" class="form-control" id="doj" name="doj">
 </div>
 
 <div class="form-group col-md-4">
-                        <label for="recruitmentType">Recruitment Type:</label>
+                        <label for="recruitmentType">Recruitment Type :</label>
                         <select class="form-control" name="recruitmentType">
                             <option value="new" <?php echo ($res_user['recruitment_type'] == 'new') ? 'selected' : ''; ?>>New</option>
                             <option value="rejoin" <?php echo ($res_user['recruitment_type'] == 'rejoin') ? 'selected' : ''; ?>>Rejoin</option>
@@ -353,7 +353,7 @@ $res_user = mysqli_fetch_array($getuser);
 
 
             <div class="form-group col-md-4">
-                            <label for="department">Department<span style="color:red">*</span></label>
+                            <label for="department">Department :<span style="color:red">*</span></label>
                             <select class="form-control" id="department" name="department">
 
 
@@ -380,7 +380,7 @@ $res_user = mysqli_fetch_array($getuser);
                     <div class="form-row">
                         
                         <div class="form-group col-md-4">
-                            <label for="designation">Designation<span style="color:red">*</span></label>
+                            <label for="designation">Designation :<span style="color:red">*</span></label>
                             <select class="form-control" id="designation" name="designation">
                             <option value="" disabled selected>Select an option</option>
 
@@ -400,7 +400,7 @@ $res_user = mysqli_fetch_array($getuser);
 
 
                         <div class="form-group col-md-4">
-                            <label for="company">Grade<span style="color:red">*</span></label>
+                            <label for="company">Grade :<span style="color:red">*</span></label>
                             <select class="form-control" id="grade" name="grade">
 
 
@@ -423,7 +423,7 @@ $res_user = mysqli_fetch_array($getuser);
                     
                    
                         <div class="form-group col-md-4">
-                            <label for="jobCategory">Job Title<span style="color:red">*</span></label>
+                            <label for="jobCategory">Job Title :<span style="color:red">*</span></label>
                             <select class="form-control" id="jobCategory" name="jobcategory">
                             <option value="" disabled selected>Select an option</option>
 
@@ -443,42 +443,20 @@ $res_user = mysqli_fetch_array($getuser);
                         </div> 
                 </div>  
 
+                <div class="form-row">   
 
 
-                <div class="form-row">           
-                
-
-           
-
-            <div class="form-group col-md-3">
-                            <label for="vehicleNumber">Vehicle Number</label>
-                            <input type="text" value="<?php echo $res_user['vehicle_num']; ?>" class="form-control" id="vehicleNumber" name="vehiclenumber" placeholder="Enter vehicle number">
-            </div>
-        
-            <!-- <div class="form-group col-md-3">
-    <label for="uploadPhoto">Upload NIC or Driving License</label>
-    <?php if($res_user['img']): ?>
-        <img src="uploads/<?php echo $res_user['img']; ?>" alt="NIC/Driving License" width="150" height="150"><br>
-    <?php endif; ?>
-    <input type="file" class="form-control-file" id="form-group" name="photo">
-    <div class="message" id="message"></div>
-</div> -->
-
-<div class="form-group col-md-3">
-                <label for="uploadPhoto">Upload NIC or Driving License</label>
-                <?php if ($res_user['img']): ?>
-                    <img src="uploads/<?php echo $res_user['img']; ?>" alt="NIC/Driving License" width="150" height="150"><br>
-                <?php endif; ?>
-                <input type="file" class="form-control-file" name="photo">
-            </div>
+                <div class="form-group col-md-5">
+    <label for="dob">Last promoted Dates :</label>
+        <input type="text"  value="<?php echo $res_user['last_promo']; ?>" class="form-control" id="lpd" name="lpd">
+</div>
 
 
 
-            
-                        
+                              
            <!-- Employee Status -->
-           <div class="form-group col-md-6">
-                        <label for="empstatus">Employee Status:</label>
+           <div class="form-group col-md-7">
+                        <label for="empstatus">Employee Status :</label>
                         <select class="form-control" name="empstatus">
                             <option value="permanent" <?php echo ($res_user['emp_status'] == 'permanent') ? 'selected' : ''; ?>>Permanent</option>
                             <option value="ftc" <?php echo ($res_user['emp_status'] == 'ftc') ? 'selected' : ''; ?>>FTC</option>
@@ -487,13 +465,34 @@ $res_user = mysqli_fetch_array($getuser);
                         </select>
             </div>
 
-    
 
-    
+                    
+                </div>
+                
+
+                <div class="form-row">           
+                
+
+           
+
+            <div class="form-group col-md-3">
+                            <label for="vehicleNumber">Vehicle Number :</label>
+                            <input type="text" value="<?php echo $res_user['vehicle_num']; ?>" class="form-control" id="vehicleNumber" name="vehiclenumber" placeholder="Enter vehicle number">
+            </div>
+        
+
+<div class="form-group col-md-3">
+                <label for="uploadPhoto">Upload NIC or Driving License:</label>
+                <?php if ($res_user['img']): ?>
+                    <img src="uploads/<?php echo $res_user['img']; ?>" alt="NIC/Driving License" width="150" height="150"><br>
+                <?php endif; ?>
+                <input type="file" class="form-control-file" name="photo">
+            </div>
+
 
             <!-- OT -->
             <div class="form-group col-md-5">
-                        <label for="ot">OT:</label>
+                        <label for="ot">OT :</label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="ot" value="yes" <?php echo ($res_user['ot'] == 'yes') ? 'checked' : ''; ?>>
                             <label class="form-check-label">Yes</label>
@@ -510,7 +509,7 @@ $res_user = mysqli_fetch_array($getuser);
             <div class="row">
     <div class="col-md-12">
         <div class="form-group row align-items-start">
-            <label for="remark" class="col-form-label col-md-2 text-left">Remark</label>
+            <label for="remark" class="col-form-label col-md-2 text-left">Remark :</label>
 
             <div class="col-md-10">
                 <div class="row">

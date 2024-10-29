@@ -30,13 +30,21 @@ include 'db_connect.php';
        margin-top: 10px; /* Reduce the gap from the top */
     }
     .table {
-        background-color: #32a9ad;
+        background-color: ghostwhite;
     }
+
+    .table th {
+        background-color: darkgrey; /* Set header background color */
+        color: black;
+     }
+
 
     body {
         margin: 0;
         padding: 0;
         background-color: gainsboro;
+        background-image: url("black.jpg");   
+
     }
 
     .text-black {
@@ -108,7 +116,7 @@ include 'db_connect.php';
 
 <div class="mainContainer">
     <div class="container">
-        <h1 class="text-black">Transfers Details</h1>
+        <h3 class="text-white">Transfers Details</h3>
         
         <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">
@@ -127,6 +135,8 @@ include 'db_connect.php';
                     <th>Company</th>
                     <th>Department</th>
                     <th>Name</th>
+                    <th>Designation</th>
+
 
 
                     <th>View</th>
@@ -140,13 +150,15 @@ include 'db_connect.php';
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT id, emp_num, ex_department, ex_company, name FROM  transfers
+                    $getuser = mysqli_query($con, "SELECT id, emp_num, ex_department, ex_company,  name, designation FROM  transfers
                                                    WHERE emp_num LIKE '%$searchTerm%' 
                                                    OR ex_company LIKE '%$searchTerm%'
                                                    OR ex_department LIKE '%$searchTerm%'
-                                                   OR name LIKE '%$searchTerm%'");
+                                                   OR name LIKE '%$searchTerm%'
+
+                                                   OR designation LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id, emp_num, ex_department, ex_company, name  FROM  transfers");
+                    $getuser = mysqli_query($con, "SELECT id, emp_num, ex_department, ex_company, name, designation  FROM  transfers");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
@@ -157,9 +169,11 @@ include 'db_connect.php';
                         <td><?php echo $res_user['ex_company']; ?></td>
                         <td><?php echo $res_user['ex_department']; ?></td>
                         <td><?php echo $res_user['name']; ?></td>
+                        <td><?php echo $res_user['designation']; ?></td>
+
 
                         <td>
-                            <a href="transferView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger">View</a>
+                            <a href="transferView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger"  style="background-color: green">View</a>
                         </td>
                         <td>
                             <a href="transferUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>

@@ -29,26 +29,35 @@ if(isset($_GET['user_id'])) {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
+            margin: 0;
+            background-color: #dadce3;
+            background-image: url("black.jpg");
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #dadce3;
-            background-image: url("img1.jpg");
         }
 
-        .form-container {
-            position: relative;
+        .wrapper {
+            display: flex;
             width: 100%;
-            max-width: 600px;
+            height: 100%;
+        }
+
+        
+        .form-container {
+            margin-left: 250px; /* Adjusted for sidebar width */
             padding: 30px;
-            background-color: #22b3b0;
+            background-color: lightblue;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 250px); /* Adjust width for sidebar */
+            max-width: 800px;
+            margin: auto;
         }
 
         .form-control {
-            color: black;
+            color: white;
             background-color: #343a40;
         }
 
@@ -63,10 +72,12 @@ if(isset($_GET['user_id'])) {
         .btn-primary {
             background-color: #a62411;
             border: none;
+            display: block;
+            margin: 0 auto;
         }
 
         .btn-primary:hover {
-            background-color: #495057;
+            background-color: #c82333;
         }
 
         .btn-small {
@@ -97,42 +108,84 @@ if(isset($_GET['user_id'])) {
         .back-button:hover {
             background-color: #495057;
         }
+
+        #fullNameInitials,
+        #emp,
+        #reason,
+        #remark{
+            color: black;
+            background-color: white;
+        }
     </style>
 </head>
 <body>
     
 <?php include 'submenubar.php';?>
 
-    <div class="container form-container">
-        <button class="back-button" onclick="window.history.back();">&larr;</button>
-        <h2 class="text-center">Disciplinary details</h2>
-       
-        <form>
-            <div class="form-group">
-                <label for="selectEmployee">Select Employee</label>
-                <input type="text" class="form-control" id="selectEmployee" name="selectemp" value="<?php echo $res_user['select_emp']; ?>" readonly>
-                    
-            </div>
-            <div class="form-group">
-                <label for="remark">Remark</label>
-                <input type="text" class="form-control" id="remark" name="remark" rows="2" value="<?php echo $res_user['remark']; ?>" readonly>            
+<div class="container form-container">
+            <h2 class="text-center">Disciplinary Actions Form</h2>
+            
+            <form id="registrationForm" method="POST" action="diciSave.php" enctype="multipart/form-data">
+
+            
+            <div class="form-row">
+
+            <div class="form-group col-md-8">
+                            <label for="fullNameInitials">Name with Initials :</label>
+                            <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" value="<?php echo $res_user['name']; ?>" readonly>
             </div>
             
+            <div class="form-group col-md-4">
+                    <label for="emp">Employee Number :</label>
+                    <input type="text"  class="form-control" id="emp" name="empnumber" value="<?php echo $res_user['emp_num']; ?>" readonly>
+                </div> 
 
-            <div class="form-group col-md-12">
-                            <label for="photo">Photo</label>
-                            <?php
-                            if(!empty($res_user['img'])) {
-                                echo '<div><img src="dici/' . $res_user['img'] . '" alt="Employee Photo" class="img-fluid" /></div>';
-                            } else {
-                                echo '<div>No photo uploaded.</div>';
-                            }
-                            ?>
+           
+
+            
+
+
             </div>
-   
-       </form>
-</body>
-       
+
+            <div class="form-row">
+            
+            <div class="form-group col-md-12">
+                            <label for="fullNameInitials">Disciplinary issue :</label>
+                            <input type="text" class="form-control" id="fullNameInitials" name="reason" value="<?php echo $res_user['reason']; ?>" readonly>
+            </div>
+</div>
+
+<div class="form-row">
+<div class="form-group col-md-12">
+                            <label for="fullNameInitials">Disciplinary Action :</label>
+                            <input type="text" class="form-control" id="fullNameInitials" name="reason1" value="<?php echo $res_user['action']; ?>" readonly>
+            </div>
+</div>
+
+<div class="form-group col-md-12">
+    <label for="photo">Image</label>
+    <?php
+    if (!empty($res_user['img'])) {
+        echo '<div><img src="dici/' . $res_user['img'] . '" alt="Employee Photo" class="img-fluid" style="max-width: 400px; max-height: 300px;" /></div>';
+    } else {
+        echo '<div>No photo uploaded.</div>';
+    }
+    ?>
+</div>
+
+                <div class="form-group">
+                    <label for="remark">Remark :</label>
+                    <input type="text" class="form-control" id="remark" name="remark" rows="2" value="<?php echo $res_user['remark']; ?>" readonly>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     
 </html>
 

@@ -35,23 +35,26 @@ if (!$con) {
        border-radius: 10px;
        margin-top: 10px; /* Reduce the gap from the top */
     }
+    
     .table {
-        background-color: #32a9ad;
+        background-color: ghostwhite
     }
 
     body {
         margin: 0;
         padding: 0;
-        background-color: gainsboro;
-    }
+        background-image: url("black.jpg");   
+     }
+
+     .table th {
+        background-color: darkgrey; /* Set header background color */
+        color: black;
+     }
 
     .text-black {
         color: black !important;
     }
 
-  
-
-   
     .dataTables_filter input {
         background-color: white !important;
     }
@@ -70,13 +73,13 @@ if (!$con) {
         padding: 5px 15px;
         font-size: 1rem;
     }
+   
 
     .form-inline {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 15px;
     }
-
    
 </style>
 <meta charset="UTF-8">
@@ -109,7 +112,7 @@ if (!$con) {
 
 <div class="mainContainer">
     <div class="container">
-        <h1 class="text-black">Employee Details</h1>
+        <h3 class="text-white">Employee Details</h3>
         
         <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">
@@ -125,12 +128,14 @@ if (!$con) {
                 <tr>                    
                     <th>Company</th>
                     <th>Department</th>
-                    <th>Emp number</th>
-                    <th>EPF number</th>
+                    <th>NIC</th>
+                    <th>EPF </th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Job Title</th>
                     <th>View</th>
                     <th>Update</th>
                     <th>InActive</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -138,13 +143,21 @@ if (!$con) {
                 $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf, isAct FROM employer
-                                                   WHERE emp_num LIKE '%$searchTerm%' 
+                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, nic, epf, full_name, designation, job_title, isAct 
+                                                   FROM employer
+                                                   WHERE empid LIKE '%$searchTerm%' 
                                                    OR comp_num LIKE '%$searchTerm%' 
-                                                   OR department LIKE '%$searchTerm%' 
-                                                   OR epf LIKE '%$searchTerm%'");
+                                                   OR department LIKE '%$searchTerm%'
+                                                   OR nic LIKE '%$searchTerm%' 
+                                                   OR epf LIKE '%$searchTerm%' 
+                                                   OR full_name LIKE '%$searchTerm%' 
+                                                   OR designation LIKE '%$searchTerm%' 
+                                                   OR job_title LIKE '%$searchTerm%'
+                                                   ORDER BY isAct DESC");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_num, epf, isAct FROM employer");
+                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, nic, epf, full_name, designation, job_title, isAct 
+                                                   FROM employer
+                                                   ORDER BY isAct DESC");
                 }
 
                 if (!$getuser) {
@@ -155,29 +168,27 @@ if (!$con) {
                         <tr>
                             <td><?php echo $res_user['comp_num']; ?></td>
                             <td><?php echo $res_user['department']; ?></td>
-                            <td><?php echo $res_user['emp_num']; ?></td>
+                            <td><?php echo $res_user['nic']; ?></td>
                             <td><?php echo $res_user['epf']; ?></td>
+                            <td><?php echo $res_user['full_name']; ?></td>
+                            <td><?php echo $res_user['designation']; ?></td>
+                            <td><?php echo isset($res_user['job_title']) ? $res_user['job_title'] : 'N/A'; ?></td>
                             <td>
-                                <a href="empView.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-danger">View</a>
+                                <a href="empView.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-danger" style="background-color: green">View</a>
                             </td>
                             <td>
-                                <a href="empUpdate.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-warning">Update</a>
+                                <a href="empUpdate.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-warning"  style="background-color: dark yellow">Update</a>
                             </td>
-                            
                             <td>
-    <?php
-    if ($res_user['isAct'] == 1) {
-        echo '<span class="btn btn-small" style="background-color: purple; color: white;">Active</span>';
-    } else {
-        echo '<span class="btn btn-small" style="background-color: blue; color: white;">Deactive</span>';
-    }
-    ?>
-</td>
-
-
-</td>
-
-                       
+                                <?php
+                                if ($res_user['isAct'] == 1) {
+                                    echo '<span class="btn btn-small" style="background-color: blue; color: white;">Active</span>';
+                                } else {
+                                    echo '<span class="btn btn-small" style="background-color: darkorange; color: white;">Deactive</span>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
                         <?php
                     }
                 }

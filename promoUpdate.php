@@ -149,15 +149,18 @@ include 'db_connect.php';
     </a>
     <form id="registrationForm" method="POST" action="promoSubmitUpdate.php">
         <div class="form-row"> 
+
+        <div class="form-group col-md-9">
+                <label for="fullNameInitials">Name with Initials</label>
+                <input type="text" value="<?php echo $res_user['name']; ?>" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
+            </div> 
+            
             <div class="form-group col-md-3">
                 <label for="employNumber">Employ Number </label>
                 <input type="text" value="<?php echo $res_user['emp_num']; ?>" class="form-control" id="employNumber" name="empnumber" readonly>
             </div>
 
-            <div class="form-group col-md-9">
-                <label for="fullNameInitials">Name with Initials</label>
-                <input type="text" value="<?php echo $res_user['name']; ?>" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
-            </div>
+           
         </div>
 
         <div class="form-group col-md-13">
@@ -206,7 +209,7 @@ include 'db_connect.php';
             </div>
 
             <div class="form-group col-md-3">
-                <label for="designation">Promoted Designation<span style="color:red">*</span></label>
+                <label for="designation">Promoted Designation</label>
                 <select class="form-control" id="designation" name="designation1">
                     <?php 
                     $getEmp = mysqli_query($con, "SELECT * FROM sub_designation");
@@ -240,7 +243,7 @@ include 'db_connect.php';
 
             <div class="form-group col-md-4">
                 <label for="dob">Last promoted Date</label>
-                <input type="date" value="<?php echo $res_user['last_promo_date']; ?>" class="form-control" id="dob" name="dob2">
+                <input type="date" value="<?php echo $res_user['last_promo_date']; ?>" class="form-control" id="dob" name="dob2" readonly>
             </div>
         </div>
 

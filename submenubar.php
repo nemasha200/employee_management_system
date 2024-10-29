@@ -60,7 +60,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar a:hover {
-            background-color: #851549;
+            background-color: mediumpurple;
         }
 
         .sidebar .submenu a {
@@ -85,7 +85,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .card-header button:hover {
-            background-color: burlywood;
+            background-color: crimson;
         }
 
         .submenu {
@@ -116,7 +116,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .dashboard-btn:hover {
-            background-color: #f573a5;
+            /* background-color: #cfccc8; */
         }
 
         .main-content {
@@ -145,7 +145,7 @@ $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE u
     <h4 class="text-center"><img src="menu-bar_3926749.png" alt="Logo" class="logo"> Menu bar</h4>
 
     <div class="dashboard-btn-container">
-            <a href="menubar.php" class="dashboard-btn">--Go Dashboard--</a>
+            <a href="menubar.php" class="dashboard-btn  ">Go Dashboard</a>
         </div>
 
     <?php

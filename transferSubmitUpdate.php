@@ -18,6 +18,7 @@ if (!isset($_SESSION['admin_id'])) {
     $excompany = $_POST['excompany'];
     $transdep = $_POST['transdep'];
     $transcom = $_POST['transcom'];
+    $designation1 = $_POST['designation1'];
     $dob1 = $_POST['dob1'];
     $dob2 = $_POST['dob2'];
     $dob3 = $_POST['dob3'];
@@ -32,6 +33,7 @@ if (!isset($_SESSION['admin_id'])) {
                   `ex_company`='$excompany',
                   `trans_department`='$transdep',
                   `trans_company`='$transcom',
+                  `trans_designation`='$designation1',
                   `effect_date`='$dob1',
                   `req_date`='$dob2',
                   `approve_date`='$dob3',

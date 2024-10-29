@@ -106,12 +106,12 @@ $res_user = mysqli_fetch_array($getuser);
         </a><br><br>
         <form id="registrationForm" method="POST" action="subJobSubmitUpdate.php">
         <div class="form-group">
-                <label for="departmentNumber">Job Category Number</label>
-                <input type="text"  value="<?php echo $res_user['jobcat_num']; ?>" class="form-control" id="jobnum" name="jobnum" placeholder="Enter job Category number">
+                <label for="departmentNumber">Reference Number</label>
+                <input type="text"  value="<?php echo $res_user['jobcat_num']; ?>" class="form-control" id="jobnum" name="jobnum" >
             </div><br>
             <div class="form-group">
-                <label for="departmentName">Job Category Name</label>
-                <input type="text" value="<?php echo $res_user['jobcat_name']; ?>" class="form-control" id="jobname" name="jobname" placeholder="Enter job Category name">
+                <label for="departmentName">Job Title</label>
+                <input type="text" value="<?php echo $res_user['jobcat_name']; ?>" class="form-control" id="jobname" name="jobname">
             </div><br>
 
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">

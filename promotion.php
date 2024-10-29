@@ -132,12 +132,13 @@ include 'db_connect.php';
         text-align: center;
     }
 
-    #fullNameInitials,
+    #employNumber,
     #company,
     #department,
     #doj,
     #designation,
-    #grade {
+    #grade,
+    #dob2{
         background-color: white;
         color: black;
     }
@@ -157,59 +158,71 @@ include 'db_connect.php';
     <form id="promoForm" method="POST" action="promoSave.php">
 
         <div class="form-row"> 
-            <div class="form-group col-md-3">
-                <label for="employNumber">Employ Number:</label>
-                <select class="form-control" id="employNumber" name="empnumber">
+           
+
+
+             
+            <div class="form-group col-md-9">
+                <label for="fullNameInitials">Full Name :</label>
+                <select class="form-control" class="form-control" id="fullNameInitials" name="nameinitial"> 
+               
                     <option value="" disabled selected>Select an option</option>
                     <?php 
-                    $getEmp = mysqli_query($con,"SELECT emp_num FROM  employer ");
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
-                    <option value="<?php echo $resCom['emp_num'] ?>"><?php echo $resCom['emp_num'] ?></option>
+                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
                     <?php
                     }
                     ?>
-                </select>      
+                </select>     
             </div>
+
+            <div class="form-group col-md-3">
+                <label for="employNumber">Employ Number :</label>
+               
+                <input type="text" class="form-control" id="employNumber" name="empnumber" readonly>
+                
+            </div>
+
+          
+
             
-            <div class="form-group col-md-9">
-                <label for="fullNameInitials">Name with Initials:</label>
-                <input type="text" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
-            </div>
+         
         </div>
         <div class="form-group col-md-13">
-            <label for="company">Company:</label>
+            <label for="company">Company :</label>
             <input type="text" class="form-control" id="company" name="company" readonly>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="department">Department<span style="color:red">*</span></label>
+                <label for="department">Department :</label>
                 <input type="text" class="form-control" id="department" name="department" readonly>
             </div>
 
             <div class="form-group col-md-5">
-                <label for="dob">Date of Join</label>
+                <label for="dob">Date of Join :</label>
                 <input type="text" class="form-control" id="doj" name="doj" readonly>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="grade">Existing Grade<span style="color:red">*</span></label>
+                <label for="grade">Existing Grade :</label>
                 <input type="grade" class="form-control" id="grade" name="grade" readonly>
         </div>
 
 
         <div class="form-group col-md-3">
-                <label for="designation">Existing Designation<span style="color:red">*</span></label>
+                <label for="designation">Existing Designation :</label>
                 <input type="designation"  class="form-control" id="designation" name="designation" readonly>
                     
                
             </div>
 
             <div class="form-group col-md-3">
-                <label for="grade1">Promoted Grade<span style="color:red">*</span></label>
+                <label for="grade1">Promoted Grade :</label>
                 <select class="form-control" id="grade1" name="grade1">
                     <option value="" disabled selected>Select an option</option>
                     <?php 
@@ -224,7 +237,7 @@ include 'db_connect.php';
             </div>
 
             <div class="form-group col-md-3">
-                <label for="designation1">Promoted Designation<span style="color:red">*</span></label>
+                <label for="designation1">Promoted Designation :</label>
                 <select class="form-control" id="designation1" name="designation1">
                     <option value="" disabled selected>Select an option</option>
                     <?php 
@@ -241,7 +254,7 @@ include 'db_connect.php';
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="action">Promo Action</label>
+                <label for="action">Type :</label>
                 <select class="form-control" id="action" name="action">
                     <option value="" disabled selected>Select an option</option>
                     <option value="promotion">Promotion</option>
@@ -249,17 +262,17 @@ include 'db_connect.php';
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="dob1">With Effect Date</label>
+                <label for="dob1">With Effect Date :</label>
                 <input type="date" class="form-control" id="dob1" name="dob1">
             </div>
             <div class="form-group col-md-4">
-                <label for="dob2">Last Promoted Date</label>
-                <input type="date" class="form-control" id="dob2" name="dob2">
+                <label for="dob2">Last Promoted Date :</label>
+                <input type="text" class="form-control" id="dob2" name="dob2" readonly>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="remark">Remark</label>
+            <label for="remark">Remark :</label>
             <textarea class="form-control" id="remark" name="remark" rows="1" placeholder="Enter remark"></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-small">Submit</button>                                                     
@@ -361,25 +374,27 @@ include 'db_connect.php';
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#employNumber').change(function () {
-            var empNumber = $(this).val();
+        $('#fullNameInitials').change(function () {
+            var nameinitial = $(this).val();
 
-            if (empNumber) {
+            if (nameinitial) {
                 $.ajax({
                     type: 'POST',
                     url: 'getEmployeeDetails.php',
-                    data: { empnumber: empNumber },
+                    data: { nameinitial: nameinitial },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
-                            $('#fullNameInitials').val(response.initial_name);
+                            $('#employNumber').val(response.emp_num);
                             $('#company').val(response.comp_num);
                             $('#department').val(response.department);
                             $('#doj').val(response.doj);
                             $('#grade').val(response.grade);
                             $('#designation').val(response.designation);
+                            $('#dob2').val(response.last_promo);
+
 
 
 

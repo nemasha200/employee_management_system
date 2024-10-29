@@ -100,12 +100,12 @@ if (!isset($_SESSION['admin_id'])) {
         </a>  <br><br>
         <form id="registrationForm" method="POST" action="subDesignationSave.php">
             <div class="form-group">
-                <label for="designationNumber">Designation Number</label>
-                <input type="text" class="form-control" id="designationNumber" name="designationum" placeholder="Enter designation number">
+                <label for="designationNumber">Reference Number</label>
+                <input type="text" class="form-control" id="designationNumber" name="designationum" placeholder="Enter Reference number">
             </div><br>
             <div class="form-group">
-                <label for="designationName">Designation Name</label>
-                <input type="text" class="form-control" id="designationName" name="designationame" placeholder="Enter designation name" >
+                <label for="designationName">Designation</label>
+                <input type="text" class="form-control" id="designationName" name="designationame" placeholder="Enter designation" >
             </div><br>
             <button type="submit" class="btn btn-primary btn-small">Submit</button>
         </form>

@@ -254,26 +254,6 @@ if(isset($_GET['user_id'])) {
 
 
 
-<!-- <div class="form-row">
-
-                     
-<div class="form-group col-md-4">
-    <label for="phoneNumber">Emergency contact Name</label>
-    <input type="text" class="form-control" id="phoneNumber" name="phonenumber" placeholder="Enter emergency contact Name">
-</div>
-
-<div class="form-group col-md-4">
-    <label for="phoneNumber1">Emergency contact Relationship</label>
-    <input type="text" class="form-control" id="phoneNumber1" name="phonenumber1" placeholder="Enter  relationship">
-</div>
-
-<div class="form-group col-md-4">
-    <label for="phoneNumber1">Emergency contact mobile</label>
-    <input type="text" class="form-control" id="phoneNumber1" name="phonenumber1" placeholder="Enter mobile number">
-</div>
-
-</div>    <hr> -->
-
 
 <h5><u>Employee Company related Details</u></h5><br>
 
@@ -332,36 +312,40 @@ if(isset($_GET['user_id'])) {
                         </div> 
                 </div>  
 
+                <div class="form-row">    
 
 
-                <div class="form-row">           
+                <div class="form-group col-md-4">
+        <label for="recruitmentType">Last promoted Dates :</label>
+        <input type="text" class="form-control" id="lpd" name="lpd[]" value="<?php echo $res_user['last_promo']; ?>" readonly>
+
+    </div>
+
+
                 
-
-           
-
-            <div class="form-group col-md-3">
-                            <label for="vehicleNumber">Vehicle Number</label>
-                            <input type="text" class="form-control" id="vehiclenumber" name="vehiclenumber" value="<?php echo $res_user['vehicle_num']; ?>" readonly>
-            </div>
-
             <div class="form-group col-md-6">
         <label for="recruitmentType">Employee Status:</label>
         <input type="text" class="form-control" id="empstatus" name="empstatus" value="<?php echo $res_user['emp_status']; ?>" readonly>
 
     </div>
 
+
+    </div>
+
+    <div class="form-row">           
+                   <div class="form-group col-md-3">
+                            <label for="vehicleNumber">Vehicle Number</label>
+                            <input type="text" class="form-control" id="vehiclenumber" name="vehiclenumber" value="<?php echo $res_user['vehicle_num']; ?>" readonly>
+            </div>
+
+         
+
+
     <div class="form-group col-md-3">
                 <label for="headerGiven"><strong>OT :</strong></label>
                 <input type="text" class="form-control" id="ot" name="ot" value="<?php echo $res_user['ot']; ?>" readonly>
 
-                <!-- <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ot" id="yes" value="Male">
-                    <label class="form-check-label" for="male">Yes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ot" id="no" value="Female">
-                    <label class="form-check-label" for="female">No</label>
-                </div> -->
+               
             </div>         
                         
 
@@ -370,7 +354,7 @@ if(isset($_GET['user_id'])) {
             <label for="uploadPhoto">Upload NIC or Driving License</label>
             <?php
                             if(!empty($res_user['img'])) {
-                                echo '<div><img src="dici/' . $res_user['img'] . '" alt="NIC/Driving License" width="150" height="150" class="img-fluid" /></div>';
+                                echo '<div><img src="dici/' . $res_user['img'] . '" alt="NIC/Driving License" width="300" height="250" class="img-fluid" /></div>';
                             } else {
                                 echo '<div>No photo uploaded.</div>';
                             }
