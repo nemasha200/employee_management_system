@@ -21,7 +21,7 @@ if (!isset($_SESSION['admin_id'])) {
 
     <style>
         body {
-            background-image: url("black.jpg");
+            background-image: url("img1.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -113,7 +113,7 @@ if (!isset($_SESSION['admin_id'])) {
 
         .sidebar {
             height: 100vh;
-            background-color: #d4d6d6;
+            background-color: gray;
             padding-top: 20px;
             position: fixed;
             width: 250px;
@@ -229,11 +229,11 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar .card-body a:first-child {
-            background-color: #055473;
+            background-color: #7a776d;
             color: black; /* If you want to change the text color */
         }
         .sidebar .card-body a:first-child:hover{
-            background-color: #94060b;
+            background-color: maroon;
             color: black; /* If you want to change the text color */
         }
 
@@ -244,8 +244,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar .card-header {
-            background-color: #52514f; Set the background color for card headers
-            color: black; /* Set the text color for card headers */
+            background-color: #202928; Set the background color for card headers
             border-bottom: none; /* Remove the border from the bottom */
             padding: 10px 20px; /* Add padding to card headers */
             border-radius: 10px 10px 0 0; /* Round the top corners */
@@ -287,12 +286,12 @@ if (!isset($_SESSION['admin_id'])) {
             background-color: #7a776d;
         }
         .card-body a.btn-link {
-        background-color: #2eaac9; /* Set button background to dark green */
+        background-color: #819994; /* Set button background to dark green */
         color: black; /* Set font color to black */
         }
 
         .card-body a.btn-link:hover {
-        background-color: mediumpurple; /* Darker shade of green on hover */
+        background-color: #495057; /* Darker shade of green on hover */
         color: black; /* Keep font color black on hover */
        }  
 
@@ -356,56 +355,91 @@ if (!isset($_SESSION['admin_id'])) {
         <div class="content w-100">
             <h1 class="employee-system-header"><img src="raigam.png" alt="Logo" class="logo">        
             <b>Employee Registration System</b> </h1>
-            <section class="employee-system-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                        <d class="card animate__animated animate__bounceInLeft">
-                            <h5>Welcome to the Employee Registration System!</h5>
-                            <p>Please select an option from the menu to get started.</p>
-                        </d>
-                    </div>
-                </div>
-            </section>
+            
         </div>
 
 
             </div>
+
+
             <div class="container employee-system-section">
-                <!-- <h5>Overview Of the System</h5> -->
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" >
+
                         <div class="card text-black mb-3">
-                            <div class="card-header"><h4><center>Total of the Employees</center></h4>
-                                <a href="employer.php">
-                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
-                                </a>
+                        <d class="card animate__animated animate__zoomIn">
+                            
+
+                            <div class="card-header">
+                           
+                            <h4><center><img src="team.png" alt="Logo" class="logo">     Total of the Employees</center></h4>
+                                
                             </div>
                             <div class="card-body">
                             <h2>450</h2>
-                            <!-- <a href="total.php" class="btn btn-go-subform"> See the Total</a> -->
-                                </p>
+                               
                             </div>
+                            </d>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card text-black mb-3">
-                            <div class="card-header"><h4><center>Total ActiveEmployees</center></h4>
+                        <d class="card animate__animated animate__zoomIn">
+
+                            <div class="card-header"><h4><center><img src="inactive.png" alt="Logo" class="logo">  Total ActiveEmployees</center></h4>
                                 <a href="employer.php">
                                     <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
                                 </a>
                             </div>
                             <div class="card-body">
                                 <h2>275</h2>
-                                <!-- <p class="card-title"></p><b>Total of Active Employees</b> -->
-                                <!-- <a href="subDepartment.php" class="btn btn-go-subform">Go to Subform</a> -->
+                               
                             </div>
+                            </d>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-6">
+                        <div class="card text-black mb-3">
+                        <d class="card animate__animated animate__zoomIn">
+
+                            <div class="card-header"><h4><center><img src="emp.png" alt="Logo" class="logo">  Total Deactive Employees</center></h4>
+                                <a href="employer.php">
+                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h2>275</h2>
+                               
+                            </div>
+                            </d>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-6">
+                        <div class="card text-black mb-3">
+                        <d class="card animate__animated animate__zoomIn">
+
+                            <div class="card-header"><h4><center><img src="promo.png" alt="Logo" class="logo">  Total Transfer Employees</center></h4>
+                                <a href="employer.php">
+                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h2>27</h2>
+                               
+                            </div>
+                            </d>
                         </div>
                     </div>
                    
                     
                     
                 </div>
+
+
+
+                
             </div>
         </div>
     </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +7,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <style>
         body {
             background-image: url("black.jpg");
         }
         .registration-form {
             padding: 30px;
-            background-color: grey; 
+            background-color: grey;
             margin-top: 50px;
         }
         .logo {
@@ -33,11 +31,6 @@
             background-color: darkred;
             border-color: darkred;
         }
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
         label {
             color: white;
         }
@@ -45,10 +38,8 @@
 </head>
 <body>
     <div class="container">
-        <a href="menubar.php" class="btn btn-secondary back-button">Back</a>
-
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <form class="registration-form" id="registrationForm" method="POST" action="userSave.php">
                     <h2 class="text-center">Login Registration</h2>
                     <div class="form-group">
@@ -67,14 +58,6 @@
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control" id="lastName" name="lastname" placeholder="Enter lastname">
-                    </div>
-                    <div class="form-group">
-                        <label for="department">Department<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="department" name="department" placeholder="Enter department" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nic">NIC<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter NIC" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email<span style="color:red">*</span></label>
@@ -112,12 +95,9 @@
             </div>
         </div>
     </div>
-
     <script>
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent the form from submitting the default way
-  
-            // Check if all required fields are filled
+            e.preventDefault();
             let form = e.target;
             if (!form.checkValidity()) {
                 Swal.fire({
@@ -127,8 +107,6 @@
                 });
                 return;
             }
-
-            // Check if passwords match
             let password = document.getElementById('password').value;
             let conpassword = document.getElementById('conpassword').value;
             if (password !== conpassword) {
@@ -139,8 +117,6 @@
                 });
                 return;
             }
-
-            // Show confirmation alert
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to submit the form?",
@@ -151,16 +127,13 @@
                 confirmButtonText: 'Yes, submit it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Submit the form via the default submission
                     form.submit();
-
-                    // Show success alert and refresh the form
                     Swal.fire(
                         'Submitted!',
                         'Your form has been submitted.',
                         'success'
                     ).then(() => {
-                        form.reset(); // Reset the form after submission
+                        form.reset();
                     });
                 }
             });
