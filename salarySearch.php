@@ -135,7 +135,7 @@ include 'db_connect.php';
                     <th>Emp number</th>
                     <th>EPF number</th>
 
-                    <th>name</th>
+                    <th>namess</th>
 
                    
 

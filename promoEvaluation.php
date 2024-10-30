@@ -175,7 +175,7 @@ include 'db_connect.php';
                         <select class="form-control" id="fullNameInitials" name="nameinitial">
                     <option value="" disabled selected>Select an option</option>
                     <?php 
-                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer where isAct='1' ");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
                     <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
