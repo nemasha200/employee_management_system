@@ -382,9 +382,9 @@ if (!isset($_SESSION['admin_id'])) {
         <label for="Payment">Payment Method :</label>
         <select class="form-control" id="Payment" name="payment">
                         <option value="" disabled selected>Select an option</option>
-                        <option value="permanent">Cash</option>
-                        <option value="ftc">Cheque</option>
-                        <option value="casual">Bank transfer</option>
+                        <option value="cash">Cash</option>
+                        <option value="cheque">Cheque</option>
+                        <option value="tansfer">Bank transfer</option>
                     </select>
 </div>
 

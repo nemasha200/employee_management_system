@@ -383,7 +383,7 @@ $res_user = mysqli_fetch_array($getuser);
           
            
 <div class="form-group col-md-6">
-        <label for="Payment">Payment :</label>
+        <label for="Payment">Payment Method :</label>
         <select class="form-control" name="payment">
                             <option value="cash" <?php echo ($res_user['payemnt'] == 'cash') ? 'selected' : ''; ?>>Cash</option>
                             <option value="cheque" <?php echo ($res_user['payemnt'] == 'cheque') ? 'selected' : ''; ?>>Cheque</option>

@@ -1,43 +1,37 @@
 <?php
- error_reporting(E_ALL ^ E_NOTICE);
- session_start();
+session_start();
 
 if (!isset($_SESSION['admin_id'])) {
     header("Location: userlogin.php");
     exit();
-}else{
-?>
-<?php 
+}
 
 include 'db_connect.php';
 
+$title = mysqli_real_escape_string($con, $_POST['title']);
+$firstname = mysqli_real_escape_string($con, $_POST['firstname']);
+$lastname = mysqli_real_escape_string($con, $_POST['lastname']);
+$email = mysqli_real_escape_string($con, $_POST['email']);
+$contact = mysqli_real_escape_string($con, $_POST['contact']);
+$type = mysqli_real_escape_string($con, $_POST['type']);
+$username = mysqli_real_escape_string($con, $_POST['username']);
+$password = mysqli_real_escape_string($con, $_POST['password']);
+$conpassword = mysqli_real_escape_string($con, $_POST['conpassword']);
 
-$title = $_POST['title'];
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
-$firstname = $_POST['firstname'];
-$department = $_POST['department'];
-$nic = $_POST['nic'];
-$email = $_POST['email'];
-$contact = $_POST['contact'];
-$type = $_POST['type'];
-$username = $_POST['username'];
-$password = $_POST['password'];
-$conpassword=$_POST['conpassword'];
+if ($password !== $conpassword) {
+    echo "Passwords do not match.";
+    exit();
+}
 
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
+$query = "INSERT INTO `user` (`title`, `first_name`, `last_name`, `email`, `contact`, `type`, `username`, `password`) 
+          VALUES ('$title', '$firstname', '$lastname', '$email', '$contact', '$type', '$username', '$hashedPassword')";
 
-
-
-
-
-mysqli_query($con,"INSERT INTO `user`(`title`, `first_name`, `last_name`, `department`, `nic`, `email`, `contact`, `type`, `username`, `password`,`con_password`) VALUES ('$title','$firstname','$lastname','$department','$nic','$email','$contact','$type','$username','$password','$conpassword')");
- 
- header("Location: user.php");
-exit();
-
-
-?>
-<?php
+if (mysqli_query($con, $query)) {
+    header("Location: user.php");
+    exit();
+} else {
+    echo "Error: " . mysqli_error($con);
 }
 ?>

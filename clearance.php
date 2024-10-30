@@ -124,7 +124,7 @@ include 'db_connect.php';
 
     <div class="form-group">
             <label for="fullName">Full Name</label>
-            <select class="form-control" id="fullName" name="fullName">
+            <select class="form-control" id="FullName" name="fullName">
                     <option value="" disabled selected>Select an option</option>
                     <?php 
                     $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
@@ -179,7 +179,7 @@ include 'db_connect.php';
             </div>
 
             
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-6">
                 <label for="department">Designation<span style="color:red">*</span></label>
                 <input type="text" class="form-control" id="designation" name="designation" readonly>
                    
@@ -187,8 +187,8 @@ include 'db_connect.php';
         </div>
 
         
-
-        <div class="form-group col-md-8">  
+        <div class="form-row">
+        <div class="form-group col-md-5">  
     <label for="headerGiven"><strong>Prior notice Given:</strong></label>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" id="headerYes" name="headerGiven" value="yes" required>
@@ -199,6 +199,17 @@ include 'db_connect.php';
         <label class="form-check-label" for="headerNo">No</label>
     </div>
 </div>
+
+<div class="form-group col-md-7">
+                    <label for="imageUpload">Upload File : (Only Allowed pdf, jpg, jpeg, png formates)</label>
+                            <input type="file" class="form-control-file" id="group" name="photo">
+                            
+                            <div class="message" id="message"></div>
+
+</div>
+</div>
+
+
 
 
         <div class="form-group col-md-">
@@ -286,37 +297,47 @@ if (!head) {
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
+    <script>
     $(document).ready(function () {
-        $('#fullName').change(function () {
+        $('#FullName').change(function () {
             var fullName = $(this).val();
 
             if (fullName) {
                 $.ajax({
                     type: 'POST',
                     url: 'getClearancedetails.php',
-                    data: { fullName: fullName  },
+                    data: { fullName: fullName },
                     dataType: 'json',
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
-                        } else {
+                        } else if (response.emp_num && response.comp_num && response.department && response.designation) {
                             $('#dropdown').val(response.comp_num);
                             $('#empNumber').val(response.emp_num);
                             $('#Section').val(response.department);
                             $('#designation').val(response.designation);
-
+                        } else {
+                            Swal.fire({
+                                title: 'Data Missing!',
+                                text: 'Some details could not be retrieved automatically. Please contact support.',
+                                icon: 'warning',
+                                confirmButtonText: 'OK'
+                            });
                         }
                     },
                     error: function () {
-                        alert('Error retrieving employee details');
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'There was an error retrieving employee details.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
                     }
                 });
             }
         });
     });
 </script>
-
 
 
 

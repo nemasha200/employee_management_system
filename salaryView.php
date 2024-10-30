@@ -374,7 +374,7 @@ include 'db_connect.php';
           
            
 <div class="form-group col-md-6">
-        <label for="Payment">Payment :</label>
+        <label for="Payment">Payment Method :</label>
         <input type="text" class="form-control" id="Payment" name="payment" value="<?php echo $res_user['payemnt']; ?>" readonly>
 </div>
 
