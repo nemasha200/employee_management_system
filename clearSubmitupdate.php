@@ -1,57 +1,65 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+// Start the session and connect to the database
 session_start();
+include 'db_connect.php';
 
-// Check if the user is logged in as admin
+// Check if the user is logged in as an admin
 if (!isset($_SESSION['admin_id'])) {
     header("Location: userlogin.php");
     exit();
 }
 
-// Include database connection
-include 'db_connect.php';
+// Check if form data is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
+    $user_id = $_POST['user_id'];
+    $refnumber = $_POST['refnumber'];
+    $dob = $_POST['dob'];
+    $prior_notice = isset($_POST['headerGiven']) ? implode(',', $_POST['headerGiven']) : '';
+    $remark = $_POST['remark'];
 
-// Check if the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect form data
-    $empnumber = mysqli_real_escape_string($con, $_POST['empnumber']);
-    $refnumber = mysqli_real_escape_string($con, $_POST['refnumber']);
-    $dob = mysqli_real_escape_string($con, $_POST['dob']);
-    $employeeType = mysqli_real_escape_string($con, $_POST['employeeType']);
-    $company = mysqli_real_escape_string($con, $_POST['company']);
-    $fullName = mysqli_real_escape_string($con, $_POST['fullName']);
-    $section = mysqli_real_escape_string($con, $_POST['section']);
-    $designation = mysqli_real_escape_string($con, $_POST['designation']);
-    $priorNotice = isset($_POST['headerGiven']) ? implode(',', $_POST['headerGiven']) : '';
-    $remark = mysqli_real_escape_string($con, $_POST['remark']);
+    // Handle file upload if a new file is uploaded
+    $upload_dir = 'clear/';
+    $img_name = '';
 
-    // Update the clearance details in the database
-    $query = "UPDATE clearance SET
-                ref_num='$refnumber',
-                wef='$dob',
-                emptype='$employeeType',
-                company_num='$company',
-                fullname='$fullName',
-                section='$section',
-                designation='$designation',
-                prior_notice='$priorNotice',
-                remark='$remark'
-              WHERE emp_num='$empnumber'"; // Assuming emp_num is the primary key
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+        $img_name = basename($_FILES['photo']['name']);
+        $img_tmp = $_FILES['photo']['tmp_name'];
+        $img_dest = $upload_dir . $img_name;
 
-    if (mysqli_query($con, $query)) {
-        // Redirect to a confirmation page or the updated clearance view
-        header("Location: clearSearch.php?success=1"); // Redirect with success message
-        exit();
+        // Move the uploaded file to the specified directory
+        if (!move_uploaded_file($img_tmp, $img_dest)) {
+            die("Error uploading file");
+        }
     } else {
-        // Handle error (you can redirect to an error page or show a message)
-        echo "Error updating record: " . mysqli_error($con);
+        // Keep the old image if no new image is uploaded
+        $existing_query = mysqli_query($con, "SELECT img FROM clearance WHERE id='$user_id'");
+        if ($existing_row = mysqli_fetch_assoc($existing_query)) {
+            $img_name = $existing_row['img'];
+        }
+    }
+
+    // Update the database
+    $update_query = "UPDATE clearance SET 
+                        ref_num = '$refnumber',
+                        wef = '$dob',
+                        prior_notice = '$prior_notice',
+                        img = '$img_name',
+                        remark = '$remark'
+                    WHERE id = '$user_id'";
+
+    if (mysqli_query($con, $update_query)) {
+        // Redirect with a success message
+        echo "<script>
+                alert('Clearance details updated successfully!');
+                window.location.href = 'clearSearch.php';
+              </script>";
+    } else {
+        echo "<script>
+                alert('Error updating clearance details.');
+                window.history.back();
+              </script>";
     }
 } else {
-    // If the form is not submitted properly, redirect back
-    header("Location: clearUpdate.php");
-    exit();
+    echo "Invalid request.";
 }
-
-// Close the database connection
-mysqli_close($con);
 ?>

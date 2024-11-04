@@ -180,6 +180,7 @@ if (!$con) {
                                 <a href="empUpdate.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-warning"  style="background-color: dark yellow">Update</a>
                             </td>
                             <td>
+                           <!-- can be Active or Deactive to employer    -->
                             <?php
     if ($res_user['isAct'] == 1) {
         echo '<a href="toggleStatus.php?empid=' . $res_user['empid'] . '&status=0" class="btn btn-small" style="background-color: blue; color: white;">Active</a>';

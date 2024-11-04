@@ -8,40 +8,62 @@ if (!isset($_SESSION['admin_id'])) {
 } else {
     include 'db_connect.php';
 
-    $company = $_POST['company'];     
-    $refnumber = $_POST['refnumber'];
-    $empnumber = $_POST['empnumber'];
-    $dob = $_POST['dob'];
     $fullName = $_POST['fullName'];
+    $empnumber = $_POST['empnumber'];
+    $refnumber = $_POST['refnumber'];
+    $dob = $_POST['dob'];
+    $company = $_POST['company'];
     $section = $_POST['section'];
-    $designation = $_POST['designation'];                                             
+    $designation = $_POST['designation'];
     $headerGiven = $_POST['headerGiven'];
     $remark = $_POST['remark'];
 
-    $photoPath = null;
-    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
-        $allowedExtensions = ['pdf', 'jpg', 'jpeg', 'png'];
-        $fileExtension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-        if (in_array(strtolower($fileExtension), $allowedExtensions)) {
-            $uploadDir = 'uploads/';
-            $photoPath = $uploadDir . basename($_FILES['photo']['name']);
-            move_uploaded_file($_FILES['photo']['tmp_name'], $photoPath);
+    $image_name = null;
+    $response = array();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+            $targetDir = "clear/";
+            $targetFile = $targetDir . basename($_FILES['photo']['name']);
+            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+            $allowedTypes = array('jpg', 'jpeg', 'png', 'gif', 'pdf');
+
+            if (in_array($imageFileType, $allowedTypes)) {
+                if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) {
+                    $image_name = basename($_FILES['photo']['name']);
+                    $response['success'] = true;
+                    $response['message'] = "The file " . htmlspecialchars($image_name) . " has been uploaded.";
+                } else {
+                    $response['success'] = false;
+                    $response['message'] = "Sorry, there was an error uploading your file.";
+                }
+            } else {
+                $response['success'] = false;
+                $response['message'] = "Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed.";
+            }
         } else {
-            echo "Error: Only PDF, JPG, JPEG, and PNG formats are allowed.";
-            exit();
+            $response['success'] = false;
+            $response['message'] = "No file was uploaded or there was an error uploading the file.";
         }
+    } else {
+        $response['success'] = false;
+        $response['message'] = "Invalid request method.";
     }
 
-    $query = "INSERT INTO `clearance` 
-                (`company_num`,  `ref_num`, `emp_num`, `wef`, `fullname`, `section`, `designation`, `prior_notice`, `remark`, `photo_path`) 
-              VALUES 
-                ('$company',  '$refnumber', '$empnumber', '$dob', '$fullName', '$section', '$designation', '$headerGiven', '$remark', '$photoPath')";
+    // Modify the SQL query to match the correct columns
+    if ($response['success']) {
+        $query = "INSERT INTO `clearance` (`full_name`, `emp_num`, `ref_num`, `wef`, `company`, `section`, `designation`, `prior_notice`, `img`, `remark`) 
+                  VALUES ('$fullName', '$empnumber', '$refnumber', '$dob', '$company', '$section', '$designation', '$headerGiven', '$image_name', '$remark')";
+    } else {
+        $query = "INSERT INTO `clearance` (`full_name`, `emp_num`, `ref_num`, `wef`, `company`, `section`, `designation`, `prior_notice`, `img`, `remark`) 
+                  VALUES ('$fullName', '$empnumber', '$refnumber', '$dob', '$company', '$section', '$designation', '$headerGiven', NULL, '$remark')";
+    }
 
     if (mysqli_query($con, $query)) {
         header("Location: clearance.php");
         exit();
     } else {
-        echo "Error: " . mysqli_error($con); 
+        echo "Error: " . mysqli_error($con);
     }
 }
 ?>

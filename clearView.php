@@ -158,87 +158,102 @@ include 'db_connect.php';
 <div class="container form-container">
     <h2 class="text-center">Clearance Form</h2>
     
+    
 
     
 
     <form>
 
     <div class="form-group">
-                <label for="dropdown">Company:</label>
-                <h4 class="highlight-green" id="company" readonly><?php echo $res_user['company_num']; ?></h4>
-                    
-        </div> 
+                <label for="dropdown">Company :</label>
+                <h4 class="highlight-green" id="company" readonly><?php echo $res_user['company']; ?></h4>    
+   
+        </div>
+
+
+    <div class="form-group">
+            <label for="fullName">Full Name :</label>
+            <input type="text" class="form-control" id="FullName" name="fullName" value="<?php echo $res_user['full_name']; ?>" readonly>
+                     
+        </div>
 
     <div class="form-row">
 
     <div class="form-group col-md-4">
-                <label for="employeeNumber">Employee Number</label>
-                <input type="text" class="form-control" id="empNumber" name="empnumber" value="<?php echo $res_user['emp_num']; ?>" readonly>
-                       
+                <label for="employeeNumber">Employee Number :</label>
+                <input type="text" class="form-control" id="empNumber" name="empnumber" value="<?php echo $res_user['emp_num']; ?>"readonly>
+                         
             </div>
 
             <div class="form-group col-md-4">
-                <label for="epfNumber">Reference Number</label>
-                <input type="text" class="form-control" id="epfNumber" name="refnumber"  value="<?php echo $res_user['ref_num']; ?>" readonly>
+                <label for="epfNumber">Reference Number :</label>
+                <input type="text" class="form-control" id="refNumber" name="refnumber" value="<?php echo $res_user['ref_num']; ?>"readonly>
             </div>
 
            
 
             <div class="form-group col-md-4">
-                <label for="dob">Resignation w.e.f</label>
-                <input type="text" class="form-control" id="dob" name="dob"  value="<?php echo $res_user['wef']; ?>" readonly>
+                <label for="dob">Resignation w.e.f :</label>
+                <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $res_user['wef']; ?>"readonly>
             </div>
         </div>  
        
 
         
 
-        <div class="form-group">
-            <label for="employeeType">Employee Type:</label>
-            <input type="text" class="form-control" id="employeeType" name="employeeType" value="<?php echo $res_user['emptype']; ?>" readonly>
-
-            
-        </div>
-
         
+       
+       
 
        
 
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" class="form-control" id="fullName" name="fullName" value="<?php echo $res_user['fullname']; ?>" readonly>
-        </div>
-
         <div class="form-row">
             <div class="form-group col-md-5">
-                <label for="Section">Section</label>
+                <label for="Section">Section :</label>
                 <input type="text" class="form-control" id="Section" name="section" value="<?php echo $res_user['section']; ?>"readonly>
             </div>
 
             
-            <div class="form-group col-md-5">
-                <label for="department">Designation<span style="color:red">*</span></label>
-                <input type="text" class="form-control" id="designation" name="designation" value="<?php echo $res_user['designation']; ?>" readonly>
+            <div class="form-group col-md-4">
+                <label for="department">Designation :</label>
+                <input type="text" class="form-control" id="designation" name="designation" value="<?php echo $res_user['designation']; ?>"readonly>
                    
             </div>
-        </div>
+       
 
         
+        
+        <div class="form-group col-md-3">
+                <label for="department">Prior notice Given :</label>
+                <input type="text" class="form-control" id="headerGiven" name="headerGiven"  value="<?php echo $res_user['prior_notice']; ?>" readonly>
+                   
+            </div>
+</div>      
 
-        <div class="form-group col-md-">  
-            <label for="headerGiven"><strong>Prior notice Given:</strong></label>
-            <input type="text" class="form-control" id="headerGiven" name="headerGiven" value="<?php echo $res_user['prior_notice']; ?>" readonly>
+<div class="form-group col-md-6">
+    <label for="photo">Image :</label>
+    <?php
+    if (!empty($res_user['img'])) {
+        echo '<div><img src="clear/' . $res_user['img'] . '" alt="Employee Photo" class="img-fluid" style="max-width: 400px; max-height: 200px;" /></div>';
+    } else {
+        echo '<div>No photo uploaded.</div>';
+    }
+    ?>
+</div>
 
-            
-           
-        </div>
 
-        <div class="form-group col-md-">
-            <label for="remark">Remark</label>
-            <input type="text" class="form-control" id="remark" name="remark" value="<?php echo $res_user['remark']; ?>" readonly>
+<div class="form-group col-md-">
+            <label for="remark">Remark :</label>
+            <input type="text" class="form-control" id="remark" name="remark" rows="2" value="<?php echo $res_user['remark']; ?>" readonly>
             </div>
 
-      
+
+</div>
+
+
+
+
+       
     </form>
 </div>
 

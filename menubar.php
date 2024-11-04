@@ -372,7 +372,7 @@ if (!isset($_SESSION['admin_id'])) {
 
                             <div class="card-header">
                            
-                            <h4><center><img src="team.png" alt="Logo" class="logo">     Total of the Employees</center></h4>
+                            <h4><center><img src="promo.png" alt="Logo" class="logo">     Total of the Employees</center></h4>
                                 
                             </div>
                             <div class="card-body">
@@ -399,41 +399,7 @@ if (!isset($_SESSION['admin_id'])) {
                         </div>
                     </div>
                    
-                    <div class="col-md-6">
-                        <div class="card text-black mb-3">
-                        <d class="card animate__animated animate__zoomIn">
-
-                            <div class="card-header"><h4><center><img src="emp.png" alt="Logo" class="logo">  Total Deactive Employees</center></h4>
-                                <a href="employer.php">
-                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h2>275</h2>
-                               
-                            </div>
-                            </d>
-                        </div>
-                    </div>
                    
-                    <div class="col-md-6">
-                        <div class="card text-black mb-3">
-                        <d class="card animate__animated animate__zoomIn">
-
-                            <div class="card-header"><h4><center><img src="promo.png" alt="Logo" class="logo">  Total Transfer Employees</center></h4>
-                                <a href="employer.php">
-                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h2>27</h2>
-                               
-                            </div>
-                            </d>
-                        </div>
-                    </div>
-                   
-                    
                     
                 </div>
 

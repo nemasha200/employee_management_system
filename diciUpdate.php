@@ -142,7 +142,7 @@ $res_user = mysqli_fetch_array($getuser);
                
                 
                 <div class="form-group col-md-8">
-                <label for="fullNameInitials">Name with Initials :</label>
+                <label for="fullNameInitials">Full Name :</label>
                 <input type="text" value="<?php echo $res_user['name']; ?>" class="form-control" id="fullNameInitials" name="nameinitial" readonly>
             </div>
 

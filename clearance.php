@@ -123,11 +123,11 @@ include 'db_connect.php';
 
 
     <div class="form-group">
-            <label for="fullName">Full Name</label>
+            <label for="fullName">Full Name :</label>
             <select class="form-control" id="FullName" name="fullName">
                     <option value="" disabled selected>Select an option</option>
                     <?php 
-                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer ");
+                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer WHERE isAct ='1'");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
                     <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
@@ -140,20 +140,20 @@ include 'db_connect.php';
     <div class="form-row">
 
     <div class="form-group col-md-4">
-                <label for="employeeNumber">Employee Number</label>
+                <label for="employeeNumber">Employee Number :</label>
                 <input type="text" class="form-control" id="empNumber" name="empnumber" readonly>
                          
             </div>
 
             <div class="form-group col-md-4">
-                <label for="epfNumber">Reference Number</label>
+                <label for="epfNumber">Reference Number :</label>
                 <input type="text" class="form-control" id="refNumber" name="refnumber" placeholder="Enter Reference number">
             </div>
 
            
 
             <div class="form-group col-md-4">
-                <label for="dob">Resignation w.e.f</label>
+                <label for="dob">Resignation w.e.f :</label>
                 <input type="date" class="form-control" id="dob" name="dob">
             </div>
         </div>  
@@ -163,7 +163,7 @@ include 'db_connect.php';
 
         
         <div class="form-group">
-                <label for="dropdown">Company:</label>
+                <label for="dropdown">Company :</label>
                 <input type="text" class="form-control" id="dropdown" name="company" readonly>
                     
         </div>
@@ -174,13 +174,13 @@ include 'db_connect.php';
 
         <div class="form-row">
             <div class="form-group col-md-5">
-                <label for="Section">Section</label>
+                <label for="Section">Section :</label>
                 <input type="text" class="form-control" id="Section" name="section" readonly>
             </div>
 
             
             <div class="form-group col-md-6">
-                <label for="department">Designation<span style="color:red">*</span></label>
+                <label for="department">Designation :<span style="color:red">*</span></label>
                 <input type="text" class="form-control" id="designation" name="designation" readonly>
                    
             </div>
@@ -189,7 +189,7 @@ include 'db_connect.php';
         
         <div class="form-row">
         <div class="form-group col-md-5">  
-    <label for="headerGiven"><strong>Prior notice Given:</strong></label>
+    <label for="headerGiven"><strong>Prior notice Given :</strong></label>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" id="headerYes" name="headerGiven" value="yes" required>
         <label class="form-check-label" for="headerYes">Yes</label>
@@ -213,7 +213,7 @@ include 'db_connect.php';
 
 
         <div class="form-group col-md-">
-            <label for="remark">Remark</label>
+            <label for="remark">Remark :</label>
             <textarea class="form-control" id="remark" name="remark" rows="1" placeholder="Enter remark"></textarea>
         </div>
 

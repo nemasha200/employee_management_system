@@ -16,7 +16,7 @@ include 'db_connect.php';
             position: absolute;
             top: 20px;
             right: 20px;
-            background-color: darkred;
+            background-color: whitesmoke;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -36,7 +36,7 @@ include 'db_connect.php';
 
 
  
-    <a href="logintype.php" class="logout-btn">Logout</a>   
+    <a href="logintype.php" class="logout-btn"><img src="power.png" alt="Logo" class="logo"></a>   
 
 
    

@@ -86,6 +86,8 @@ include 'db_connect.php';
         margin-bottom: 15px;
     }
 </style>
+</head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employee Details</title>
@@ -103,11 +105,11 @@ include 'db_connect.php';
 <script>
     $(document).ready(function () {
         $('#tableID').DataTable({
-            searching: false
+            searching: false // Disable default searching, as we're handling it server-side
         });
     });
 </script>
-</head>
+</>
 
 <body>
 
@@ -129,12 +131,15 @@ include 'db_connect.php';
         <!-- Table -->
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
-                <tr>
-                    <th>Emp number</th>
-                    <th>Emp type</th>
+                <tr>                    
+                    
+                    <th>Full Name</th>
+                    <th>Employee Number</th>
                     <th>Company</th>
-                    <th>Department</th>
-                    <th>Name</th>
+                    <th>Section</th>
+                    <th>Designation</th>
+                   
+
                     <th>View</th>
                     <th>Update</th>
                 </tr>
@@ -145,41 +150,39 @@ include 'db_connect.php';
                 $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
                 // Modify the query based on the search term
-                if (!empty($searchTerm)) {
-                    $query = "SELECT id, emp_num, emptype, company_num, section, fullname FROM clearance 
-                              WHERE emp_num LIKE '%$searchTerm%' 
-                              OR emptype LIKE '%$searchTerm%' 
-                              OR fullname LIKE '%$searchTerm%' 
-                              OR company_num LIKE '%$searchTerm%' 
-                              OR section LIKE '%$searchTerm%'";
+                if (!empty($searchTerm)) { 
+                    $getuser = mysqli_query($con, "SELECT id, full_name, emp_num, company, section, designation FROM  clearance
+                                                   WHERE emp_num LIKE '%$searchTerm%'
+                                                   OR full_name LIKE '%$searchTerm%'
+                                                   OR company LIKE '%$searchTerm%'
+                                                   OR section LIKE '%$searchTerm%'
+
+
+                                                   OR designation LIKE '%$searchTerm%'");
                 } else {
-                    $query = "SELECT id, emp_num, emptype, company_num, section, fullname FROM clearance";
+                    $getuser = mysqli_query($con, "SELECT id, full_name, emp_num, company, section, designation  FROM  clearance");
                 }
 
-                $getuser = mysqli_query($con, $query);
+                while ($res_user = mysqli_fetch_array($getuser)) {
+                    ?>
+                    <tr>
+                        <td><?php echo $res_user['full_name']; ?></td>
+                        <td><?php echo $res_user['emp_num']; ?></td>
 
-                // Check if query execution was successful
-                if ($getuser) {
-                    while ($res_user = mysqli_fetch_array($getuser)) {
-                        ?>
-                        <tr>
-                            <td><?php echo $res_user['emp_num']; ?></td>
-                            <td><?php echo $res_user['emptype']; ?></td>
-                            <td><?php echo $res_user['company_num']; ?></td>
-                            <td><?php echo $res_user['section']; ?></td>
-                            <td><?php echo $res_user['fullname']; ?></td>
-                            <td>
-                                <a href="clearView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger"  style="background-color: green">View</a>
-                            </td>
-                            <td>
-                                <a href="clearUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                } else {
-                    // Display an error message if the query failed
-                    echo "<tr><td colspan='7'>An error occurred: " . mysqli_error($con) . "</td></tr>";
+                        <td><?php echo $res_user['company']; ?></td>
+
+                        <td><?php echo $res_user['section']; ?></td>
+                        <td><?php echo $res_user['designation']; ?></td>
+
+
+                        <td>
+                            <a href="clearView.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-danger" style="background-color: green">View</a>
+                        </td>
+                        <td>
+                            <a href="clearUpdate.php?user_id=<?php echo $res_user['id']; ?>" class="btn btn-warning">Update</a>
+                        </td>
+                    </tr>
+                    <?php
                 }
                 ?>
             </tbody>

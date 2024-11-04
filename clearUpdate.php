@@ -93,11 +93,11 @@ include 'db_connect.php';
             border: 1px solid #ccc;
             margin: 20px 0;
         }
-        #dropdown
-       {
-            color:black;
-        }
+       
 
+        #dropdown{
+        color:black;
+       }
        #designation{
         color:black;
        }
@@ -114,10 +114,7 @@ include 'db_connect.php';
 
        }
 
-       #refNumber{
-        color:black;
-
-       }
+       
 
     
        
@@ -139,93 +136,65 @@ include 'db_connect.php';
     <form id="registrationForm" method="POST" action="clearSubmitupdate.php" enctype="multipart/form-data">
 
 
+    <div class="form-group">
+            <label for="fullName">Full Name :</label>
+            <input type="text" value="<?php echo $res_user['full_name']; ?>" class="form-control" id="fullName" name="fullName" readonly>
+  
+        </div>
+
     <div class="form-row">
 
     <div class="form-group col-md-4">
-                <label for="employeeNumber">Employee Number</label>
+                <label for="employeeNumber">Employee Number :</label>
                 <input type="text"  value="<?php echo $res_user['emp_num']; ?>" class="form-control" id="empNumber" name="empnumber" readonly>
                          
             </div>
 
             <div class="form-group col-md-4">
-                <label for="epfNumber">Reference Number</label>
-                <input type="text" value="<?php echo $res_user['ref_num']; ?>" class="form-control" id="refNumber" name="refnumber" readonly>
+                <label for="epfNumber">Reference Number :</label>
+                <input type="text" value="<?php echo $res_user['ref_num']; ?>"  class="form-control" id="refNumber" name="refnumber" >
             </div>
 
            
 
             <div class="form-group col-md-4">
-                <label for="dob">Resignation w.e.f</label>
-                <input type="date" value="<?php echo $res_user['wef']; ?>" class="form-control" id="dob" name="dob">
+                <label for="dob">Resignation w.e.f :</label>
+                <input type="date" value="<?php echo $res_user['wef']; ?>"  class="form-control" id="dob" name="dob">
             </div>
         </div>  
        
 
         
 
-        <!-- <div class="form-group">
-            <label for="employeeType"><strong>Employee Type:</strong></label>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="employeeType" id="staff" value="Staff" required>
-                <label class="form-check-label" for="staff">Staff</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="employeeType" id="ase" value="ASE">
-                <label class="form-check-label" for="ase">ASE</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="employeeType" id="factory" value="Factory">
-                <label class="form-check-label" for="factory">Factory</label><br>
-            </div>
-        </div> -->
-
+        
         <div class="form-group">
-                        <label for="employeeType"><strong>Employee Category:</strong></label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="employeeType" value="Staff" <?php echo ($res_user['emptype'] == 'Staff') ? 'checked' : ''; ?> required>
-                            <label class="form-check-label">Staff</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="employeeType" value="Sales" <?php echo ($res_user['emptype'] == 'Sales') ? 'checked' : ''; ?>>
-                            <label class="form-check-label">Sales</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="employeeType" value="Factory" <?php echo ($res_user['emptype'] == 'Factory') ? 'checked' : ''; ?>>
-                            <label class="form-check-label">Factory</label>
-                        </div>
-        </div>
-
-        <div class="form-group">
-                <label for="dropdown">Company:</label>
-                <input type="text" value="<?php echo $res_user['company_num']; ?>" class="form-control" id="dropdown" name="company" readonly>
+                <label for="dropdown">Company :</label>
+                <input type="text" value="<?php echo $res_user['company']; ?>" class="form-control" id="dropdown" name="company" readonly>
                     
         </div>
 
        
 
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" value="<?php echo $res_user['fullname']; ?>" class="form-control" id="fullName" name="fullName" readonly>
-        </div>
+       
 
         <div class="form-row">
             <div class="form-group col-md-5">
-                <label for="Section">Section</label>
+                <label for="Section">Section :</label>
                 <input type="text" value="<?php echo $res_user['section']; ?>" class="form-control" id="Section" name="section" readonly>
             </div>
 
             
-            <div class="form-group col-md-5">
-                <label for="department">Designation<span style="color:red">*</span></label>
-                <input type="text" value="<?php echo $res_user['designation']; ?>"class="form-control" id="designation" name="designation" readonly>
+            <div class="form-group col-md-6">
+                <label for="department">Designation :</label>
+                <input type="text" value="<?php echo $res_user['designation']; ?>" class="form-control" id="designation" name="designation" readonly>
                    
             </div>
         </div>
 
         
-
-        <div class="form-group col-md-8">  
-            <label for="headerGiven"><strong>Prior notice Given:</strong></label>
+        <div class="form-row">
+        <div class="form-group col-md-5">  
+            <label for="headerGiven"><strong>Prior notice Given :</strong></label>
             <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="headerYes" name="headerGiven[]" value="yes" <?php echo ($res_user['prior_notice'] == 'yes' || strpos(strtolower($res_user['prior_notice']), 'yes') !== false) ? 'checked' : ''; ?>>
     <label class="form-check-label" for="headerYes">Yes</label>
@@ -236,18 +205,30 @@ include 'db_connect.php';
 </div>
 
 
-            
-        </div>
+
+</div>
+
+<div class="form-group col-md-7">
+                <label for="imageUpload">Upload Image :</label>
+                <?php if ($res_user['img']): ?>
+                    <img src="dici/<?php echo $res_user['img']; ?>" alt="image" width="150" height="150"><br>
+                <?php endif; ?>
+                <input type="file" class="form-control-file" name="photo">
+            </div>
+</div>
+
+
+
 
         <div class="form-group col-md-">
-            <label for="remark">Remark</label>
+            <label for="remark">Remark :</label>
             <textarea class="form-control" id="remark" name="remark" rows="1"><?php echo $res_user['remark']; ?></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-small">Submit</button>
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+        <button type="submit" class="btn btn-primary btn-small">Update</button>
+    
     </form>
-</div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

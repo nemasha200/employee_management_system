@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 
 if (!isset($_SESSION['admin_id'])) {
@@ -17,6 +17,7 @@ $type = mysqli_real_escape_string($con, $_POST['type']);
 $username = mysqli_real_escape_string($con, $_POST['username']);
 $password = mysqli_real_escape_string($con, $_POST['password']);
 $conpassword = mysqli_real_escape_string($con, $_POST['conpassword']);
+$userId = isset($_POST['userId']) ? mysqli_real_escape_string($con, $_POST['userId']) : null;
 
 if ($password !== $conpassword) {
     echo "Passwords do not match.";
@@ -25,8 +26,22 @@ if ($password !== $conpassword) {
 
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-$query = "INSERT INTO `user` (`title`, `first_name`, `last_name`, `email`, `contact`, `type`, `username`, `password`) 
-          VALUES ('$title', '$firstname', '$lastname', '$email', '$contact', '$type', '$username', '$hashedPassword')";
+if ($userId) {
+    // Update user
+    $query = "UPDATE `user` SET 
+              `title` = '$title', 
+              `first_name` = '$firstname', 
+              `last_name` = '$lastname', 
+              `email` = '$email', 
+              `contact` = '$contact', 
+              `type` = '$type', 
+              `username` = '$username', 
+              `password` = '$hashedPassword' 
+              WHERE `id` = '$userId'";
+} else {
+    $query = "INSERT INTO `user` (`title`, `first_name`, `last_name`, `email`, `contact`, `type`, `username`, `password`) 
+              VALUES ('$title', '$firstname', '$lastname', '$email', '$contact', '$type', '$username', '$hashedPassword')";
+}
 
 if (mysqli_query($con, $query)) {
     header("Location: user.php");
