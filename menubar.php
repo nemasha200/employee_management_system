@@ -29,37 +29,39 @@ if (!isset($_SESSION['admin_id'])) {
             height: 100vh;
             display: flex;
             flex-direction: column;
-            color: black; /* Set the default font color to black */
+            color: black;
         }
 
         .container {
-            margin-top: 30px;
             padding: 60px;
             border-radius: 20px;
-            background-color: thistle; Background color for the container
-            color: white;
+            background-color: transparent;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: initial;
+            margin-left: 400px;
         }
 
         .card {
             margin: 20px 0;
-            background-color: whitesmoke; /* Change background to white */
-            
+            background-color: whitesmoke;
         }
 
         .card-header {
-            background-color: darkred;
+            background-color: #495057;
             color: white;
         }
 
         .card-body {
-            color: black; /* Change text color to black */
-            text-align: center; /* Center text alignment */
+            color: black;
+            text-align: center;
             background-color: whitesmoke;
         }
 
         .card-body p {
-            color: black; /* Ensure all paragraph text color is black */
-            margin: 0; /* Remove default margin */
+            color: black;
+            margin: 0;
         }
 
         .buttons-right {
@@ -90,13 +92,11 @@ if (!isset($_SESSION['admin_id'])) {
         .logo {
             height: 35px;
             width: auto;
-            margin-right: 0 px;
         }
 
         .logoemp {
             height: 30px;
             width: auto;
-            margin-right: 0 px;
         }
 
         .btn-register {
@@ -129,7 +129,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar a {
-            background-color: red;
+            background-color: #716c8c;
             color: black;
             display: block;
             padding: 10px 20px;
@@ -137,11 +137,11 @@ if (!isset($_SESSION['admin_id'])) {
             font-weight: 500;
             border-radius: 10px;
             transition: background-color 0.3s ease-in-out;
-            margin-bottom: 10px; /* Add space between buttons */
+            margin-bottom: 10px;
         }
 
         .sidebar a:hover {
-            background-color: lightskyblue;
+            background-color: gray ;
         }
 
         .sidebar .submenu a {
@@ -149,8 +149,8 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar .card-body a:first-child {
-            background-color: lightpink;
-            color: black; /* If you want to change the text color */
+            background-color:  #92152e;
+            color: black;
         }
 
         .content {
@@ -167,10 +167,11 @@ if (!isset($_SESSION['admin_id'])) {
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 15px;
+            position: relative;
         }
 
         .employee-system-section h5 {
-            color: black; /* Change header color to black */
+            color: black;
             margin-bottom: 20px;
             font-size: 1.5rem;
             border-bottom: 2px solid #f22e3b;
@@ -178,7 +179,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .employee-system-section p {
-            color: black; /* Change paragraph color to black */
+            color: black;
         }
 
         .employee-system-section a {
@@ -187,120 +188,46 @@ if (!isset($_SESSION['admin_id'])) {
             text-decoration: none;
         }
 
-        .employee-system-section a:hover {
-            background-color: orange;
-        }
+       
 
-        .employee-system-section {
-            background-color: transparent;
-        }
+       
+        
 
-        .dashboard-btn {
-            background-color: red;
-            color: white;
-        }
-
-        .dashboard-btn:hover {
-            background-color: #e0e0c0; /* Slightly darker cream */
-        }
-
-        .logout-btn {
+        .logout-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: darkred;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #dc3545;
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .logout-btn:hover {
-            background-color: darkorange;
-        }
-
-        .sidebar .card-header h5 a,
-        .sidebar .card-header h5 button {
-            color: black;
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .sidebar .card-body a:first-child {
-            background-color: #7a776d;
-            color: black; /* If you want to change the text color */
-        }
-        .sidebar .card-body a:first-child:hover{
-            background-color: maroon;
-            color: black; /* If you want to change the text color */
-        }
-
-        .sidebar .card {
-            border-radius: 20px; /* Round the corners */
-            overflow: hidden; /* Hide overflow */
-            margin-bottom: 10px; /* Add space between cards */
-        }
-
-        .sidebar .card-header {
-            background-color: #202928; Set the background color for card headers
-            border-bottom: none; /* Remove the border from the bottom */
-            padding: 10px 20px; /* Add padding to card headers */
-            border-radius: 10px 10px 0 0; /* Round the top corners */
-        }
-
-        .sidebar .card-body {
-            /* background-color: lightgrey; Set the background color for card bodies */
-            color: black; /* Set the text color for card bodies */
-            padding: 20px; /* Add padding to card bodies */
-            border-radius: 0 0 10px 10px; /* Round the bottom corners */
-        }
-
-        .sidebar .btn-link {
-            color: black; /* Set the text color for button links */
-        }
-
-        .sidebar .btn-link:hover {
-            color: black; /* Set the hover color for button links */
-        }
-
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #343a40;
+            padding: 8px 16px;
             border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             border-radius: 5px;
-            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
         }
 
-        .back-button:hover {
-            background-color: #7a776d;
-        }
-        .card-body a.btn-link {
-        background-color: #819994; /* Set button background to dark green */
-        color: black; /* Set font color to black */
+        .logout-button:hover {
+            background-color: #c82333;
+            color: white;
         }
 
-        .card-body a.btn-link:hover {
-        background-color: #495057; /* Darker shade of green on hover */
-        color: black; /* Keep font color black on hover */
-       }  
+        .text {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            left: 120px; /* Adjust this value as needed */
+        }
 
-</style>
+    </style>
 </head>
 
 <body>
 
-<?php include 'logout.php';?> 
+<!-- <?php include 'logout.php';?>  -->
 
     <?php
     $username = $_SESSION['username'];
@@ -353,65 +280,74 @@ if (!isset($_SESSION['admin_id'])) {
         </div>
 
         <div class="content w-100">
-            <h1 class="employee-system-header"><img src="raigam.png" alt="Logo" class="logo">        
-            <b>Employee Registration System</b> </h1>
+            <h1 class="employee-system-header">
+                <a href="userlogin.php" class="logout-button">Logout</a>
+                <img src="raigam.png" alt="Logo" class="logo">
+                <b>Employee Registration System</b> 
+            </h1>
             
         </div>
 
+    </div>
 
-            </div>
+    <div class="container employee-system-section">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-black mb-3">
+                    <div class="card animate__animated animate__zoomIn">
+                        <div class="card-header">
+                            <h4><center><img src="promo.png" alt="Logo" class="logo"> Total of the Employees</center></h4>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            $dash_query = "SELECT * from employer";
+                            $dash_query_run = mysqli_query($con, $dash_query);
 
-
-            <div class="container employee-system-section">
-                <div class="row">
-                    <div class="col-md-6" >
-
-                        <div class="card text-black mb-3">
-                        <d class="card animate__animated animate__zoomIn">
-                            
-
-                            <div class="card-header">
-                           
-                            <h4><center><img src="promo.png" alt="Logo" class="logo">     Total of the Employees</center></h4>
-                                
-                            </div>
-                            <div class="card-body">
-                            <h2>450</h2>
-                               
-                            </div>
-                            </d>
+                            if($emp_total = mysqli_num_rows($dash_query_run))
+                            {
+                                echo '<h2>'.$emp_total.'</h2>';
+                            }
+                            else
+                            {
+                                echo '<h2> No Data </h2>';
+                            }
+                        ?>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card text-black mb-3">
-                        <d class="card animate__animated animate__zoomIn">
-
-                            <div class="card-header"><h4><center><img src="inactive.png" alt="Logo" class="logo">  Total ActiveEmployees</center></h4>
-                                <a href="employer.php">
-                                    <!-- <button type="button" class="btn btn-sm btn-register"> Register</button> -->
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h2>275</h2>
-                               
-                            </div>
-                            </d>
-                        </div>
-                    </div>
-                   
-                   
-                    
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-black mb-3">
+                    <div class="card animate__animated animate__zoomIn">
+                        <div class="card-header">
+                            <h4><center><img src="inactive.png" alt="Logo" class="logo"> Total Active Employees</center></h4>
+                            <a href="employer.php"></a>
+                        </div>
+                        <div class="card-body">
+                        <?php
+                            $dash_active_query = "SELECT * from employer where isAct ='1'";
+                            $dash_active_query_run = mysqli_query($con, $dash_active_query);
 
-
-
-                
+                            if($emp_active_total = mysqli_num_rows($dash_active_query_run))
+                            {
+                                echo '<h2>'.$emp_active_total.'</h2>';
+                            }
+                            else
+                            {
+                                echo '<h2> No Data </h2>';
+                            }
+                        ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
- 
+
+    <!-- Footer -->
+    <div class="text">
+        <span> Copyright © 2024 Designed by <a href="#"> RAIGAM IT Department </a> All rights reserved.</span>
     </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

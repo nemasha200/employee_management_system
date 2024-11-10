@@ -31,7 +31,7 @@ $res_user = mysqli_fetch_array($getuser);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Registration Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">=
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -110,6 +110,9 @@ $res_user = mysqli_fetch_array($getuser);
         }
        
     </style>
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -134,7 +137,7 @@ $res_user = mysqli_fetch_array($getuser);
             <h5><u>Employee Personal Details</u></h5><br>
 
             <div class="form-group">
-                        <label for="employeeType"><strong>Employee Category :</strong></label>
+                        <label for="employeeType"><strong>Employee Category :<span style="color:red">*</span></strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="employeeType" value="Staff" <?php echo ($res_user['emp_type'] == 'Staff') ? 'checked' : ''; ?> required>
                             <label class="form-check-label">Staff</label>
@@ -181,14 +184,14 @@ $res_user = mysqli_fetch_array($getuser);
                 
                 
                         <div class="form-group col-md-6">
-                            <label for="employNumber">Employ Number :</label>
+                            <label for="employNumber">Employ Number :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['emp_num']; ?>" class="form-control" id="employNumber" name="empnumber" placeholder="Enter employ number">
                 </div>
 
                        
 
                 <div class="form-group col-md-6">
-                            <label for="epfNumber">EPF Number :</label>
+                            <label for="epfNumber">EPF Number :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['epf']; ?>" class="form-control" id="epfNumber" name="epfnumber" placeholder="Enter EPF number">
                 </div>
 
@@ -235,7 +238,7 @@ $res_user = mysqli_fetch_array($getuser);
 
             
             <div class="form-group col-md-">
-                            <label for="fullNameInitials">Name with Initials :</label>
+                            <label for="fullNameInitials">Name with Initials :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['initial_name']; ?>" class="form-control" id="fullNameInitials" name="nameinitial" placeholder="Enter full name with initials">
             </div>
 
@@ -259,7 +262,7 @@ $res_user = mysqli_fetch_array($getuser);
 
                      
             <div class="form-group col-md-4">
-                            <label for="nicNumber">Driving License Number :<span style="color:red">*</span></label>
+                            <label for="nicNumber">Driving License Number :</label>
                             <input type="text" value="<?php echo $res_user['drive_lic_num']; ?>" class="form-control" id="nicNumber" name="drive" placeholder="Enter Driving License number">
             </div>
                         
@@ -268,14 +271,14 @@ $res_user = mysqli_fetch_array($getuser);
             </div>
 
             <div class="form-group col-md-">
-                            <label for="address1">Permanent Address :</label>
+                            <label for="address1">Permanent Address :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['permanat_address']; ?>" class="form-control" id="address1" name="address1" placeholder="Enter address 1">
             </div>
 
 
                     
             <div class="form-group col-md-">
-                            <label for="address2">Current Address :</label>
+                            <label for="address2">Current Address :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['current_address']; ?>" class="form-control" id="address2" name="address2" placeholder="Enter address 2">
             </div>
        
@@ -306,7 +309,7 @@ $res_user = mysqli_fetch_array($getuser);
 
                      
 <div class="form-group col-md-4">
-    <label for="phoneNumber">Mobile Number :</label>
+    <label for="phoneNumber">Mobile Number :<span style="color:red">*</span></label>
     <input type="text" value="<?php echo $res_user['mobile']; ?>" class="form-control" id="phoneNumber" name="phonenumber" placeholder="Enter mobile number">
 </div>
 
@@ -338,7 +341,7 @@ $res_user = mysqli_fetch_array($getuser);
 <div class="form-row">
 
 <div class="form-group col-md-4">
-<label for="dob">Date of Join :</label>
+<label for="dob">Date of Join :<span style="color:red">*</span></label>
 <input type="date" value="<?php echo $res_user['doj']; ?>" class="form-control" id="doj" name="doj">
 </div>
 
@@ -457,7 +460,7 @@ $res_user = mysqli_fetch_array($getuser);
            <!-- Employee Status -->
            <div class="form-group col-md-7">
                         <label for="empstatus">Employee Status :</label>
-                        <select class="form-control" name="empstatus">
+                        <select class="form-control"  id="empstatus" name="empstatus">
                             <option value="permanent" <?php echo ($res_user['emp_status'] == 'permanent') ? 'selected' : ''; ?>>Permanent</option>
                             <option value="ftc" <?php echo ($res_user['emp_status'] == 'ftc') ? 'selected' : ''; ?>>FTC</option>
                             <option value="casual" <?php echo ($res_user['emp_status'] == 'casual') ? 'selected' : ''; ?>>Casual</option>
@@ -565,6 +568,191 @@ $res_user = mysqli_fetch_array($getuser);
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
+
+
+<script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Capture values
+            var company = document.getElementById('company').value.trim();
+            var employNumber = document.getElementById('employNumber').value.trim();
+            var epfNumber = document.getElementById('epfNumber').value.trim();
+            var fullName = document.getElementById('fullName').value.trim();
+            var fullNameInitials = document.getElementById('fullNameInitials').value.trim();
+            var nicNumber = document.getElementById('nicNumber').value.trim();
+        var address1 = document.getElementById('address1').value.trim();
+        var address2 = document.getElementById('address2').value.trim();
+        var phoneNumber = document.getElementById('phoneNumber').value.trim();
+        var doj = document.getElementById('doj').value.trim();
+        var department = document.getElementById('department').value.trim();
+        var designation = document.getElementById('designation').value.trim();
+        var grade = document.getElementById('grade').value.trim();
+        var jobCategory = document.getElementById('jobCategory').value.trim();
+        var empstatus = document.getElementById('empstatus').value.trim();
+        var remark1 = document.getElementById('remark1').value.trim();
+
+            // Validation
+            if (!company) {
+                Swal.fire({
+                    title: 'Validation Error!',
+                    text: 'Please select a Company Number.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!employNumber) {
+                Swal.fire({
+                    title: 'Validation Error!',
+                    text: 'Please enter an Employee Number.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!epfNumber) {
+                Swal.fire({
+                    title: 'Validation Error!',
+                    text: 'Please enter an EPF Number.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!fullName) {
+                Swal.fire({
+                    title: 'Validation Error!',
+                    text: 'Please enter a Full Name.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!fullNameInitials) {
+                Swal.fire({
+                    title: 'Validation Error!',
+                    text: 'Please enter a Name with Initials.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!nicNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  NIC Number',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!address1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Permanant Address',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!address2) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Current Address',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+       
+
+        if (!phoneNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Mobile Number',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!doj) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Date Of Join',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!department) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Department',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!jobCategory) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Job Category',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!empstatus) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Employee Status',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!remark1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Remark',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+
+            // If all validations pass, show success alert and submit form
+            Swal.fire({
+                title: 'Updated!',
+                text: 'Form updated successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 <?php

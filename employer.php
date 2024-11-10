@@ -86,6 +86,17 @@ include 'db_connect.php';
         #ftc-details {
             display: none; /* Hide the FTC details by default */
         }
+
+        .text {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: black;
+            font-size: 0.9rem;
+            left: 120px; /* Adjust this value as needed */
+
+        }
         
     </style>
     
@@ -100,7 +111,7 @@ include 'db_connect.php';
 <div class="container position-relative">
     <div class="row justify-content-center">
         <div class="col-10 form-container">
-            <h2 class="text-center">Employee Registration Form</h2>
+            <h3 class="text-center">Employee Registration Form</h3>
             <a href="empSearch.php">
                 <button type="button" class="btn btn-primary btn-small">View Users</button>
             </a>  
@@ -215,7 +226,7 @@ include 'db_connect.php';
  
     <div class="form-group col-md-4">
         <label for="nicNumber">Driving License Number :</label>
-        <input type="text" class="form-control" id="nicNumber" name="drive" placeholder="Enter Driving License number">
+        <input type="text" class="form-control" id="drive" name="drive" placeholder="Enter Driving License number">
     </div>
     
    
@@ -513,6 +524,9 @@ include 'db_connect.php';
 
 
 
+<div class="text">
+        <span> Copyright © 2024 Designed by <a href="#"> RAIGAM IT Department </a> All rights reserved.</span>
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -526,6 +540,23 @@ include 'db_connect.php';
 
         var dropdown = document.getElementById('dropdown').value.trim();
         var employNumber = document.getElementById('employNumber').value.trim();
+        var epfNumber = document.getElementById('epfNumber').value.trim();
+        var fullName = document.getElementById('fullName').value.trim();
+        var fullNameInitials = document.getElementById('fullNameInitials').value.trim();
+        var nicNumber = document.getElementById('nicNumber').value.trim();
+        var address1 = document.getElementById('address1').value.trim();
+        var address2 = document.getElementById('address2').value.trim();
+        var phoneNumber = document.getElementById('phoneNumber').value.trim();
+        var doj = document.getElementById('doj').value.trim();
+        var department = document.getElementById('department').value.trim();
+        var designation = document.getElementById('designation').value.trim();
+        var grade = document.getElementById('grade').value.trim();
+        var jobCategory = document.getElementById('jobCategory').value.trim();
+        var empstatus = document.getElementById('empstatus').value.trim();
+        var remark1 = document.getElementById('remark1').value.trim();
+
+
+
 
 
         if (!dropdown) {
@@ -558,15 +589,124 @@ include 'db_connect.php';
             return false;
         }
 
-        if (!epfNumber) {
+        if (!fullName) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a EPF Number.',
+                text: 'Please select a  Full name',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;
+            return false;   
         }
+
+        if (!fullNameInitials) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Name with Initials',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+        
+
+        if (!nicNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  NIC Number',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!address1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Permanant Address',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!address2) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Current Address',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+       
+
+        if (!phoneNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Mobile Number',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!doj) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Date Of Join',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!department) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Department',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!jobCategory) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Job Category',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!empstatus) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Employee Status',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+        if (!remark1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Remark',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+       
+
+
+
+
 
         
 

@@ -81,6 +81,16 @@ session_start();
     .back-button:hover {
       background-color: #0056b3;
     }
+
+    .text {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            left: 0px; /* Adjust this value as needed */
+        } 
   </style>
 </head>
 <body>
@@ -114,6 +124,9 @@ session_start();
       <a href="user.php" class="login-link">Don't have an account? Register here</a>
     </form>
   </div>
+  <div class="text">
+        <span> Copyright © 2024 Designed by <a href="#"> RAIGAM IT Department </a> All rights reserved.</span>
+    </div>
   
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

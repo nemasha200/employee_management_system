@@ -34,9 +34,40 @@
         label {
             color: white;
         }
+
+        .logout-button {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+            color: white;
+        }
+
+        .text {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            left: 120px; /* Adjust this value as needed */
+        } 
     </style>
 </head>
 <body>
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -95,6 +126,13 @@
             </div>
         </div>
     </div>
+
+    <div class="logout-button">
+           
+                <a href="userlogin.php" class="logout-button">Logout</a>
+               
+            
+        </div>
     <script>
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -119,8 +157,8 @@
             }
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Do you want to submit the form?",
-                icon: 'warning',
+                text: "Do you want to update details?",
+               
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

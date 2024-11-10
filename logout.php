@@ -13,18 +13,18 @@ include 'db_connect.php';
         
 
         .logout-btn {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
-            background-color: whitesmoke;
-            color: white;
-            padding: 10px 20px;
+            background-color: orange;
+            color: Black;
+            padding: 10px 10px;
             border-radius: 5px;
             text-decoration: none;
         }
 
         .logout-btn:hover {
-            background-color: darkorange;
+            background-color: red;
         }
 
 
@@ -36,7 +36,7 @@ include 'db_connect.php';
 
 
  
-    <a href="logintype.php" class="logout-btn"><img src="power.png" alt="Logo" class="logo"></a>   
+    <a href="logintype.php" class="logout-btn">Logout</a>   
 
 
    

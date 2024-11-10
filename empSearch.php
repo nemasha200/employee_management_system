@@ -22,10 +22,12 @@ if (!$con) {
 
 <head>
 <style>
+    /* General styles */
     .mainContainer {
         width: 100vw;
         height: 100vh;
         display: flex;
+        padding: 1rem;
         justify-content: center; /* Center content horizontally */
         align-items: flex-start; /* Align content to the top */
     }
@@ -37,19 +39,22 @@ if (!$con) {
     }
     
     .table {
-        background-color: ghostwhite
+        background-color: ghostwhite;
+        height: 70%;
+        margin-left: 100px;
     }
 
+   
     body {
         margin: 0;
         padding: 0;
         background-image: url("black.jpg");   
-     }
+    }
 
-     .table th {
+    .table th {
         background-color: darkgrey; /* Set header background color */
         color: black;
-     }
+    }
 
     .text-black {
         color: black !important;
@@ -59,29 +64,91 @@ if (!$con) {
         background-color: white !important;
     }
 
-    .btn-small {
+    /* Button Sizes */
+    .btn-small, .btn-medium, .btn-large {
         padding: 5px 15px;
         font-size: 1rem;
     }
-
-    .btn-medium {
-        padding: 5px 15px;
-        font-size: 1rem;
-    }
-
-    .btn-large {
-        padding: 5px 15px;
-        font-size: 1rem;
-    }
-   
 
     .form-inline {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 15px;
     }
-   
+
+    /* Responsive Styles */
+
+    /* For small devices (mobile, up to 600px) */
+    @media (max-width: 600px) {
+        .mainContainer {
+            padding: 0.5rem;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            padding: 15px;
+            margin-top: 5px;
+        }
+        .table {
+            height: auto;
+        }
+        .btn-small, .btn-medium, .btn-large {
+            padding: 5px 10px;
+            font-size: 0.875rem;
+        }
+    }
+
+    /* For tablets (600px to 768px) */
+    @media (min-width: 600px) and (max-width: 768px) {
+        .mainContainer {
+            padding: 1rem;
+            align-items: center;
+        }
+        .container {
+            width: 85%;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .table {
+            height: 60%;
+        }
+        .btn-small, .btn-medium, .btn-large {
+            padding: 5px 12px;
+            font-size: 0.9rem;
+        }
+    }
+
+    /* For laptops and desktops (768px to 1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .container {
+            width: 80%;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .table {
+            height: 65%;
+        }
+    }
+
+    /* For large desktops (above 1024px) */
+    @media (min-width: 1024px) {
+        .container {
+            width: 70%;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .table {
+            height: 70%;
+        }
+    }
+
+    .text-whit{
+        margin-left: 100px;
+        color: white;
+    }
 </style>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employee Details</title>
@@ -106,13 +173,15 @@ if (!$con) {
 </head>
 
 <body>
-
+<!-- <div> -->
 <?php include 'submenubar.php';?>
+<!-- </div> -->
 <?php include 'logout.php';?>
 
-<div class="mainContainer">
+
+<!-- <div class="mainContainer"> -->
     <div class="container">
-        <h3 class="text-white">Employee Details</h3>
+        <h3 class="text-whit">Employee Details</h3>
         
         <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">
@@ -126,7 +195,6 @@ if (!$con) {
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>                    
-                    <th>Company</th>
                     <th>Department</th>
                     <th>NIC</th>
                     <th>EPF </th>
@@ -143,10 +211,10 @@ if (!$con) {
                 $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, nic, epf, full_name, designation, job_title, isAct 
+                    $getuser = mysqli_query($con, "SELECT empid, department, nic, epf, full_name, designation, job_title, isAct 
                                                    FROM employer
                                                    WHERE empid LIKE '%$searchTerm%' 
-                                                   OR comp_num LIKE '%$searchTerm%' 
+                                                --    OR comp_num LIKE '%$searchTerm%' 
                                                    OR department LIKE '%$searchTerm%'
                                                    OR nic LIKE '%$searchTerm%' 
                                                    OR epf LIKE '%$searchTerm%' 
@@ -155,7 +223,7 @@ if (!$con) {
                                                    OR job_title LIKE '%$searchTerm%'
                                                    ORDER BY isAct DESC");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT empid, comp_num, department, nic, epf, full_name, designation, job_title, isAct 
+                    $getuser = mysqli_query($con, "SELECT empid,  department, nic, epf, full_name, designation, job_title, isAct 
                                                    FROM employer
                                                    ORDER BY isAct DESC");
                 }
@@ -166,7 +234,7 @@ if (!$con) {
                     while ($res_user = mysqli_fetch_array($getuser)) {
                         ?>
                         <tr>
-                            <td><?php echo $res_user['comp_num']; ?></td>
+                            <!-- <td><?php echo $res_user['comp_num']; ?></td> -->
                             <td><?php echo $res_user['department']; ?></td>
                             <td><?php echo $res_user['nic']; ?></td>
                             <td><?php echo $res_user['epf']; ?></td>
@@ -197,7 +265,7 @@ if (!$con) {
             </tbody>
         </table>
     </div>
-</div>
+<!-- </div> -->
 </body>
 
 </html>

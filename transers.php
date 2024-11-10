@@ -374,6 +374,8 @@ include 'db_connect.php';
 
         var transdepartment = document.getElementById('transdepartment').value.trim();
         var transcompany = document.getElementById('transcompany').value.trim();
+        var designation1 = document.getElementById('designation1').value.trim();
+
         var dob1 = document.getElementById('dob1').value.trim();
         var dob2 = document.getElementById('dob2').value.trim();
         var dob3 = document.getElementById('dob3').value.trim();
@@ -393,6 +395,16 @@ include 'db_connect.php';
             Swal.fire({
                 title: 'Validation Error!',
                 text: 'Please select a Transfer company.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!designation1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Transfer Designation.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });

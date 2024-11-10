@@ -354,7 +354,7 @@ if(isset($_GET['user_id'])) {
             <label for="uploadPhoto">Upload NIC or Driving License</label>
             <?php
                             if(!empty($res_user['img'])) {
-                                echo '<div><img src="dici/' . $res_user['img'] . '" alt="NIC/Driving License" width="300" height="250" class="img-fluid" /></div>';
+                                echo '<div><img src="uploads/' . $res_user['img'] . '" alt="NIC/Driving License" width="300" height="250" class="img-fluid" /></div>';
                             } else {
                                 echo '<div>No photo uploaded.</div>';
                             }

@@ -31,6 +31,7 @@ include 'db_connect.php';
     }
     .table {
         background-color: ghostwhite;
+        margin-left: 100px;
     }
 
     .table th {
@@ -85,6 +86,10 @@ include 'db_connect.php';
         justify-content: flex-end;
         margin-bottom: 15px;
     }
+    .text-whit{
+        margin-left: 100px;
+        color:white;
+    }
 </style>
 </head>
 
@@ -118,7 +123,7 @@ include 'db_connect.php';
 
 <div class="mainContainer">
     <div class="container">
-        <h3 class="text-white">Disciplinary Details</h3>
+        <h3 class="text-whit">Disciplinary Details</h3>
         
         <!-- Search form aligned to the right -->
         <form method="GET" action="" class="form-inline">

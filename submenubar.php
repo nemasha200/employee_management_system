@@ -85,7 +85,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .card-header button:hover {
-            background-color: crimson;
+            background-color: ;
         }
 
         .submenu {
@@ -94,7 +94,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar .card-body a:first-child {
-            background-color: #c791ba;
+            background-color: #3c48b8;
             color: black;
         }
 
@@ -135,14 +135,21 @@ if (!isset($_SESSION['admin_id'])) {
 
 <?php
 $username = $_SESSION['username'];
-// $user_id = $_SESSION['user_id'];
 
 $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE username='$username'");
 ?>
 
 
 <div class="sidebar p-3">
-    <h4 class="text-center"><img src="menu-bar_3926749.png" alt="Logo" class="logo"> Menu bar</h4>
+
+
+
+
+    <h4 class="text-center"> Menu bar   <img src="menu-bar_3926749.png" alt="Logo" class="logo"></h4>
+    
+
+   
+
 
     <div class="dashboard-btn-container">
             <a href="menubar.php" class="dashboard-btn  ">Go Dashboard</a>
@@ -185,7 +192,15 @@ $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE u
         echo "No privileges found.";
     }
     ?>
+    
 </div>
+
+
+
+
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
 
 <div class="main-content">
 </div>
