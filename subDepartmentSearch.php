@@ -103,6 +103,11 @@ include 'db_connect.php';
 </head>
 
 <body>
+
+<!-- <?php include 'submenubar.php';?> -->
+
+<?php include 'logout.php';?> 
+
 <div class="mainContainer">
     <div class="container">
         <h1 class="text-black">Department Details</h1>

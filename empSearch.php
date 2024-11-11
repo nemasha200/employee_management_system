@@ -225,7 +225,7 @@ if (!$con) {
                 } else {
                     $getuser = mysqli_query($con, "SELECT empid,  department, nic, epf, full_name, designation, job_title, isAct 
                                                    FROM employer
-                                                   ORDER BY isAct DESC");
+                                                   ORDER BY isAct ASC limit 10 offset 5");
                 }
 
                 if (!$getuser) {
