@@ -132,7 +132,7 @@ include 'db_connect.php';
         </form>
 
         <!-- Table -->
-        <table id="tableID" class="table table-striped table-bordered">
+        <table id="tableID" class="table table-responsive table-striped table-bordered">
             <thead>
                 <tr> 
                 <th>Company</th>

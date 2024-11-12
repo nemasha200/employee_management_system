@@ -21,10 +21,6 @@ if (!isset($_SESSION['admin_id'])) {
             color: black;
         }
 
-       
-
-        
-
         .sidebar {
             height: 100vh;
             background-color: #cfccc8;
@@ -122,16 +118,14 @@ if (!isset($_SESSION['admin_id'])) {
         .main-content {
             margin-left: 250px; /* Creates space on the left for the sidebar */
             padding: 20px;
-            width: calc(12% - 250px);
+            width: calc(100% - 250px); /* Adjusts the width to fit the remaining space */
+            overflow-x: auto; /* Enables horizontal scrolling */
         }
-
     </style>
 </head>
 
 <body>
 <?php include 'logout.php';?> 
-
-
 
 <?php
 $username = $_SESSION['username'];
@@ -139,21 +133,12 @@ $username = $_SESSION['username'];
 $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE username='$username'");
 ?>
 
-
 <div class="sidebar p-3">
-
-
-
-
-    <h4 class="text-center"> Menu bar   <img src="menu-bar_3926749.png" alt="Logo" class="logo"></h4>
-    
-
-   
-
+    <h4 class="text-center"> Menu bar <img src="menu-bar_3926749.png" alt="Logo" class="logo"></h4>
 
     <div class="dashboard-btn-container">
-            <a href="menubar.php" class="dashboard-btn  ">Go Dashboard</a>
-        </div>
+        <a href="menubar.php" class="dashboard-btn">Go Dashboard</a>
+    </div>
 
     <?php
     if (mysqli_num_rows($stmt) > 0) {
@@ -192,49 +177,9 @@ $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE u
         echo "No privileges found.";
     }
     ?>
-    
 </div>
 
-
-
-
-
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-
-
-<div class="main-content">
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    function toggleSubmenu(id) {
-        var submenus = document.querySelectorAll('.card-body .submenu');
-        var targetMenu = document.getElementById(id);
-
-        submenus.forEach(function (submenu) {
-            if (submenu.closest('.collapse') !== targetMenu) {
-                submenu.style.display = 'none';
-            }
-        });
-
-        var isCollapsed = targetMenu.classList.contains('show');
-        if (isCollapsed) {
-            targetMenu.classList.remove('show');
-            targetMenu.classList.add('collapse');
-        } else {
-            targetMenu.classList.remove('collapse');
-            targetMenu.classList.add('show');
-            targetMenu.querySelectorAll('.submenu').forEach(function (item) {
-                item.style.display = 'block';
-            });
-        }
-    }
-</script>
 </body>
-
 </html>
 <?php
 }
