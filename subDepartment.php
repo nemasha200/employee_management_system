@@ -37,6 +37,7 @@ if (!isset($_SESSION['admin_id'])) {
             overflow-y: auto;
             max-height: 90vh;
             position: relative;
+            margin-left: 700px;
         }
         .form-control {
             color: white;
@@ -62,25 +63,7 @@ if (!isset($_SESSION['admin_id'])) {
             display: block;
             margin: 20px auto 0;
         }
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #343a40;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .back-button:hover {
-            background-color: #495057;
-        }
+        
     </style>
 </head>
 <body>

@@ -27,7 +27,7 @@ include 'db_connect.php';
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: darkgrey;
+            background-color: darkgrey; 
             margin: 0;
             display: flex;
             background-image: url("black.jpg");
@@ -43,6 +43,7 @@ include 'db_connect.php';
             max-width: 1000px;
             margin: 20px auto; 
             overflow-y: auto; 
+           
         }
         .form-container h1 {
             text-align: center;

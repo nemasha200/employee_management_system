@@ -106,6 +106,10 @@ include 'db_connect.php';
 </head>
 
 <body>
+<?php include 'submenubar.php';?>
+
+<?php include 'logout.php';?> 
+
     <div class="mainContainer">
     <div class="container mt-5">
         <h1 class="text-black">Job Grade Details</h1>

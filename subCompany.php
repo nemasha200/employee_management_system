@@ -25,7 +25,7 @@ if (!isset($_SESSION['admin_id'])) {
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url("img1.jpg");       
+            background-image: url("img1.jpg");
         }
         .form-container {
             background-color: #daf4f5;

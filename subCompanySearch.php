@@ -106,6 +106,11 @@ include 'db_connect.php';
 </head>
 
 <body>
+
+<?php include 'submenubar.php';?>
+
+<?php include 'logout.php';?> 
+
     <div class="mainContainer">
     <div class="container mt-5">
         <!-- <button class="back-button" onclick="window.history.back();">&larr;</button> -->

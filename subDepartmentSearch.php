@@ -19,6 +19,8 @@ include 'db_connect.php';
     <style>
         .table {
             background-color: #32a9ad; /* Light cyan background for the table */
+            position: relative;
+            left: 200px;
         }
         
         .mainContainer {
@@ -48,28 +50,10 @@ include 'db_connect.php';
 
         .text-black {
             color: black !important; /* Set font color to black */
+            margin-left: 200px;
         }
 
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #343a40;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .back-button:hover {
-            background-color: #495057;
-        }
+       
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,7 +66,7 @@ include 'db_connect.php';
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 
-    <!-- jQuery -->
+    <!-- serch eith pagination -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
     <!-- DataTables JS -->
@@ -109,7 +93,7 @@ include 'db_connect.php';
 
 <div class="mainContainer">
     <div class="container">
-        <h1 class="text-black">Department Details</h1>
+        <h3 class="text-black">Department Details</h3>
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>

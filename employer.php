@@ -40,6 +40,7 @@ include 'db_connect.php';
             max-width: 1000px;
             margin: 20px auto; 
             overflow-y: auto; 
+            margin-left: 250px;
         }
         .form-control {
             color: white;
