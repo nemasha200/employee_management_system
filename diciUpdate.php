@@ -64,6 +64,8 @@ $res_user = mysqli_fetch_array($getuser);
             width: calc(100% - 250px); /* Adjust width for sidebar */
             max-width: 800px;
             margin: auto;
+            margin-left: 600px;
+            
         }
 
         .form-control {

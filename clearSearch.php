@@ -6,9 +6,11 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: userlogin.php");
     exit();
 } else {
-?>
-<?php 
-include 'db_connect.php';
+    include 'db_connect.php';
+
+    if (!$con) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +18,12 @@ include 'db_connect.php';
 
 <head>
 <style>
+    /* General styles */
     .mainContainer {
         width: 100vw;
         height: 100vh;
         display: flex;
+        padding: 1rem;
         justify-content: center; /* Center content horizontally */
         align-items: flex-start; /* Align content to the top */
     }
@@ -29,69 +33,101 @@ include 'db_connect.php';
        border-radius: 10px;
        margin-top: 10px; /* Reduce the gap from the top */
     }
+    
     .table {
+
+        height: 70%;
         background-color: ghostwhite;
-        margin-left: 100px;
+        margin-left: 200px;
+        position: relative;
+        left: 200px;
     }
-
-    .table th {
-        background-color: darkgrey; /* Set header background color */
-        color: black;
-     }
-
+    
+    .text-whit {
+        margin-left: 600px;
+        color: white;
+    }
 
     body {
         margin: 0;
         padding: 0;
-        background-color: gainsboro;
         background-image: url("black.jpg");   
+    }
 
+    .table th {
+        background-color: darkgrey;
+        color: black;
     }
 
     .text-black {
         color: black !important;
     }
 
-    .btn-view {
-        background-color: green;
-        border: none;
-        color: white;
-    }
-
-    .btn-view:hover {
-        background-color: darkgreen;
-    }
-
     .dataTables_filter input {
         background-color: white !important;
     }
 
-    .btn-small {
-        padding: 5px 15px;
-        font-size: 1rem;
-    }
 
-    .btn-medium {
-        padding: 5px 15px;
-        font-size: 1rem;
-    }
+    .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            color: white; 
+            font-weight: bold;
+            position: relative;
+        left: 200px;
+        }
 
-    .btn-large {
-        padding: 5px 15px;
-        font-size: 1rem;
-    }
+        .dataTables_filter input {
+            background-color: #f0f0f0 !important; 
+            border: 1px solid #ccc !important; 
+            border-radius: 4px;
+            padding: 5px;
+            margin-left: 10px;
+        }
 
-    .form-inline {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 15px;
-    }
-    .text-whit{
-        margin-left: 100px;
-        color: white;
-    }
+        .dataTables_length label {
+            display: flex;
+            align-items: center;
+            color: white; 
+            font-weight: bold;
+            position: relative;
+        left: 200px;
+        }
+
+        .dataTables_length select {
+            background-color: #f0f0f0 !important; 
+            border: 1px solid #ccc !important; 
+            border-radius: 4px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+              
+                .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: right;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            float: left;
+        }
+        .dataTables_paginate{
+            position: relative;
+            left: 200px;
+        }
+
+       .dataTables_info{
+            position: relative;
+            left: 200px;
+            color: white;
+        }
+        .btn-primary{
+            background-color: blue;
+        }
+
+        .btn-danger{
+            background-color: purple;
+        }
 </style>
-</head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,62 +146,51 @@ include 'db_connect.php';
 <script>
     $(document).ready(function () {
         $('#tableID').DataTable({
-            searching: false // Disable default searching, as we're handling it server-side
+            searching: true,
+            paging: true
         });
     });
 </script>
-</>
+</head>
 
 <body>
-
-<?php include 'submenubar.php';?>
-<?php include 'logout.php';?>
+<?php include 'submenubar.php'; ?>
+<?php include 'logout.php'; ?>
 
 <div class="mainContainer">
     <div class="container">
         <h3 class="text-whit">Clearance Details</h3>
-        
-        <!-- Search form aligned to the right -->
-        <form method="GET" action="" class="form-inline">
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" name="search" class="form-control" placeholder="Search Employee Details" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Search</button>
-        </form>
 
-        <!-- Table -->
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
-                <tr>                    
-                    
+                <tr>
                     <th>Full Name</th>
                     <th>Employee Number</th>
                     <th>Company</th>
                     <th>Section</th>
-                    <th>Designation</th>
+                    <th>NIC</th>
                    
 
                     <th>View</th>
-                    <th>Update</th>
-                </tr>
+                    <th>Update</th>              </tr>
             </thead>
-            <tbody>
+        <tbody>
                 <?php
                 // Initialize the search term
                 $searchTerm = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT id, full_name, emp_num, company, section, designation FROM  clearance
+                    $getuser = mysqli_query($con, "SELECT id, full_name, emp_num, company, section, nic FROM  clearance
                                                    WHERE emp_num LIKE '%$searchTerm%'
                                                    OR full_name LIKE '%$searchTerm%'
                                                    OR company LIKE '%$searchTerm%'
                                                    OR section LIKE '%$searchTerm%'
 
 
-                                                   OR designation LIKE '%$searchTerm%'");
+                                                   OR nic LIKE '%$searchTerm%'");
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id, full_name, emp_num, company, section, designation  FROM  clearance");
+                    $getuser = mysqli_query($con, "SELECT id, full_name, emp_num, company, section, nic  FROM  clearance");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
@@ -177,7 +202,7 @@ include 'db_connect.php';
                         <td><?php echo $res_user['company']; ?></td>
 
                         <td><?php echo $res_user['section']; ?></td>
-                        <td><?php echo $res_user['designation']; ?></td>
+                        <td><?php echo $res_user['nic']; ?></td>
 
 
                         <td>
@@ -190,9 +215,8 @@ include 'db_connect.php';
                     <?php
                 }
                 ?>
-            </tbody>
-        </table>
-    </div>
+            </tbody>      </table>
+  </div>
 </div>
 </body>
 

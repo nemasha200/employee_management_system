@@ -58,6 +58,7 @@ $res_user = mysqli_fetch_array($getuser);
             max-width: 1000px;
             margin: 20px auto; 
             overflow-y: auto; 
+            margin-left: 300px;
 }
         .form-control {
             color: white;

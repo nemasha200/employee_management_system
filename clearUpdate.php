@@ -43,7 +43,7 @@ include 'db_connect.php';
         }
         .form-container {
             background-color: whitesmoke;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             border-color: black;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -51,6 +51,7 @@ include 'db_connect.php';
             max-width: 1000px;
             margin: 20px auto; 
             overflow-y: auto; 
+            margin-left: 580px;
         }
         .form-control {
             color: white;
@@ -98,7 +99,7 @@ include 'db_connect.php';
         #dropdown{
         color:black;
        }
-       #designation{
+       #nic{
         color:black;
        }
        #fullName{
@@ -185,8 +186,8 @@ include 'db_connect.php';
 
             
             <div class="form-group col-md-6">
-                <label for="department">Designation :</label>
-                <input type="text" value="<?php echo $res_user['designation']; ?>" class="form-control" id="designation" name="designation" readonly>
+                <label for="department">NIC :</label>
+                <input type="text" value="<?php echo $res_user['nic']; ?>" class="form-control" id="nic" name="nic" readonly>
                    
             </div>
         </div>

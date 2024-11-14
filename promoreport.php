@@ -34,22 +34,25 @@ include 'db_connect.php';
             overflow-x: hidden; 
         }
         .form-container {
-            background-color: whitesmoke;
-            padding: 30px;
-            border-radius: 10px;
-            border-color: black;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 1000px;
-            margin: 20px auto; 
-            overflow-y: auto; 
-        }
+    background-color: whitesmoke;
+    padding: 30px;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 1000px;
+    overflow-y: auto;
+    margin-left: 500px;
+    margin-top: 70px; /* Add margin-top to push it down */
+}
+
+            
+        
         .form-container h1 {
             text-align: center;
             margin-bottom: 20px;
         }
         .form-container .btn {
-            /* width: 100%; */
             padding: 10px;
             margin-bottom: 10px;
             font-size: 16px;
@@ -115,6 +118,12 @@ include 'db_connect.php';
         .btn-get-report {
             background-color: purple;
         }
+
+        .btn-success {
+    
+    margin-top: 30px; /* Adjust this value to move the button further down */
+}
+
     </style>
 </head>
 <body>
@@ -124,9 +133,9 @@ include 'db_connect.php';
 
 
 <div class="form-container">
-    <h1>promotion Reports</h1>
+    <h2><center>Promotions Reports</center></h2>
 
-    <button class="btn btn-all" onclick="window.location.href='emp.php'">All  promotions Deatils</button>
+    <button class="btn btn-all" onclick="window.location.href='emp.php'">All Deatils</button>
 
 
     <div class="form-row">
@@ -231,8 +240,36 @@ include 'db_connect.php';
         </table>
     </div>
 
+    <button class="btn btn-success" onclick="downloadTableAsCSV()">Download CSV</button>
     <button class="btn-print" onclick="window.print()">Print</button>
 </div>
+
+<script>
+function downloadTableAsCSV() {
+    let csv = [];
+    const rows = document.querySelectorAll("table tr");
+
+    for (let row of rows) {
+        let rowData = [];
+        for (let cell of row.querySelectorAll("th, td")) {
+            rowData.push(cell.innerText.replace(/,/g, "")); // Remove commas to avoid CSV formatting issues
+        }
+        csv.push(rowData.join(","));
+    }
+
+    // Convert to CSV format
+    const csvString = csv.join("\n");
+    const blob = new Blob([csvString], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    // Create a download link and click it
+    const downloadLink = document.createElement("a");
+    downloadLink.href = url;
+    downloadLink.download = "employee_data.csv";
+    downloadLink.click();
+}
+</script>
+
 
 </body>
 </html>

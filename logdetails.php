@@ -183,8 +183,7 @@ include 'db_connect.php';
                     <th>title</th>
                     <th> first_name</th>
                     <th>last_name</th>
-                    <th>department</th>
-                    <th>nic</th>
+                  
                     <th>email</th>
                     <th>contact</th>
                     <th>type</th>
@@ -195,7 +194,7 @@ include 'db_connect.php';
             </thead>
             <tbody>
                 <?php
-               $getuser = mysqli_query($con, "SELECT admin_id, title, first_name, last_name, department, nic, email, contact, type, username, password,con_password FROM user");
+               $getuser = mysqli_query($con, "SELECT admin_id, title, first_name, last_name,  email, contact, type, username, password,con_password FROM user");
                 
                while ($res_user = mysqli_fetch_array($getuser)) {
                    
@@ -204,8 +203,7 @@ include 'db_connect.php';
                         <td><?php echo $res_user['title']; ?></td>
                         <td><?php echo $res_user['first_name']; ?></td>
                         <td><?php echo $res_user['last_name']; ?></td>
-                        <td><?php echo $res_user['department']; ?></td>
-                        <td><?php echo $res_user['nic']; ?></td>
+                        
                         <td><?php echo $res_user['email']; ?></td>
                         <td><?php echo $res_user['contact']; ?></td>
                         <td><?php echo $res_user['type']; ?></td>

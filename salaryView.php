@@ -52,8 +52,9 @@ include 'db_connect.php';
             width: 80%;
             max-width: 1000px;
             margin: 20px auto; 
-            overflow-y: auto; 
-}
+            overflow-y: auto;
+            margin-left: 300px; 
+        }
         .form-control {
             color: black;
             background-color: #343a40;

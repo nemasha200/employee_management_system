@@ -16,7 +16,13 @@ include 'db_connect.php';
 <html lang="en">
 
 <head>
-    <style>
+<style>
+.table {
+            background-color: #32a9ad; /* Light cyan background for the table */
+            position: relative;
+            left: 175px;
+        }
+        
         .mainContainer {
             background-color: #b7ebed;
             width: 100vw;
@@ -41,37 +47,30 @@ include 'db_connect.php';
             justify-content: center;
             align-items: center;
         }
-        
-        
-        .table {
-            background-color: #32a9ad; /* Light cyan background for the table */
-        }
 
-       
         .text-black {
             color: black !important; /* Set font color to black */
+            margin-left: 600px;
+        }
+        .dataTables_length{
+            position: relative;
+            left: 200px;
+        }
+         .dataTables_filter{
+            position: relative;
+            left: 170px;
+        }
+        .dataTables_info{
+            position: relative;
+            left: 170px;
+        }
+        .dataTables_paginate{
+            position: relative;
+            left: 200px;
         }
 
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #343a40;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            cursor: pointer;
-        }
 
-        .back-button:hover {
-            background-color: #495057;
-        }
+       
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

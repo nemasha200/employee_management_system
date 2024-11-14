@@ -133,7 +133,7 @@ include 'db_connect.php';
 
 
 <div class="form-container">
-    <h2><center>Diciplinary Actions Report</center></h2>
+    <h2><center>Promotion Evaluation marks Report</center></h2>
 
     <button class="btn btn-all" onclick="window.location.href='emp.php'">All Deatils</button>
 

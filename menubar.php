@@ -117,6 +117,8 @@ if (!isset($_SESSION['admin_id'])) {
             padding-top: 20px;
             position: fixed;
             width: 250px;
+            max-height: 100vh; /* Set maximum height to full viewport */
+            overflow-y: auto; /* Enables vertical scrollbar */
         }
 
         .sidebar h4 {

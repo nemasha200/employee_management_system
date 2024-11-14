@@ -48,6 +48,7 @@ include 'db_connect.php';
             max-width: 600px;
             margin: auto;
             position: relative;
+            left: 120px;
         }
 
         .form-control {

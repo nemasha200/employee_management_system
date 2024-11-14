@@ -621,6 +621,16 @@ include 'db_connect.php';
             return false;   
         }
 
+        if (!nicNumber || (nicNumber.length !== 10 && nicNumber.length !== 13)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'NIC Number must be exactly 10 or 13 characters long.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
         if (!address1) {
             Swal.fire({
                 title: 'Validation Error!',

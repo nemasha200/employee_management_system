@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin_id'])) {
     $dob = $_POST['dob'];
     $company = $_POST['company'];
     $section = $_POST['section'];
-    $designation = $_POST['designation'];
+    $nic = $_POST['nic'];
     $headerGiven = $_POST['headerGiven'];
     $remark = $_POST['remark'];
 
@@ -52,11 +52,11 @@ if (!isset($_SESSION['admin_id'])) {
 
     // Modify the SQL query to match the correct columns
     if ($response['success']) {
-        $query = "INSERT INTO `clearance` (`full_name`, `emp_num`, `ref_num`, `wef`, `company`, `section`, `designation`, `prior_notice`, `img`, `remark`) 
-                  VALUES ('$fullName', '$empnumber', '$refnumber', '$dob', '$company', '$section', '$designation', '$headerGiven', '$image_name', '$remark')";
+        $query = "INSERT INTO `clearance` (`full_name`, `emp_num`, `ref_num`, `wef`, `company`, `section`, `nic`, `prior_notice`, `img`, `remark`) 
+                  VALUES ('$fullName', '$empnumber', '$refnumber', '$dob', '$company', '$section', '$nic', '$headerGiven', '$image_name', '$remark')";
     } else {
-        $query = "INSERT INTO `clearance` (`full_name`, `emp_num`, `ref_num`, `wef`, `company`, `section`, `designation`, `prior_notice`, `img`, `remark`) 
-                  VALUES ('$fullName', '$empnumber', '$refnumber', '$dob', '$company', '$section', '$designation', '$headerGiven', NULL, '$remark')";
+        $query = "INSERT INTO `clearance` (`full_name`, `emp_num`, `ref_num`, `wef`, `company`, `section`, `nic`, `prior_notice`, `img`, `remark`) 
+                  VALUES ('$fullName', '$empnumber', '$refnumber', '$dob', '$company', '$section', '$nic', '$headerGiven', NULL, '$remark')";
     }
 
     if (mysqli_query($con, $query)) {

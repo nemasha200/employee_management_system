@@ -99,13 +99,14 @@ include 'db_connect.php';
 
         .form-container {
             margin-left: 250px; /* Adjusted for sidebar width */
-            padding: 30px;
+            padding: 20px;
             background-color: lightblue;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: calc(100% - 250px); /* Adjust width for sidebar */
             max-width: 800px;
             margin: auto;
+            margin-left: 600px;
         }
 
         .form-control {
@@ -215,8 +216,8 @@ include 'db_connect.php';
 
             
             <div class="form-group col-md-4">
-                <label for="department">Designation :</label>
-                <input type="text" class="form-control" id="designation" name="designation" value="<?php echo $res_user['designation']; ?>"readonly>
+                <label for="department">NIC :</label>
+                <input type="text" class="form-control" id="nic" name="nic" value="<?php echo $res_user['nic']; ?>"readonly>
                    
             </div>
        

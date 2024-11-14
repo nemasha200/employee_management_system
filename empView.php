@@ -57,7 +57,8 @@ if(isset($_GET['user_id'])) {
             width: 80%;
             max-width: 1000px;
             margin: 20px auto; 
-            overflow-y: auto; 
+            overflow-y: auto;
+            margin-left: 300px; 
 }
         .form-control {
             color: black;

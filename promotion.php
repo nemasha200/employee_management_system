@@ -87,7 +87,7 @@ include 'db_connect.php';
 
     .form-container {
         margin-left: 250px; 
-        padding: 30px;
+        padding: 20px;
         background-color: whitesmoke;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

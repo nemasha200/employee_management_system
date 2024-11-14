@@ -98,14 +98,15 @@ include 'db_connect.php';
         }
 
         .form-container {
-            margin-left: 250px; /* Adjusted for sidebar width */
-            padding: 30px;
-            background-color: whitesmoke;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: calc(100% - 250px); /* Adjust width for sidebar */
-            max-width: 800px;
-            margin: auto;
+            margin-left: 250px; 
+        padding: 50px;
+        background-color: whitesmoke;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: calc(100% - 250px); 
+        max-width: 800px;
+        margin: auto;
+        margin-left: 600px;
         }
 
         .form-control {

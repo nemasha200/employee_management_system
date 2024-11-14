@@ -20,7 +20,6 @@ if (!isset($_SESSION['admin_id'])) {
 <style>
     /* General styles */
     .mainContainer {
-        position: relative;
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -36,14 +35,16 @@ if (!isset($_SESSION['admin_id'])) {
     }
     
     .table {
-        position: relative;
-        width: 20%;
+
+        height: 70%;
         background-color: ghostwhite;
+        margin-left: 200px;
+        position: relative;
         left: 200px;
     }
     
     .text-whit {
-        margin-left: 200px;
+        margin-left: 600px;
         color: white;
     }
 
@@ -65,6 +66,66 @@ if (!isset($_SESSION['admin_id'])) {
     .dataTables_filter input {
         background-color: white !important;
     }
+
+
+    .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            color: white; 
+            font-weight: bold;
+            position: relative;
+        left: 200px;
+        }
+
+        .dataTables_filter input {
+            background-color: #f0f0f0 !important; 
+            border: 1px solid #ccc !important; 
+            border-radius: 4px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        .dataTables_length label {
+            display: flex;
+            align-items: center;
+            color: white; 
+            font-weight: bold;
+            position: relative;
+        left: 200px;
+        }
+
+        .dataTables_length select {
+            background-color: #f0f0f0 !important; 
+            border: 1px solid #ccc !important; 
+            border-radius: 4px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+              
+                .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: right;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            float: left;
+        }
+        .dataTables_paginate{
+            position: relative;
+            left: 200px;
+        }
+        .dataTables_info{
+            position: relative;
+            left: 200px;
+            color: white;
+        }
+        .btn-primary{
+            background-color: blue;
+        }
+
+        .btn-danger{
+            background-color: purple;
+        }
 </style>
 
 <meta charset="UTF-8">
@@ -140,9 +201,9 @@ if (!isset($_SESSION['admin_id'])) {
                             <td>
                                 <?php
                                 if ($res_user['isAct'] == 1) {
-                                    echo '<a href="toggleStatus.php?empid=' . $res_user['empid'] . '&status=0" class="btn btn-primary">Active</a>';
+                                    echo '<a href="toggleStatus.php?empid=' . $res_user['empid'] . '&status=0" class="btn btn-primary" >Active</a>';
                                 } else {
-                                    echo '<a href="toggleStatus.php?empid=' . $res_user['empid'] . '&status=1" class="btn btn-danger">Deactive</a>';
+                                    echo '<a href="toggleStatus.php?empid=' . $res_user['empid'] . '&status=1" class="btn btn-danger" style="background-color: purple">Deactive</a>';
                                 }
                                 ?>
                             </td>

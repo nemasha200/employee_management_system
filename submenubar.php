@@ -22,15 +22,16 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar {
-            height: 100vh;
             background-color: #cfccc8;
             color: black;
             padding-top: 20px;
             width: 250px;
-            position: fixed; /* Fixed to the left side */
+            position: fixed;
             left: 0;
             top: 0;
             bottom: 0;
+            max-height: 100vh; /* Set maximum height to full viewport */
+            overflow-y: auto; /* Enables vertical scrollbar */
         }
 
         .sidebar h4 {
@@ -59,6 +60,11 @@ if (!isset($_SESSION['admin_id'])) {
             background-color: mediumpurple;
         }
 
+        .submenu {
+            display: none;
+            background-color: lightpink;
+        }
+
         .sidebar .submenu a {
             padding-left: 20px;
         }
@@ -80,20 +86,6 @@ if (!isset($_SESSION['admin_id'])) {
             cursor: pointer;
         }
 
-        .card-header button:hover {
-            background-color: ;
-        }
-
-        .submenu {
-            display: none;
-            background-color: lightpink;
-        }
-
-        .sidebar .card-body a:first-child {
-            background-color: #3c48b8;
-            color: black;
-        }
-
         .dashboard-btn-container {
             display: flex;
             justify-content: center;
@@ -111,15 +103,11 @@ if (!isset($_SESSION['admin_id'])) {
             transition: background-color 0.3s ease-in-out;
         }
 
-        .dashboard-btn:hover {
-            /* background-color: #cfccc8; */
-        }
-
         .main-content {
-            margin-left: 250px; /* Creates space on the left for the sidebar */
+            margin-left: 250px;
             padding: 20px;
-            width: calc(100% - 250px); /* Adjusts the width to fit the remaining space */
-            overflow-x: auto; /* Enables horizontal scrolling */
+            width: calc(100% - 250px);
+            overflow-x: auto;
         }
     </style>
 </head>

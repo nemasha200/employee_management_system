@@ -31,7 +31,7 @@ include 'db_connect.php';
         }
         .form-container {
             background-color: whitesmoke;
-            padding: 30px;
+            padding: 60px;
             border-radius: 10px;
             border-color: black;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -39,7 +39,9 @@ include 'db_connect.php';
             max-width: 1000px;
             margin: 20px auto; 
             overflow-y: auto; 
-        }
+            margin-left: 600px;
+            bottom: 100px;
+b        }
         .form-control {
             color: white;
             background-color: #343a40;
@@ -86,7 +88,7 @@ include 'db_connect.php';
             color:black;
         }
 
-       #designation{
+       #nic{
         color:black;
        }
        #empNumber{
@@ -180,8 +182,8 @@ include 'db_connect.php';
 
             
             <div class="form-group col-md-6">
-                <label for="department">Designation :<span style="color:red">*</span></label>
-                <input type="text" class="form-control" id="designation" name="designation" readonly>
+                <label for="nic">NIC Number :</label>
+                <input type="text" class="form-control" id="nic" name="nic" readonly>
                    
             </div>
         </div>
@@ -311,11 +313,11 @@ if (!head) {
                     success: function (response) {
                         if (response.error) {
                             alert(response.error);
-                        } else if (response.emp_num && response.comp_num && response.department && response.designation) {
+                        } else if (response.emp_num && response.comp_num && response.department && response.nic) {
                             $('#dropdown').val(response.comp_num);
                             $('#empNumber').val(response.emp_num);
                             $('#Section').val(response.department);
-                            $('#designation').val(response.designation);
+                            $('#nic').val(response.nic);
                         } else {
                             Swal.fire({
                                 title: 'Data Missing!',

@@ -20,7 +20,7 @@ include 'db_connect.php';
         .table {
             background-color: #32a9ad; /* Light cyan background for the table */
             position: relative;
-            left: 200px;
+            left: 175px;
         }
         
         .mainContainer {
@@ -50,8 +50,25 @@ include 'db_connect.php';
 
         .text-black {
             color: black !important; /* Set font color to black */
-            margin-left: 200px;
+            margin-left: 600px;
         }
+        .dataTables_length{
+            position: relative;
+            left: 200px;
+        }
+         .dataTables_filter{
+            position: relative;
+            left: 170px;
+        }
+        .dataTables_info{
+            position: relative;
+            left: 170px;
+        }
+        .dataTables_paginate{
+            position: relative;
+            left: 200px;
+        }
+
 
        
     </style>

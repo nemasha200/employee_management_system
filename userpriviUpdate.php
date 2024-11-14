@@ -67,6 +67,8 @@ if (!isset($_SESSION['admin_id'])) {
             max-width: 600px;
             margin: auto;
             position: relative;
+            left: 120px;
+
         }
 
         .form-control {
