@@ -175,14 +175,19 @@ if (!isset($_SESSION['admin_id'])) {
                 </tr>
             </thead>
             <tbody>
+            <!-- Fetch employee data from the database -->
+
                 <?php
                 $getuser = mysqli_query($con, "SELECT empid, department, nic, epf, full_name, designation, job_title, isAct 
                                                FROM employer
                                                ORDER BY isAct DESC");
+                // Handle query execution errors
 
                 if (!$getuser) {
                     echo "Error executing query: " . mysqli_error($con);
                 } else {
+                //  Loop through the fetched data
+
                     while ($res_user = mysqli_fetch_array($getuser)) {
                         ?>
                         <tr>
@@ -199,6 +204,9 @@ if (!isset($_SESSION['admin_id'])) {
                                 <a href="empUpdate.php?user_id=<?php echo $res_user['empid']; ?>" class="btn btn-warning">Update</a>
                             </td>
                             <td>
+
+                            <!-- Display status toggle buttons -->
+
                                 <?php
                                 if ($res_user['isAct'] == 1) {
                                     echo '<a href="toggleStatus.php?empid=' . $res_user['empid'] . '&status=0" class="btn btn-primary" >Active</a>';

@@ -370,7 +370,7 @@ include 'db_connect.php';
     $getEmp = mysqli_query($con,"SELECT * FROM  sub_division ");
     while ($resCom = mysqli_fetch_array($getEmp)) {
         ?>
-    <option value="<?php echo $resCom['job_title']."/".$resCom['grade'] ?>"><?php echo $resCom['job_title']."/".$resCom['grade'] ?></option>
+    <option value="<?php echo $resCom['grade'] ?>"><?php echo $resCom['grade'] ?></option>
 
         <?php
     }
@@ -621,15 +621,26 @@ include 'db_connect.php';
             return false;   
         }
 
-        if (!nicNumber || (nicNumber.length !== 10 && nicNumber.length !== 13)) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'NIC Number must be exactly 10 or 13 characters long.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;   
-        }
+        // if (!nicNumber || (nicNumber.length !== 10 && nicNumber.length !== 12)) {
+        //     Swal.fire({
+        //         title: 'Validation Error!',
+        //         text: 'NIC Number must be exactly 10 or 13 characters long.',
+        //         icon: 'error',
+        //         confirmButtonText: 'OK'
+        //     });
+        //     return false;   
+        // }
+
+        if (!nicNumber || (!/^\d{9}[V]$/.test(nicNumber) && !/^\d{12}$/.test(nicNumber))) {
+    Swal.fire({
+        title: 'Validation Error!',
+        text: 'NIC Number must be either 9 digits followed by "V" or 12 digits.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+    return false;
+}
+
 
         if (!address1) {
             Swal.fire({

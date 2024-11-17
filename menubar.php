@@ -221,7 +221,7 @@ if (!isset($_SESSION['admin_id'])) {
             text-align: center;
             color: white;
             font-size: 0.9rem;
-            left: 120px; /* Adjust this value as needed */
+            left: 120px; 
         }
 
     </style>
@@ -229,127 +229,118 @@ if (!isset($_SESSION['admin_id'])) {
 
 <body>
 
-<!-- <?php include 'logout.php';?>  -->
+<?php include 'logout.php'; ?>
 
-    <?php
+<?php
+    // Get session variables for user authentication and privileges
     $username = $_SESSION['username'];
     $admin_id = $_SESSION['admin_id'];
 
+    // Fetch user privileges from the database
     $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE username='$username'");
-    ?>
+?>
 
-    <div class="d-flex">
-        <div class="sidebar p-3">
-            <h4 class="text-center"><img src="menu-bar_3926749.png" alt="Logo" class="logo"> Menu bar</h4>
+<!-- Sidebar Menu -->
+<div class="d-flex">
+    <div class="sidebar p-3">
+        <h4 class="text-center"><img src="menu-bar_3926749.png" alt="Logo" class="logo"> Menu bar</h4>
 
-            <?php
-            if (mysqli_num_rows($stmt) > 0) {
-                while ($menu = mysqli_fetch_array($stmt)) {
-                    $menu_id = $menu['menu_id'];
-                    $getMain = mysqli_query($con, "SELECT * FROM mainmenu WHERE id='$menu_id'");
-                    $mainMenu = mysqli_fetch_array($getMain);
-                    ?>
-                    <div class="card bg-black">
-                        <div class="card-header" id="heading<?php echo $menu_id; ?>">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link text-white collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $menu_id; ?>" aria-expanded="false" aria-controls="collapse<?php echo $menu_id; ?>">
-                                    <?php echo $mainMenu['menu_name']; ?>
-                                </button>
-                            </h5>
-                        </div>
-
-                        <div id="collapse<?php echo $menu_id; ?>" class="collapse" aria-labelledby="heading<?php echo $menu_id; ?>" data-parent=".sidebar">
-                            <div class="card-body">
-                                <?php
-                                $getSub = mysqli_query($con, "SELECT * FROM submenu WHERE mainmenu_id='$menu_id' AND id IN (SELECT submenu_id FROM user_priviledge WHERE username='$username')");
-                                while ($subMenu = mysqli_fetch_array($getSub)) {
-                                    ?>
-                                    <a href="<?php echo $subMenu['pagename']; ?>" class="btn btn-link text-white">
-                                        <?php echo $subMenu['submenu_name']; ?>
-                                    </a>
-                                    <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
+        <?php
+        // Check if user has any menu privileges
+        if (mysqli_num_rows($stmt) > 0) {
+            while ($menu = mysqli_fetch_array($stmt)) {
+                $menu_id = $menu['menu_id'];
+                $getMain = mysqli_query($con, "SELECT * FROM mainmenu WHERE id='$menu_id'");
+                $mainMenu = mysqli_fetch_array($getMain);
+        ?>
+        <!-- Display main menu -->
+        <div class="card bg-black">
+            <div class="card-header" id="heading<?php echo $menu_id; ?>">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-white collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $menu_id; ?>" aria-expanded="false">
+                        <?php echo $mainMenu['menu_name']; ?>
+                    </button>
+                </h5>
+            </div>
+            <!-- Submenu items -->
+            <div id="collapse<?php echo $menu_id; ?>" class="collapse">
+                <div class="card-body">
                     <?php
-                }
-            } else {
-                echo "No privileges found.";
+                    $getSub = mysqli_query($con, "SELECT * FROM submenu WHERE mainmenu_id='$menu_id' AND id IN (SELECT submenu_id FROM user_priviledge WHERE username='$username')");
+                    while ($subMenu = mysqli_fetch_array($getSub)) {
+                    ?>
+                    <a href="<?php echo $subMenu['pagename']; ?>" class="btn btn-link text-white">
+                        <?php echo $subMenu['submenu_name']; ?>
+                    </a>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <?php
             }
-            ?>
-        </div>
-
-        <div class="content w-100">
-            <h1 class="employee-system-header">
-                <a href="userlogin.php" class="logout-button">Logout</a>
-                <img src="raigam.png" alt="Logo" class="logo">
-                <b>Employee Registration System</b> 
-            </h1>
-            
-        </div>
-
+        } else {
+            echo "No privileges found."; // Message if no privileges
+        }
+        ?>
     </div>
 
-    <div class="container employee-system-section">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card text-black mb-3">
-                    <div class="card animate__animated animate__zoomIn">
-                        <div class="card-header">
-                            <h4><center><img src="promo.png" alt="Logo" class="logo"> Total of the Employees</center></h4>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            $dash_query = "SELECT * from employer";
-                            $dash_query_run = mysqli_query($con, $dash_query);
+    <!-- Main Content -->
+    <div class="content w-100">
+        <h1 class="employee-system-header">
+            <a href="userlogin.php" class="logout-button">Logout</a>
+            <img src="raigam.png" alt="Logo" class="logo">
+            <b>Employee Registration System</b>
+        </h1>
+    </div>
+</div>
 
-                            if($emp_total = mysqli_num_rows($dash_query_run))
-                            {
-                                echo '<h2>'.$emp_total.'</h2>';
-                            }
-                            else
-                            {
-                                echo '<h2> No Data </h2>';
-                            }
-                        ?>
-                        </div>
+<!-- Dashboard statistics -->
+<div class="container employee-system-section">
+    <div class="row">
+        <!-- Total Employees -->
+        <div class="col-md-6">
+            <div class="card text-black mb-3">
+                <div class="card animate__animated animate__zoomIn">
+                    <div class="card-header">
+                        <h4><center>Total Employees</center></h4>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card text-black mb-3">
-                    <div class="card animate__animated animate__zoomIn">
-                        <div class="card-header">
-                            <h4><center><img src="inactive.png" alt="Logo" class="logo"> Total Active Employees</center></h4>
-                            <a href="employer.php"></a>
-                        </div>
-                        <div class="card-body">
+                    <div class="card-body">
                         <?php
-                            $dash_active_query = "SELECT * from employer where isAct ='1'";
-                            $dash_active_query_run = mysqli_query($con, $dash_active_query);
-
-                            if($emp_active_total = mysqli_num_rows($dash_active_query_run))
-                            {
-                                echo '<h2>'.$emp_active_total.'</h2>';
-                            }
-                            else
-                            {
-                                echo '<h2> No Data </h2>';
-                            }
+                        $dash_query = "SELECT * FROM employer";
+                        $dash_query_run = mysqli_query($con, $dash_query);
+                        echo '<h2>' . mysqli_num_rows($dash_query_run) . '</h2>';
                         ?>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Total Active Employees -->
+        <div class="col-md-6">
+            <div class="card text-black mb-3">
+                <div class="card animate__animated animate__zoomIn">
+                    <div class="card-header">
+                        <h4><center>Total Active Employees</center></h4>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $dash_active_query = "SELECT * FROM employer WHERE isAct ='1'";
+                        $dash_active_query_run = mysqli_query($con, $dash_active_query);
+                        echo '<h2>' . mysqli_num_rows($dash_active_query_run) . '</h2>';
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <div class="text">
-        <span> Copyright © 2024 Designed by <a href="#"> RAIGAM IT Department </a> All rights reserved.</span>
-    </div>
+<!-- Footer -->
+<div class="text">
+    <span> Copyright © 2024 Designed by <a href="#"> RAIGAM IT Department </a> All rights reserved.</span>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
