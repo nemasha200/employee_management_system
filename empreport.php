@@ -209,6 +209,7 @@ include 'db_connect.php';
 
     </style>
 </head>
+
 <body>
 
 <?php include 'submenubar.php'; ?> 
@@ -216,75 +217,50 @@ include 'db_connect.php';
 
 
 <div class="form-container">
-    <h2><center><u>Employee Reports <img src="xl.png" alt="Logo" class="logo"></u></center></h2>
-
-    <!-- <button class="btn btn-all" onclick="window.location.href='emp.php'">All Deatils</button> -->
-
-
+<h2 class="text-center"><u>Employee Reports</u></h2>
     <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="company">Company:<span style="color:red">*</span></label>
+            <select class="form-control" id="company" name="company">
+                <option value="">Select an option</option>
+                <?php 
+                $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
+                while ($resCom = mysqli_fetch_array($getEmp)) { ?>
+                    <option value="<?php echo $resCom['com_number']; ?>">
+                        <?php echo $resCom['com_number'] . " / " . $resCom['com_name'] . " / " . $resCom['location']; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
 
-    <div class="form-group col-md-5">
-<label for="dropdown">Company :<span style="color:red">*</span></label>
-<select class="form-control" id="dropdown" name="company">
-    <option value="" disabled selected>Select an option</option>
-    <?php 
-    $getEmp = mysqli_query($con,"SELECT * FROM  sub_company");
-    while ($resCom = mysqli_fetch_array($getEmp)) {
-        ?>
+        <div class="form-group col-md-4">
+            <label for="department">Department:<span style="color:red">*</span></label>
+            <select class="form-control" id="department" name="department">
+                <option value="">Select an option</option>
+                <?php 
+                $getEmp = mysqli_query($con, "SELECT * FROM sub_department");
+                while ($resDep = mysqli_fetch_array($getEmp)) { ?>
+                    <option value="<?php echo $resDep['dep_name']; ?>"><?php echo $resDep['dep_name']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
 
-    <option value="<?php echo $resCom['com_number'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
+        <div class="form-group col-md-4">
+            <label for="emp_type">Employee Type:<span style="color:red">*</span></label>
+            <select class="form-control" id="emp_type" name="emp_type">
+                <option value="">Select an option</option>
+                <?php 
+                $getEmp = mysqli_query($con, "SELECT DISTINCT emp_type FROM employer");
+                while ($resCom = mysqli_fetch_array($getEmp)) { ?>
+                    <option value="<?php echo $resCom['emp_type']; ?>"><?php echo $resCom['emp_type']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <button class="btn btn-success" id="filterBtn">Generate report</button>
 
-        <?php
-    }
-?>
-        </select>
-</select>
-</div>
-
-     <div class="form-group col-md-3">
-        <label for="department">Department :<span style="color:red">*</span></label>
-        <select class="form-control" id="department" name="department">
-        <option value="" disabled selected>Select an option</option>
-
-
-        <?php 
-    $getEmp = mysqli_query($con,"SELECT * FROM  sub_department");
-    while ($resDep = mysqli_fetch_array($getEmp)) {
-        ?>
-    <option value="<?php echo $resDep['dep_name'] ?>"><?php echo $resDep['dep_name'] ?></option>
-
-        <?php
-    }
-?>
-        </select>
-
-
+        <button class="btn btn-success" onclick="downloadTableAsCSV()">Download Excel Sheet</button>
     </div>
-        
 
-    
-     <div class="form-group col-md-3">
-<label for="dropdown">Employee type :<span style="color:red">*</span></label>
-<select class="form-control" id="dropdown" name="company">
-    <option value="" disabled selected>Select an option</option>
-    <?php 
-    $getEmp = mysqli_query($con,"SELECT emp_type FROM  employer");
-    while ($resCom = mysqli_fetch_array($getEmp)) {
-        ?>
-
-    <option value="<?php echo $resCom['emp_type'] ?>"><?php echo $resCom['emp_type'] ?></option>
-
-        <?php
-    }
-?>
-        </select>
-</select>
-</div> 
-
-
-
-</div>
-<button class="btn btn-success" onclick="downloadTableAsCSV()">Download Excell sheet <img src="ex.png" alt="Logo" class="logo"></button>
 
   
     <!-- <button class="btn btn-get-report" onclick="window.location.href='#'">Get Report</button> -->
@@ -316,92 +292,22 @@ include 'db_connect.php';
 <?php include 'logout.php'; ?> -->
 
 <div class="mainContainer">
-<div class="container">
-        <table id="tableID" class="table table-striped table-bordered">
-            <thead>
-                <tr><th>Full Name</th>
-                    <th>Company</th>
-                    <th>Department</th>
-                    <th>Employee Type</th>
-                    <th>Employee Number</th>
-                    <th>NIC</th>
-                    <th>EPF</th>
-                    
-                    <th>Initial Name</th>
-                    <th>Sex</th>
-                    <th>Marital Status</th>
-                    <th>Date Of Birth</th>
-                    <th>Permanent Address</th>
-                    <th>Current Address</th>
-                    <th>Qualifications</th>
-                    <th>Mobile Number</th>
-                    <th>Land Number</th>
-                    <th>Office Number</th>
-                    <th>Date Of Join</th>
-                    <th>Recruitment Type</th>
-                    <th>Designation</th>
-                    <th>Job Title</th>
-                    <th>Grade</th>
-                    <th>Last Promotion Date</th>
-                    <th>Employee Status</th>
-                    <th>Vehicle Number</th>
-                    <th>Image</th>
-                    <th>OT</th>
-                    <th>Remark1</th>
-                    <th>Remark2</th>
-                    <th>Remark3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $getuser = mysqli_query($con, "SELECT empid, full_name, comp_num, department, emp_type, emp_num, nic, epf,  initial_name, sex, marital_status, dob, permanat_address, current_address, qulifications, mobile, landnumber, office_number, doj, recruitment_type, designation, job_title, grade, last_promo, emp_status, vehicle_num, img, ot, remark1, remark2, remark3 
-                                               FROM employer
-                                               ORDER BY isAct DESC");
-      
-                if (!$getuser) {
-                    echo "Error executing query: " . mysqli_error($con);
-                } else {
-                    while ($res_user = mysqli_fetch_array($getuser)) {
-                        ?>
-                        <tr>
-                        <td><?php echo $res_user['full_name']; ?></td>
-
-                            <td><?php echo $res_user['comp_num']; ?></td>
-                            <td><?php echo $res_user['department']; ?></td>
-                            <td><?php echo $res_user['emp_type']; ?></td>
-                            <td><?php echo $res_user['emp_num']; ?></td>
-                            <td><?php echo $res_user['nic']; ?></td>
-                            <td><?php echo $res_user['epf']; ?></td>
-                            <td><?php echo $res_user['initial_name']; ?></td>
-                            <td><?php echo $res_user['sex']; ?></td>
-                            <td><?php echo $res_user['marital_status']; ?></td>
-                            <td><?php echo $res_user['dob']; ?></td>
-                            <td><?php echo $res_user['permanat_address']; ?></td>
-                            <td><?php echo $res_user['current_address']; ?></td>
-                            <td><?php echo $res_user['qulifications']; ?></td>
-                            <td><?php echo $res_user['mobile']; ?></td>
-                            <td><?php echo $res_user['landnumber']; ?></td>
-                            <td><?php echo $res_user['office_number']; ?></td>
-                            <td><?php echo $res_user['doj']; ?></td>
-                            <td><?php echo $res_user['recruitment_type']; ?></td>
-                            <td><?php echo $res_user['designation']; ?></td>
-                            <td><?php echo $res_user['job_title']; ?></td>
-                            <td><?php echo $res_user['grade']; ?></td>
-                            <td><?php echo $res_user['last_promo']; ?></td>
-                            <td><?php echo $res_user['emp_status']; ?></td>
-                            <td><?php echo $res_user['vehicle_num']; ?></td>
-                            <td><?php echo $res_user['img']; ?></td>
-                            <td><?php echo $res_user['ot']; ?></td>
-                            <td><?php echo $res_user['remark1']; ?></td>
-                            <td><?php echo $res_user['remark2']; ?></td>
-                            <td><?php echo $res_user['remark3']; ?></td>
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
+<div class="container mt-4">
+    <table id="tableID" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Company</th>
+                <th>Department</th>
+                <th>Employee Type</th>
+                <th>Employee Number</th>
+                <th>NIC</th>
+                <th>EPF</th>
+            </tr>
+        </thead>
+        <tbody id="reportBody">
+        </tbody>
+    </table>
 </div>
 </div>
 </body>
@@ -413,6 +319,28 @@ include 'db_connect.php';
 
 
 <script>
+$(document).ready(function () {
+    $('#filterBtn').click(function () {
+        const company = $('#company').val();
+        const department = $('#department').val();
+        const empType = $('#emp_type').val();
+
+        $.ajax({
+            url: 'fetch_filtered_data.php',
+            method: 'POST',
+            data: { company, department, empType },
+            success: function (response) {
+                $('#reportBody').html(response);
+            },
+            error: function () {
+                Swal.fire('Error', 'Failed to fetch data. Try again later.', 'error');
+            }
+        });
+    });
+});
+
+
+
 function downloadTableAsCSV() {
     let csv = [];
     const rows = document.querySelectorAll("table tr");
