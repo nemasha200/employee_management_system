@@ -45,7 +45,7 @@ if (!isset($_SESSION['admin_id'])) {
         }
 
         .sidebar a {
-            background-color: #17b3cf;
+            background-color: #1090a7;
             color: black;
             display: block;
             padding: 10px 20px;
