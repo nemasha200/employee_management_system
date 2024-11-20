@@ -319,6 +319,7 @@ include 'db_connect.php';
 
 
 <script>
+    //me function eken tama filter karanne data, ajax use karala
 $(document).ready(function () {
     $('#filterBtn').click(function () {
         const company = $('#company').val();
