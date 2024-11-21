@@ -1,346 +1,187 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
 session_start();
 
 if (!isset($_SESSION['admin_id'])) {
     header("Location: userlogin.php");
     exit();
-} else {
+}
+
+include 'db_connect.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
-include 'db_connect.php';
-?>
-
 <head>
-    <meta charset="UTF-12">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Reports Form</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
     <style>
         body {
             background-color: darkgrey;
             margin: 0;
-            display: flex;
             background-image: url("black.jpg");
-            overflow-x: hidden; 
         }
-        .form-container {
-    background-color: whitesmoke;
-    padding: 30px;
-    border-radius: 10px;
-    border-color: black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 1000px;
-    overflow-y: auto;
-    margin-left: 500px;
-    margin-top: 70px; /* Add margin-top to push it down */
-}
 
-            
-        
-        .form-container h1 {
+        .form-container {
+            background-color: whitesmoke;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 80px auto;
+            margin-left: 380px;
+        }
+
+        .form-container h2 {
             text-align: center;
-            margin-bottom: 20px;
         }
-        .form-container .btn {
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            border: none;
-            color: white;
-            background-color: green;
-        }
-        .btn-all {
-            background-color: #007bff;
-        }
-        .form-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .form-row input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        .table-container {
-            margin-top: 20px;
-            overflow-x: auto;
-        }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        table, th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
+
         th {
             background-color: #be9fce;
             color: white;
         }
-        .btn-print {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            color: white;
-            margin-top: 20px;
-        }
 
         .btn-all {
-    padding: 0.2em 0.5em;
-    width: auto; 
-    min-width: auto;
-    text-align: center;
-}
-
-.btn-all {
-            background-color: red;
+            background-color: #007bff;
+            color: white;
         }
-        .btn-get-report {
-            background-color: red;
+
+        .btn {
+            /* margin: 10px; */
+            padding: 8px;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            border-radius: 45px;
+            height: 50px; /* Adjust the height as needed */
+            margin: 10px 5px;
+            background-color: #bf2128;
         }
 
         .btn-success {
-    background-color: green;
-    
-    margin-top: 30px; /* Adjust this value to move the button further down */
-}
-.btn-success:hover{
-    background-color: red;
-}
-
-.table th {
-        background-color: #8fc2b8;
-        color: black;
-    }
-
-    .text-black {
-        color: black !important;
-    }
-
-    .dataTables_filter input {
-        background-color: white !important;
-    }
-    
-
-
-    .dataTables_filter label {
-            display: flex;
-            align-items: center;
-            color: black; 
-            font-weight: bold;
-            position: relative;
-        left: 40px;
+            margin-left: 100px;
+            margin: 10px;
         }
 
-        .dataTables_filter input {
-            background-color: #f0f0f0 !important; 
-            border: 1px solid #ccc !important; 
+        .btn-all {
+            margin-left: 700px;
+        }
+
+        sbutton {
+            border-radius: 45px;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            border: none;
             border-radius: 4px;
-            padding: 5px;
-            margin-left: 10px;
-        }
-
-        .dataTables_length label {
-            display: flex;
-            align-items: center;
-            color: white; 
-            font-weight: bold;
-            position: relative;
-        left: 200px;
-        }
-
-        .dataTables_length select {
-            background-color: #f0f0f0 !important; 
-            border: 1px solid #ccc !important; 
-            border-radius: 4px;
-            padding: 5px;
-            margin-left: 10px;
-        }
-              
-                .dataTables_wrapper .dataTables_filter {
-            float: right;
-            text-align: right;
-        }
-
-        .dataTables_wrapper .dataTables_length {
-            float: left;
-        }
-        .dataTables_paginate{
-            position: relative;
-            left: 50px;
-        }
-        .dataTables_info{
-            position: relative;
-            left: 20px;
+            background-color: #2c71f2;
             color: white;
-        }
-        .btn-primary{
-            background-color: blue;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        .btn-danger{
+        cbutton {
+            border-radius: 45px;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
             background-color: purple;
-        }
-        .dataTables_length label {
-            color: black;
-            left: 20px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
         }
 
     </style>
 </head>
+
 <body>
 
 <?php include 'submenubar.php'; ?> 
 <?php include 'logout.php'; ?> 
 
-
 <div class="form-container">
-    <h2><center><u>Clearance Reports </u></center></h2>
+    <h2>Employee Detail Reports</h2>
 
-    <!-- <button class="btn btn-all" onclick="window.location.href='emp.php'">All Deatils</button> -->
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="company">Company:</label>
+            <select class="form-control" id="company" name="company">
+                <option value="">Select an option</option>
+                <?php
+                $companies = mysqli_query($con, "SELECT * FROM sub_company");
+                while ($row = mysqli_fetch_array($companies)) {
+                    echo "<option value='{$row['com_number']}'>{$row['com_number']} - {$row['com_name']} - {$row['location']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="department">Department:</label>
+            <select class="form-control" id="department" name="department">
+                <option value="">Select an option</option>
+                <?php
+                $departments = mysqli_query($con, "SELECT * FROM sub_department");
+                while ($row = mysqli_fetch_array($departments)) {
+                    echo "<option value='{$row['dep_name']}'>{$row['dep_name']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="emp_type">Employee Type:</label>
+            <select class="form-control" id="emp_type" name="emp_type">
+                <option value="">Select an option</option>
+                <?php
+                $types = mysqli_query($con, "SELECT DISTINCT emp_type FROM employer");
+                while ($row = mysqli_fetch_array($types)) {
+                    echo "<option value='{$row['emp_type']}'>{$row['emp_type']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+
 
 
     <div class="form-row">
+        <button class="btn btn-primary" id="filterBtn">Generate Report</button>
+       
 
-    <!-- <div class="form-group col-md-5">
-<label for="dropdown">Company :<span style="color:red">*</span></label>
-<select class="form-control" id="dropdown" name="company">
-    <option value="" disabled selected>Select an option</option>
-    <?php 
-    $getEmp = mysqli_query($con,"SELECT * FROM  sub_company");
-    while ($resCom = mysqli_fetch_array($getEmp)) {
-        ?>
-
-    <option value="<?php echo $resCom['com_number'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
-
-        <?php
-    }
-?>
-        </select>
-</select>
-</div> -->
-
-    <!-- <div class="form-group col-md-3">
-        <label for="department">Department :<span style="color:red">*</span></label>
-        <select class="form-control" id="department" name="department">
-        <option value="" disabled selected>Select an option</option>
-
-
-        <?php 
-    $getEmp = mysqli_query($con,"SELECT * FROM  sub_department");
-    while ($resDep = mysqli_fetch_array($getEmp)) {
-        ?>
-    <option value="<?php echo $resDep['dep_name'] ?>"><?php echo $resDep['dep_name'] ?></option>
-
-        <?php
-    }
-?>
-        </select>
-
+        <button class="btn btn-success" onclick="downloadSelectedRows()">Download Excell sheet<img src="ex.png" alt="Logo" style="width: 25px; height: auto;"></button>
 
     </div>
-        -->
 
     
-    <!-- <div class="form-group col-md-3">
-<label for="dropdown">NIC Number :<span style="color:red">*</span></label>
-<select class="form-control" id="dropdown" name="company">
-    <option value="" disabled selected>Select an option</option>
-    <?php 
-    $getEmp = mysqli_query($con,"SELECT nic FROM  employer");
-    while ($resCom = mysqli_fetch_array($getEmp)) {
-        ?>
 
-    <option value="<?php echo $resCom['nic'] ?>"><?php echo $resCom['nic'] ?></option>
 
-        <?php
-    }
-?>
-        </select>
-</select>
-</div> -->
-
-<!-- <div class="form-group col-md-5">
-<label for="fullNameInitials">Full Name :</label>
-                <select class="form-control" class="form-control" id="fullNameInitials" name="nameinitial"> 
-               
-                    <option value="" disabled selected>Select an option</option>
-                    <?php 
-                    $getEmp = mysqli_query($con,"SELECT full_name FROM  employer WHERE isAct ='1'");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                    <option value="<?php echo $resCom['full_name'] ?>"><?php echo $resCom['full_name'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>   
-</div> -->
-
-</div>
-<button class="btn btn-success" onclick="downloadTableAsCSV()">Download Excell sheet <img src="xl.png" alt="Logo" class="logo"></button>
-
-  
-    <!-- <button class="btn btn-get-report" onclick="window.location.href='#'">Get Report</button> -->
-   
-  
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#tableID').DataTable({
-            searching: true,
-            paging: true
-        });
-    });
-</script>
-</head>
-
-<body>
-<!-- <?php include 'submenubar.php'; ?>
-<?php include 'logout.php'; ?> -->
-
-<div class="mainContainer">
-<div class="container">
+    <div class="table-responsive mt-4">
         <table id="tableID" class="table table-striped table-bordered">
+            
             <thead>
                 <tr>
+                    <th>Select</th>
+                    <th>Full Name</th>
                     <th>Company</th>
                     <th>Department</th>
                     <th>Employee Type</th>
                     <th>Employee Number</th>
                     <th>NIC</th>
                     <th>EPF</th>
-                    <th>Full Name</th>
                     <th>Initial Name</th>
                     <th>Sex</th>
                     <th>Marital Status</th>
@@ -366,94 +207,98 @@ include 'db_connect.php';
                     <th>Remark3</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
-                $getuser = mysqli_query($con, "SELECT empid, comp_num, department, emp_type, emp_num, nic, epf, full_name, initial_name, sex, marital_status, dob, permanat_address, current_address, qulifications, mobile, landnumber, office_number, doj, recruitment_type, designation, job_title, grade, last_promo, emp_status, vehicle_num, img, ot, remark1, remark2, remark3 
-                                               FROM employer
-                                               ORDER BY isAct DESC");
-      
-                if (!$getuser) {
-                    echo "Error executing query: " . mysqli_error($con);
-                } else {
-                    while ($res_user = mysqli_fetch_array($getuser)) {
-                        ?>
-                        <tr>
-                            <td><?php echo $res_user['comp_num']; ?></td>
-                            <td><?php echo $res_user['department']; ?></td>
-                            <td><?php echo $res_user['emp_type']; ?></td>
-                            <td><?php echo $res_user['emp_num']; ?></td>
-                            <td><?php echo $res_user['nic']; ?></td>
-                            <td><?php echo $res_user['epf']; ?></td>
-                            <td><?php echo $res_user['full_name']; ?></td>
-                            <td><?php echo $res_user['initial_name']; ?></td>
-                            <td><?php echo $res_user['sex']; ?></td>
-                            <td><?php echo $res_user['marital_status']; ?></td>
-                            <td><?php echo $res_user['dob']; ?></td>
-                            <td><?php echo $res_user['permanat_address']; ?></td>
-                            <td><?php echo $res_user['current_address']; ?></td>
-                            <td><?php echo $res_user['qulifications']; ?></td>
-                            <td><?php echo $res_user['mobile']; ?></td>
-                            <td><?php echo $res_user['landnumber']; ?></td>
-                            <td><?php echo $res_user['office_number']; ?></td>
-                            <td><?php echo $res_user['doj']; ?></td>
-                            <td><?php echo $res_user['recruitment_type']; ?></td>
-                            <td><?php echo $res_user['designation']; ?></td>
-                            <td><?php echo $res_user['job_title']; ?></td>
-                            <td><?php echo $res_user['grade']; ?></td>
-                            <td><?php echo $res_user['last_promo']; ?></td>
-                            <td><?php echo $res_user['emp_status']; ?></td>
-                            <td><?php echo $res_user['vehicle_num']; ?></td>
-                            <td><?php echo $res_user['img']; ?></td>
-                            <td><?php echo $res_user['ot']; ?></td>
-                            <td><?php echo $res_user['remark1']; ?></td>
-                            <td><?php echo $res_user['remark2']; ?></td>
-                            <td><?php echo $res_user['remark3']; ?></td>
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
-            </tbody>
+            <tbody id="reportBody"></tbody>
         </table>
-</div>
-</div>
-</body>
 
-</html>
-
-    <!-- <button class="btn-print" onclick="window.print()">Print</button> -->
+        <sbutton id="selectAll">Select All Rows</sbutton>
+        <cbutton id="clearAll">Clear All Rows</cbutton>
+    </div>
 </div>
-
 
 <script>
-function downloadTableAsCSV() {
-    let csv = [];
-    const rows = document.querySelectorAll("table tr");
+    $(document).ready(function () {
+        $('#tableID').DataTable();
 
-    for (let row of rows) {
-        let rowData = [];
-        for (let cell of row.querySelectorAll("th, td")) {
-            rowData.push(cell.innerText.replace(/,/g, "")); 
-        }
-        csv.push(rowData.join(","));
+        $('#filterBtn').click(function () {
+            const company = $('#company').val();
+            const department = $('#department').val();
+            const emp_type = $('#emp_type').val();
+
+            $.ajax({
+                url: 'fetch_filtered_data.php',
+                method: 'POST',
+                data: { company, department, emp_type },
+                success: function (data) {
+                    $('#reportBody').html(data);
+                },
+                error: function () {
+                    Swal.fire('Error', 'Failed to fetch data.', 'error');
+                }
+            });
+        });
+
+        // Select/Deselect all rows
+        $('#selectAll').on('click', function () {
+            $('#tableID tbody input[type="checkbox"]').prop('checked', true);
+        });
+
+        // Clear/Deselect all rows
+        $('#clearAll').on('click', function () {
+            $('#tableID tbody input[type="checkbox"]').prop('checked', false);
+        });
+
+        // Synchronize row checkboxes with "selectAll"
+        $('#tableID').on('change', 'tbody input[type="checkbox"]', function () {
+            const allChecked = $('#tableID tbody input[type="checkbox"]').length === $('#tableID tbody input[type="checkbox"]:checked').length;
+            $('#selectAll').prop('checked', allChecked);
+        });
+    });
+
+    function downloadTableAsCSV() {
+        let csv = [];
+        $('#tableID tr').each(function () {
+            let row = [];
+            $(this).find('th, td').each(function () {
+                row.push($(this).text().replace(/,/g, ''));
+            });
+            csv.push(row.join(','));
+        });
+
+        const csvBlob = new Blob([csv.join('\n')], { type: 'text/csv' });
+        const url = URL.createObjectURL(csvBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'employee_report.csv';
+        a.click();
     }
 
-    // Convert to CSV format
-    const csvString = csv.join("\n");
-    const blob = new Blob([csvString], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
+    function downloadSelectedRows() {
+        let csv = [];
+        csv.push(
+            Array.from($('#tableID thead th')).map((th) => $(th).text()).join(',')
+        );
 
-    // Create a download link and click it
-    const downloadLink = document.createElement("a");
-    downloadLink.href = url;
-    downloadLink.download = "employee_data.csv";
-    downloadLink.click();
-}
+        $('#tableID tbody tr').each(function () {
+            const row = $(this);
+            if (row.find('input[type="checkbox"]').is(':checked')) {
+                csv.push(
+                    Array.from(row.find('td')).map((td) => $(td).text().trim().replace(/,/g, '')).join(',')
+                );
+            }
+        });
+
+        if (csv.length > 1) {
+            const csvBlob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const url = URL.createObjectURL(csvBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'selected_employee_report.csv';
+            a.click();
+        } else {
+            Swal.fire('Info', 'No rows selected.', 'info');
+        }
+    }
 </script>
-
 
 </body>
 </html>
-<?php
-}
-?>
