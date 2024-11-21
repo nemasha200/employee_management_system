@@ -44,7 +44,7 @@ include 'db_connect.php';
         }
 
         table {
-            width: 100%;
+            width: 10%;
             border-collapse: collapse;
         }
 
@@ -109,8 +109,8 @@ include 'db_connect.php';
 
 <body>
 
-<?php include 'submenubar.php'; ?> 
-<?php include 'logout.php'; ?> 
+<!-- <?php include 'submenubar.php'; ?>  -->
+<?php include 'dashboard.php'; ?> 
 
 <div class="form-container">
     <h2>Employee Detail Reports</h2>
@@ -160,14 +160,8 @@ include 'db_connect.php';
 
     <div class="form-row">
         <button class="btn btn-primary" id="filterBtn">Generate Report</button>
-       
-
         <button class="btn btn-success" onclick="downloadSelectedRows()">Download Excell sheet<img src="ex.png" alt="Logo" style="width: 25px; height: auto;"></button>
-
     </div>
-
-    
-
 
     <div class="table-responsive mt-4">
         <table id="tableID" class="table table-striped table-bordered">
@@ -209,16 +203,18 @@ include 'db_connect.php';
             </thead>
             <tbody id="reportBody"></tbody>
         </table>
-
-        <sbutton id="selectAll">Select All Rows</sbutton>
-        <cbutton id="clearAll">Clear All Rows</cbutton>
     </div>
+
+    <sbutton id="selectAll">Select All Rows</sbutton>
+    <cbutton id="clearAll">Clear All Rows</cbutton>
 </div>
 
 <script>
     $(document).ready(function () {
-        $('#tableID').DataTable();
+        // Initialize DataTable
+        const dataTable = $('#tableID').DataTable();
 
+        // Generate report with filters
         $('#filterBtn').click(function () {
             const company = $('#company').val();
             const department = $('#department').val();
@@ -229,7 +225,8 @@ include 'db_connect.php';
                 method: 'POST',
                 data: { company, department, emp_type },
                 success: function (data) {
-                    $('#reportBody').html(data);
+                    dataTable.clear().draw();
+                    dataTable.rows.add($(data)).draw(); // Add new rows
                 },
                 error: function () {
                     Swal.fire('Error', 'Failed to fetch data.', 'error');
@@ -242,36 +239,18 @@ include 'db_connect.php';
             $('#tableID tbody input[type="checkbox"]').prop('checked', true);
         });
 
-        // Clear/Deselect all rows
         $('#clearAll').on('click', function () {
             $('#tableID tbody input[type="checkbox"]').prop('checked', false);
         });
 
-        // Synchronize row checkboxes with "selectAll"
+        // Synchronize row checkboxes with "Select All"
         $('#tableID').on('change', 'tbody input[type="checkbox"]', function () {
             const allChecked = $('#tableID tbody input[type="checkbox"]').length === $('#tableID tbody input[type="checkbox"]:checked').length;
             $('#selectAll').prop('checked', allChecked);
         });
     });
 
-    function downloadTableAsCSV() {
-        let csv = [];
-        $('#tableID tr').each(function () {
-            let row = [];
-            $(this).find('th, td').each(function () {
-                row.push($(this).text().replace(/,/g, ''));
-            });
-            csv.push(row.join(','));
-        });
-
-        const csvBlob = new Blob([csv.join('\n')], { type: 'text/csv' });
-        const url = URL.createObjectURL(csvBlob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'employee_report.csv';
-        a.click();
-    }
-
+    // Download selected rows as CSV
     function downloadSelectedRows() {
         let csv = [];
         csv.push(
@@ -299,6 +278,7 @@ include 'db_connect.php';
         }
     }
 </script>
+
 
 </body>
 </html>
