@@ -34,9 +34,10 @@ include 'db_connect.php';
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
+            max-width: 1800px;
             margin: 80px auto;
-            margin-left: 380px;
+            margin-left: 100px;
+            margin-right: 15px;
         }
 
         .form-container h2 {

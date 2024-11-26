@@ -16,15 +16,16 @@ include 'db_connect.php';
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: green;
-            color: Black;
+            background-color: orangered;
+            color: white;
             padding: 10px 10px;
             border-radius: 5px;
             text-decoration: none;
         }
 
         .logout-btn:hover {
-            background-color: red;
+            background-color: blue;
+            color: white;
         }
 
 

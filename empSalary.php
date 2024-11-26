@@ -93,6 +93,9 @@ if (!isset($_SESSION['admin_id'])) {
         #company{
             color:black;
         }
+        #department{
+            color:black;
+        }
 
         #epf{
             color: black;
@@ -141,8 +144,8 @@ if (!isset($_SESSION['admin_id'])) {
     </div>
 
     <div class="form-group col-md-3">
-        <label for="empNumber">Employee Number :</label>
-        <input type="text" class="form-control" id="emp" name="empnumber" readonly>
+        <label for="empNumber">Department :</label>
+        <input type="text" class="form-control" id="department" name="department" readonly>
                       
             
             </div>
@@ -522,7 +525,7 @@ if (!isset($_SESSION['admin_id'])) {
                             alert(response.error);
                         } else {
                             $('#company').val(response.comp_num);
-                            $('#emp').val(response.emp_num);
+                            $('#department').val(response.department);
                             $('#epf').val(response.epf);
                         }
                     },

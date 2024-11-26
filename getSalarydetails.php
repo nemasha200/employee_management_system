@@ -4,7 +4,7 @@ include './db_connect.php';
 if (isset($_POST['nameinitial'])) {
     $emp = $_POST['nameinitial'];
 
-    $query = "SELECT full_name, emp_num, comp_num, epf FROM employer WHERE full_name = '$emp'";
+    $query = "SELECT full_name, department, comp_num, epf FROM employer WHERE full_name = '$emp'";
     $result = mysqli_query($con, $query);
 
     if ($result) {

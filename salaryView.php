@@ -142,8 +142,8 @@ include 'db_connect.php';
     </div>
 
     <div class="form-group col-md-3">
-        <label for="empNumber">Employee Number :</label>
-        <input type="text" class="form-control" id="emp" name="empnumber" value="<?php echo $res_user['emp_num']; ?>" readonly>
+        <label for="empNumber">Department :</label>
+        <input type="text" class="form-control" id="department" name="department" value="<?php echo $res_user['department']; ?>" readonly>
                         
             
             </div>

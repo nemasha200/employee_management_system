@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_id'])) {
 include 'db_connect.php';
 
 $company = $_POST['company'];     
-$empnumber = $_POST['empnumber']; 
+$department = $_POST['department']; 
 $nameinitial = $_POST['nameinitial'];
 $epfnumber = $_POST['epfnumber']; 
 $basic = $_POST['basic'];
@@ -39,8 +39,8 @@ $account = $_POST['account'];
 $bank = $_POST['bank'];
 $branch = $_POST['branch'];                                             
 
-$query = "INSERT INTO `salary`(`company_num`, `emp_num`, `name`, `epf`, `basic`, `bra`, `fa_travelling_amount`, `fa_budget_amount`, `fa_retravel_amount`, `fa_vehicle_amount`, `fa_fual_amount`, `fa_logging_amount`, `fa_attendance_amount`, `fa_travel_exp_amount`, `fa_pettah_amount`, `fa_bakery_amount`, `fa_ insentive_amount`, `fd_welfare_amount`, `fd_medical_amount`, `fd_other1`, `fd_other2`, `fd_other3`, `payemnt`, `account_num`, `bank_name`, `branch_name`)
-          VALUES ('$company', '$empnumber', '$nameinitial', '$epfnumber', '$basic', '$bra', '$amount1', '$amount2', '$amount3', '$amount4', '$amount5', '$amount6', '$amount7', '$amount8', '$amount9', '$amount10', '$amount11', '$amount12', '$amount13', '$amount14', '$amount15', '$amount16', '$payment', '$account', '$bank', '$branch')";
+$query = "INSERT INTO `salary`(`company_num`, `department`, `name`, `epf`, `basic`, `bra`, `fa_travelling_amount`, `fa_budget_amount`, `fa_retravel_amount`, `fa_vehicle_amount`, `fa_fual_amount`, `fa_logging_amount`, `fa_attendance_amount`, `fa_travel_exp_amount`, `fa_pettah_amount`, `fa_bakery_amount`, `fa_ insentive_amount`, `fd_welfare_amount`, `fd_medical_amount`, `fd_other1`, `fd_other2`, `fd_other3`, `payemnt`, `account_num`, `bank_name`, `branch_name`)
+          VALUES ('$company', '$department', '$nameinitial', '$epfnumber', '$basic', '$bra', '$amount1', '$amount2', '$amount3', '$amount4', '$amount5', '$amount6', '$amount7', '$amount8', '$amount9', '$amount10', '$amount11', '$amount12', '$amount13', '$amount14', '$amount15', '$amount16', '$payment', '$account', '$bank', '$branch')";
 
 if (mysqli_query($con, $query)) {
     header("Location: empSalary.php");

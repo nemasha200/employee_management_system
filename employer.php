@@ -283,13 +283,13 @@ include 'db_connect.php';
 </div>
 
 <div class="form-group col-md-4">
-<label for="phoneNumber1">Landphone Number :</label>
+<label for="phoneNumber1">Landphone Number :<span style="color:red">*</span></label>
 <input type="text" class="form-control" id="phoneNumber1" name="landnumber" placeholder="Enter landphone number">
 </div>
 
 <div class="form-group col-md-4">
-<label for="phoneNumber1">Office Number :</label>
-<input type="text" class="form-control" id="phoneNumber1" name="officenumber" placeholder="Enter Office number">
+<label for="phoneNumber1">Office Number :<span style="color:red">*</span></label>
+<input type="text" class="form-control" id="phoneNumber2" name="officenumber" placeholder="Enter Office number">
 </div>
 
 </div>
@@ -525,9 +525,9 @@ include 'db_connect.php';
 
 
 
-<div class="text">
+<!-- <div class="text">
         <span> Copyright © 2024 Designed by <a href="#"> RAIGAM IT Department </a> All rights reserved.</span>
-    </div>
+    </div> -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -548,6 +548,10 @@ include 'db_connect.php';
         var address1 = document.getElementById('address1').value.trim();
         var address2 = document.getElementById('address2').value.trim();
         var phoneNumber = document.getElementById('phoneNumber').value.trim();
+        var phoneNumber1 = document.getElementById('phoneNumber1').value.trim();
+
+        var phoneNumber2 = document.getElementById('phoneNumber2').value.trim();
+
         var doj = document.getElementById('doj').value.trim();
         var department = document.getElementById('department').value.trim();
         var designation = document.getElementById('designation').value.trim();
@@ -673,6 +677,56 @@ include 'db_connect.php';
             });
             return false;   
         }
+
+        if (!phoneNumber || (phoneNumber.length !== 10)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Phone Number must be exactly 10 numbers long.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+         }
+
+         if (!phoneNumber1) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Land Number',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+         if (!phoneNumber1 || (phoneNumber1.length !== 10)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Land Number must be exactly 10 numbers long.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+         }
+
+         if (!phoneNumber2) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a  Office Number',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+        }
+
+         if (!phoneNumber2 || (phoneNumber2.length !== 10)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Office Number must be exactly 10 numbers long.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;   
+         }
 
         if (!doj) {
             Swal.fire({

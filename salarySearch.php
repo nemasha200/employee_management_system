@@ -166,7 +166,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <tr>
                      <th>Company</th>
                   
-                    <th>Emp number</th>
+                    <th>Department</th>
                     <th>EPF number</th>
 
                     <th>name</th>
@@ -183,14 +183,14 @@ if (!isset($_SESSION['admin_id'])) {
 
                 // Modify the query based on the search term
                 if (!empty($searchTerm)) { 
-                    $getuser = mysqli_query($con, "SELECT id, emp_num, company_num, epf , name   FROM  salary
-                                                   WHERE emp_num LIKE '%$searchTerm%' 
+                    $getuser = mysqli_query($con, "SELECT id, department, company_num, epf , name   FROM  salary
+                                                   WHERE department LIKE '%$searchTerm%' 
                                                    OR company_num LIKE '%$searchTerm%' 
                                                    OR name LIKE '%$searchTerm%' 
                                                    OR epf LIKE '%$searchTerm%'");
                                                    
                 } else {
-                    $getuser = mysqli_query($con, "SELECT id, company_num, emp_num, epf,name FROM  salary");
+                    $getuser = mysqli_query($con, "SELECT id, company_num, department, epf,name FROM  salary");
                 }
 
                 while ($res_user = mysqli_fetch_array($getuser)) {
@@ -198,7 +198,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <tr>
                         <td><?php echo $res_user['company_num']; ?></td>
 
-                        <td><?php echo $res_user['emp_num']; ?></td>
+                        <td><?php echo $res_user['department']; ?></td>
 
 
                         <td><?php echo $res_user['epf']; ?></td>

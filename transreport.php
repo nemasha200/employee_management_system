@@ -34,9 +34,10 @@ include 'db_connect.php';
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
+            max-width: 1800px;
             margin: 80px auto;
-            margin-left: 380px;
+            margin-left: 100px;
+            margin-right: 15px;
         }
 
         .form-container h2 {
@@ -44,7 +45,7 @@ include 'db_connect.php';
         }
 
         table {
-            width: 100%;
+            width: 10%;
             border-collapse: collapse;
         }
 
@@ -109,11 +110,11 @@ include 'db_connect.php';
 
 <body>
 
-<?php include 'submenubar.php'; ?> 
-<?php include 'logout.php'; ?> 
+<!-- <?php include 'submenubar.php'; ?>  -->
+<?php include 'dashboard.php'; ?> 
 
 <div class="form-container">
-    <h2>Employee Detail Reports</h2>
+    <h2>Transfer Reports</h2>
 
     <div class="form-row">
         <div class="form-group col-md-4">
@@ -143,93 +144,80 @@ include 'db_connect.php';
         </div>
 
         <div class="form-group col-md-4">
-            <label for="emp_type">Employee Type:</label>
-            <select class="form-control" id="emp_type" name="emp_type">
+            <label for="employment">Employment:</label>
+            <select class="form-control" id="employment" name="employment">
                 <option value="">Select an option</option>
                 <?php
-                $types = mysqli_query($con, "SELECT DISTINCT emp_type FROM employer");
+                $types = mysqli_query($con, "SELECT DISTINCT employment  FROM transfers");
                 while ($row = mysqli_fetch_array($types)) {
-                    echo "<option value='{$row['emp_type']}'>{$row['emp_type']}</option>";
+                    echo "<option value='{$row['employment']}'>{$row['employment']}</option>";
                 }
                 ?>
             </select>
         </div>
     </div>
+    
 
 
 
     <div class="form-row">
         <button class="btn btn-primary" id="filterBtn">Generate Report</button>
-       
-
         <button class="btn btn-success" onclick="downloadSelectedRows()">Download Excell sheet<img src="ex.png" alt="Logo" style="width: 25px; height: auto;"></button>
-
     </div>
-
-    
-
+    <hr>
 
     <div class="table-responsive mt-4">
         <table id="tableID" class="table table-striped table-bordered">
             
             <thead>
                 <tr>
+
                     <th>Select</th>
                     <th>Full Name</th>
-                    <th>Company</th>
-                    <th>Department</th>
-                    <th>Employee Type</th>
+
                     <th>Employee Number</th>
-                    <th>NIC</th>
-                    <th>EPF</th>
-                    <th>Initial Name</th>
-                    <th>Sex</th>
-                    <th>Marital Status</th>
-                    <th>Date Of Birth</th>
-                    <th>Permanent Address</th>
-                    <th>Current Address</th>
-                    <th>Qualifications</th>
-                    <th>Mobile Number</th>
-                    <th>Land Number</th>
-                    <th>Office Number</th>
-                    <th>Date Of Join</th>
-                    <th>Recruitment Type</th>
-                    <th>Designation</th>
-                    <th>Job Title</th>
-                    <th>Grade</th>
-                    <th>Last Promotion Date</th>
-                    <th>Employee Status</th>
-                    <th>Vehicle Number</th>
-                    <th>Image</th>
-                    <th>OT</th>
-                    <th>Remark1</th>
-                    <th>Remark2</th>
-                    <th>Remark3</th>
+                    <th>Employment</th>
+                    <th>Existing Company</th>
+                    <th>Existing Department</th>
+                    <th>Existing Designation</th>
+                    <th>Transfer Company</th>
+
+
+                    <th>Transfer Department</th>
+                    <th>Transfer Designation</th>
+                    <th>Effective Date</th>
+                    <th>Requested Date</th>
+                    <th>Approved Date</th>
+                    <th>Remark</th>
+                  
                 </tr>
             </thead>
             <tbody id="reportBody"></tbody>
         </table>
-
-        <sbutton id="selectAll">Select All Rows</sbutton>
-        <cbutton id="clearAll">Clear All Rows</cbutton>
     </div>
+
+    <sbutton id="selectAll">Select All Rows</sbutton>
+    <cbutton id="clearAll">Clear All Rows</cbutton>
 </div>
 
 <script>
     $(document).ready(function () {
-        $('#tableID').DataTable();
+        // Initialize DataTable
+        const dataTable = $('#tableID').DataTable();
 
+        // Generate report with filters
         $('#filterBtn').click(function () {
             const company = $('#company').val();
             const department = $('#department').val();
-            const emp_type = $('#emp_type').val();
+            const employment = $('#employment').val();
 
             $.ajax({
-                url: 'fetch_filtered_data.php',
+                url: 'fetch_filtered_trans.php',
                 method: 'POST',
-                data: { company, department, emp_type },
+                data: { company, department, employment},
                 success: function (data) {
-                    $('#reportBody').html(data);
+                    dataTable.clear().draw();
+                    dataTable.rows.add($(data)).draw(); // Add new rows
                 },
                 error: function () {
                     Swal.fire('Error', 'Failed to fetch data.', 'error');
@@ -242,36 +230,18 @@ include 'db_connect.php';
             $('#tableID tbody input[type="checkbox"]').prop('checked', true);
         });
 
-        // Clear/Deselect all rows
         $('#clearAll').on('click', function () {
             $('#tableID tbody input[type="checkbox"]').prop('checked', false);
         });
 
-        // Synchronize row checkboxes with "selectAll"
+        // Synchronize row checkboxes with "Select All"
         $('#tableID').on('change', 'tbody input[type="checkbox"]', function () {
             const allChecked = $('#tableID tbody input[type="checkbox"]').length === $('#tableID tbody input[type="checkbox"]:checked').length;
             $('#selectAll').prop('checked', allChecked);
         });
     });
 
-    function downloadTableAsCSV() {
-        let csv = [];
-        $('#tableID tr').each(function () {
-            let row = [];
-            $(this).find('th, td').each(function () {
-                row.push($(this).text().replace(/,/g, ''));
-            });
-            csv.push(row.join(','));
-        });
-
-        const csvBlob = new Blob([csv.join('\n')], { type: 'text/csv' });
-        const url = URL.createObjectURL(csvBlob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'employee_report.csv';
-        a.click();
-    }
-
+    // Download selected rows as CSV
     function downloadSelectedRows() {
         let csv = [];
         csv.push(
@@ -292,13 +262,14 @@ include 'db_connect.php';
             const url = URL.createObjectURL(csvBlob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'selected_employee_report.csv';
+            a.download = 'selected_transfers_report.csv';
             a.click();
         } else {
             Swal.fire('Info', 'No rows selected.', 'info');
         }
     }
 </script>
+
 
 </body>
 </html>
