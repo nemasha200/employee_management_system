@@ -150,7 +150,7 @@ include 'db_connect.php';
     while ($resCom = mysqli_fetch_array($getEmp)) {
         ?>
         <!-- want to go company code only for employer table -->
-    <option value="<?php echo $resCom['com_number'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
+    <option value="<?php echo $resCom['com_number']."/".$resCom['com_name'] ?>"><?php echo $resCom['com_number']."/".$resCom['com_name']."/".$resCom['location'] ?></option>
 
         <?php
     }
@@ -613,6 +613,17 @@ include 'db_connect.php';
             });
             return false;   
         }
+        // Assuming `fullNameInitials` is the name input value
+if (!fullNameInitials || !/^[A-Z](\.[A-Z])*\.? [a-zA-Z\s]+$/.test(fullNameInitials)) {
+    Swal.fire({
+        title: 'Validation Error!',
+        text: 'Please enter a valid Name with Initials (e.g., "A.B. Smith").',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+    return false;
+}
+
         
 
         if (!nicNumber) {
@@ -688,16 +699,7 @@ include 'db_connect.php';
             return false;   
          }
 
-         if (!phoneNumber1) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Please select a  Land Number',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;   
-        }
-
+       
          if (!phoneNumber1 || (phoneNumber1.length !== 10)) {
             Swal.fire({
                 title: 'Validation Error!',
@@ -708,16 +710,7 @@ include 'db_connect.php';
             return false;   
          }
 
-         if (!phoneNumber2) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Please select a  Office Number',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;   
-        }
-
+        
          if (!phoneNumber2 || (phoneNumber2.length !== 10)) {
             Swal.fire({
                 title: 'Validation Error!',

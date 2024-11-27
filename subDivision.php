@@ -177,8 +177,8 @@ if (!isset($_SESSION['admin_id'])) {
         
 
         <div class="form-group col-md-12">
-        <label for="departmentName">Job Title</label>
-        <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Enter job Title ">
+        <label for="departmentName">Job Grade</label>
+        <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Enter job Grade ">
 
         </div>
 
@@ -195,8 +195,51 @@ if (!isset($_SESSION['admin_id'])) {
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default submission
+
+        // Get form field values
+        var divisionNumber = document.getElementById('divisionNumber').value.trim();
+        var jobname = document.getElementById('jobname').value.trim();
+
+        // Validation checks
+        if (!divisionNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Reference Number is required.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        if (!jobname) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Job Grade is required.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Successful validation
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); // Submit the form after confirmation
+            }
+        });
+    });
+</script>
+
 
 
 

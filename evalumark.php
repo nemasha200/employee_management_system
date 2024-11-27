@@ -114,7 +114,7 @@ include 'db_connect.php';
 <?php include 'dashboard.php'; ?> 
 
 <div class="form-container">
-    <h2>Clearance Reports</h2>
+    <h2>Evaluation Marks Reports</h2>
 
     <div class="form-row">
        

@@ -215,6 +215,14 @@ include 'db_connect.php';
 
                     <div class="form-row">
 
+                         
+                <div class="form-group col-md-6">
+                            <label for="mark">Evaluation Mark :</label>
+                            <input type="text" class="form-control" id="mark" name="mark" placeholder="Enter Evaluation Mark">
+                </div>
+   
+
+
                     <div class="form-group col-md-6">
                             <label for="company">Evaluation Grading :</label>
                             <select class="form-control" id="grade" name="grade">
@@ -234,13 +242,7 @@ include 'db_connect.php';
                         </div>
 
 
-                   
-                <div class="form-group col-md-6">
-                            <label for="mark">Evaluation Mark :</label>
-                            <input type="text" class="form-control" id="mark" name="mark" placeholder="Enter Evaluation Mark">
-                </div>
-   
-
+              
 
                        
 

@@ -21,10 +21,19 @@ if(isset($_GET['user_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
+<?php 
+ 
+include 'db_connect.php';
+
+?>
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promotion/Demotion Registration Form</title>
+    <title>Promotion Registration Form</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -91,17 +100,16 @@ if(isset($_GET['user_id'])) {
         }
 
         .form-container {
-            margin-left: 250px; 
-        padding: 50px;
-        background-color: lightblue;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: calc(100% - 250px); 
-        max-width: 800px;
-        margin: auto;
-        margin-left: 600px;
-           
-           
+            margin-left: 250px; /* Adjusted for sidebar width */
+            padding: 30px;
+            background-color: lightblue;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 250px); /* Adjust width for sidebar */
+            max-width: 800px;
+            margin: auto;
+            margin: auto;
+            margin-left: 570px;
         }
 
         .form-control {
@@ -133,30 +141,33 @@ if(isset($_GET['user_id'])) {
             margin-top: 20px;
         }
 
-        /* Highlight the selected value with a yellow background */
-        #selectedValue {
-            background-color: yellow;
+        .highlight-green {
+            background-color: darkcyan;
+            color: white;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
         }
+
         
-       
-       
     </style>
 </head>
+
 <body>
 <?php include 'submenubar.php';?>
 
-    <div class="container form-container">
-        <h2 class="text-center">Transfer details</h2>
+<?php include 'logout.php';?> 
+
+                                                                   
+    
+        <div class="container form-container">
 
 
+            
+            <h2 class="text-center">Transfers View</h2>
 
-       
-<form>
 
-<div class="form-row">
+            <div class="form-row">
 
 
 <div class="form-group col-md-12">
@@ -263,9 +274,22 @@ if(isset($_GET['user_id'])) {
         <label for="remark">Remark :</label>
         <input type="text" class="form-control" id="remark" name="remark" value="<?php echo $res_user['remark']; ?>" readonly>
     </div>
-</body>
-       
+
+        </form>
+
     
+    
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  
+
+</body>
+
 </html>
 <?php
 }

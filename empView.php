@@ -130,7 +130,7 @@ if(isset($_GET['user_id'])) {
                     
                
                 <div class="form-group">
-                <label for="company">Company code</label>
+                <label for="company">Company</label>
                 <!-- Display company name inside an h4 with green highlight -->
                 <h4 class="highlight-green" id="company" readonly><?php echo $res_user['comp_num']; ?></h4>    
                 </div>
@@ -201,12 +201,12 @@ if(isset($_GET['user_id'])) {
                         </div>
                         
                         <div class="form-group col-md-4">
-                            <label for="nicNumber">NIC Number<span style="color:red">*</span></label>
+                            <label for="nicNumber">NIC Number</label>
                             <input type="text" class="form-control" id="nicNumber" name="nic" value="<?php echo $res_user['nic']; ?>" readonly>
                         </div>
                      
                         <div class="form-group col-md-4">
-                            <label for="nicNumber">Driving License Number<span style="color:red">*</span></label>
+                            <label for="nicNumber">Driving License Number</label>
                             <input type="text" class="form-control" id="nicNumber" name="drive" value="<?php echo $res_user['drive_lic_num']; ?>" readonly>
                         </div>
                         
@@ -276,7 +276,7 @@ if(isset($_GET['user_id'])) {
 
 
             <div class="form-group col-md-4">
-                            <label for="department">Department<span style="color:red">*</span></label>
+                            <label for="department">Department</label>
                             <input type="text" class="form-control" id="department" name="department" value="<?php echo $res_user['department']; ?>" readonly>
 
                            
@@ -289,7 +289,7 @@ if(isset($_GET['user_id'])) {
                     <div class="form-row">
                         
                         <div class="form-group col-md-4">
-                            <label for="designation">Designation<span style="color:red">*</span></label>
+                            <label for="designation">Designation</label>
                             <input type="text" class="form-control" id="designation" name="designation" value="<?php echo $res_user['designation']; ?>" readonly>
 
                            
@@ -297,7 +297,7 @@ if(isset($_GET['user_id'])) {
 
 
                         <div class="form-group col-md-4">
-                            <label for="company">Grade<span style="color:red">*</span></label>
+                            <label for="company">Grade</label>
                             <input type="text" class="form-control" id="grade" name="grade" value="<?php echo $res_user['grade']; ?>" readonly>
 
                         </div>
@@ -307,7 +307,7 @@ if(isset($_GET['user_id'])) {
                     
                    
                         <div class="form-group col-md-4">
-                            <label for="jobCategory">Job Title<span style="color:red">*</span></label>
+                            <label for="jobCategory">Job Title</label>
                             <input type="text" class="form-control" id="" name="" value="<?php echo $res_user['job_title']; ?>" readonly>
 
                         </div> 

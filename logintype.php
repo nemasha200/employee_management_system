@@ -16,7 +16,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: url('book.jpg') no-repeat center center fixed;
+            background: url('blue.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -30,6 +30,7 @@
             font-size: 2em;
             margin-bottom: 20px;
             text-align: center;
+            color: black;
         }
         .login-container {
             display: flex;

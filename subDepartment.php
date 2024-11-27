@@ -19,7 +19,7 @@ if (!isset($_SESSION['admin_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Division Registration Form</title>
+    <title>Dep Registration Form</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> 
 
 <style>
@@ -202,77 +202,47 @@ if (!isset($_SESSION['admin_id'])) {
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
 <script>
-    document.getElementById('promoForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default submission
+        
+        var DepartmentNumber = document.getElementById('DepartmentNumber').value.trim();
+        var DepartmentName = document.getElementById('DepartmentName').value.trim();
 
-        var promotedGrade = document.getElementById('grade1').value.trim();
-        var promotedDesignation = document.getElementById('designation1').value.trim();
-        var action = document.getElementById('action').value.trim();
-        var dob1 = document.getElementById('dob1').value.trim();
-        var dob2 = document.getElementById('dob2').value.trim();
-        var remark = document.getElementById('remark').value.trim();
-
-        if (!promotedGrade) {
+        // Validation checks
+        if (!DepartmentNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a promoted grade.',
+                text: 'Department Number  is required.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;
+            return;
         }
 
-        if (!promotedDesignation) {
+        if (!DepartmentName) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a promoted designation.',
+                text: 'Department Name is required.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;
+            return;
         }
 
-        if (!action) {
+        if (!location) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select the action (Promotion or Demotion).',
+                text: 'Location is required.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;
+            return;
         }
 
-        if (!dob1) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Please select the With Effect Date.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;
-        }
-
-        if (!dob2) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Please select the Promoted Date.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;
-        }
-
-        if (!remark) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Please enter a remark.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;
-        }
-
+        // Successful validation
         Swal.fire({
             title: 'Success!',
             text: 'Form submitted successfully.',
@@ -280,12 +250,11 @@ if (!isset($_SESSION['admin_id'])) {
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.submit(); 
+                this.submit(); // Submit the form after confirmation
             }
         });
     });
 </script>
-
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

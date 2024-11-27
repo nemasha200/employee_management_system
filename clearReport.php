@@ -126,7 +126,7 @@ include 'db_connect.php';
                 <?php
                 $company = mysqli_query($con, "SELECT * FROM sub_company");
                 while ($row = mysqli_fetch_array($company)) {
-                    echo "<option value='{$row['com_number']}'>{$row['com_number']} - {$row['com_name']} - {$row['location']}</option>";
+                    echo "<option value='{$row['com_number']}/{$row['com_name']}'>{$row['com_number']}/{$row['com_name']}</option>";
                 }
                 ?>
             </select>

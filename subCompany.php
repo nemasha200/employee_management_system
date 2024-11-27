@@ -208,7 +208,60 @@ if (!isset($_SESSION['admin_id'])) {
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default submission
+        
+        var companyNumber = document.getElementById('companyNumber').value.trim();
+        var companyName = document.getElementById('companyName').value.trim();
+        var location = document.getElementById('Location').value.trim(); // Ensure ID matches case sensitivity
 
+        // Validation checks
+        if (!companyNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Company Number is required.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        if (!companyName) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Company Name is required.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        if (!location) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Location is required.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Successful validation
+        Swal.fire({
+            title: 'Success!',
+            text: 'Form submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit(); // Submit the form after confirmation
+            }
+        });
+    });
+</script>
+
+    
 
 
 </body>
