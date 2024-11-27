@@ -122,8 +122,8 @@ include 'db_connect.php';
        
 
         <div class="form-group col-md-4">
-            <label for="section">Section:</label>
-            <select class="form-control" id="section" name="section">
+            <label for="section">Department:</label>
+            <select class="form-control" id="department" name="department">
                 <option value="">Select an option</option>
                 <?php
                 $section = mysqli_query($con, "SELECT * FROM sub_department");

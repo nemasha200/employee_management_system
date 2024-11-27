@@ -16,7 +16,6 @@ include 'db_connect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Reports Form</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -118,7 +117,6 @@ include 'db_connect.php';
 
     <div class="form-row">
        
-
     <div class="form-group col-md-4">
             <label for="company">Company:</label>
             <select class="form-control" id="company_num" name="company_num">
@@ -144,9 +142,6 @@ include 'db_connect.php';
                 ?>
             </select>
         </div>
-
-      
-
     </div>
 
 
@@ -161,7 +156,6 @@ include 'db_connect.php';
             
             <thead>
                 <tr>
-
                    <th>Select</th>
                     <th>Full Name</th>
                     <th>Company</th>
@@ -179,7 +173,7 @@ include 'db_connect.php';
                     <th>fa_travel_exp_amount</th>
                     <th>fa_pettah_amount</th>
                     <th>fa_bakery_amount</th>
-                    <th>fa_ insentive_amount</th>
+                    <th>fa_insentive_amount</th>
                     <th>fd_welfare_amount</th>
                     <th>fd_medical_amount</th>
                     <th>fd_other1</th>
@@ -189,8 +183,6 @@ include 'db_connect.php';
                     <th>Account Number</th>
                     <th>Bank Name</th> 
                     <th>Branch Name</th>
-
-                   
                 </tr>
             </thead>
             <tbody id="reportBody"></tbody>

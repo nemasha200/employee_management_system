@@ -33,10 +33,7 @@ if (!$result) {
                     <td>{$row['emp_num']}</td>
                     <td>{$row['evalu_mark']}</td>
                     <td>{$row['evalu_grade']}</td>
-                    <td>{$row['remark']}</td>
-                   
-                  
-                   
+                    <td>{$row['remark']}</td> 
                   </tr>";
         }
     } else {
