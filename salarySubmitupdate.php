@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             `fa_travel_exp_amount` = '$amount8',
             `fa_pettah_amount` = '$amount9',
             `fa_bakery_amount` = '$amount10',
-            `fa_ insentive_amount` = '$amount11',
+            `fa_insentive_amount` = '$amount11',
             `fd_welfare_amount` = '$amount12',
             `fd_medical_amount` = '$amount13',
             `fd_other1` = '$amount14',
@@ -61,6 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: salarySearch.php");
     exit();
     ?>
-    <?php
+<?php
 }
-    ?>
+?>

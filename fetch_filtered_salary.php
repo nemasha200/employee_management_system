@@ -3,16 +3,25 @@ include 'db_connect.php';
 
 $company_num = $_POST['company_num'] ?? '';
 $department = $_POST['department'] ?? '';
+$payemnt = $_POST['payemnt'] ?? '';
 
-$query = "SELECT name, company_num, department, epf, basic, bra, fa_travelling_amount, fa_budget_amount, fa_retravel_amount, fa_vehicle_amount, fa_fual_amount, fa_logging_amount, fa_attendance_amount,
-fa_travel_exp_amount, fa_pettah_amount, fa_bakery_amount, fa_insentive_amount, fd_welfare_amount, fd_medical_amount, fd_other1, fd_other2, fd_other3, payemnt, account_num, bank_name, branch_name FROM salary";
- 
+
+
+
+$query = "SELECT name, company_num, department, epf, basic, bra, fa_travelling_amount, fa_budget_amount, fa_retravel_amount,
+ fa_vehicle_amount, fa_fual_amount, fa_logging_amount, fa_attendance_amount, fa_travel_exp_amount, 
+ fa_pettah_amount, fa_bakery_amount, fa_insentive_amount, fd_welfare_amount, 
+fd_medical_amount, fd_other1, fd_other2, fd_other3, payemnt, account_num, bank_name, branch_name FROM salary";
+
 $conditions = [];
 if (!empty($company_num)) {
     $conditions[] = "company_num = '" . mysqli_real_escape_string($con, $company_num) . "'";
 }
 if (!empty($department)) {
     $conditions[] = "department = '" . mysqli_real_escape_string($con, $department) . "'";
+}
+if (!empty($payemnt)) {
+    $conditions[] = "payemnt = '" . mysqli_real_escape_string($con, $payemnt) . "'";
 }
 
 

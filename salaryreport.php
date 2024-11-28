@@ -142,6 +142,22 @@ include 'db_connect.php';
                 ?>
             </select>
         </div>
+
+        <div class="form-group col-md-4">
+            <label for="payemnt">Payment method:</label>
+            <select class="form-control" id="payemnt" name="payemnt">
+                <option value="">Select an option</option>
+                <?php
+                $types = mysqli_query($con, "SELECT DISTINCT payemnt  FROM salary");
+                while ($row = mysqli_fetch_array($types)) {
+                    echo "<option value='{$row['payemnt']}'>{$row['payemnt']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+      
+
     </div>
 
 
@@ -164,7 +180,7 @@ include 'db_connect.php';
                     <th>Basic</th>
                     <th>Budgetory Relief Allowance</th>
                     <th>fa_travelling_amount</th>
-                    <th> Other amount</th>
+                    <th>Other amount</th>
                     <th>fa_retravel_amount</th>
                     <th>fa_vehicle_amount</th>
                     <th>fa_fual_amount</th>
@@ -202,11 +218,13 @@ include 'db_connect.php';
         $('#filterBtn').click(function () {
             const company_num = $('#company_num').val();
             const department = $('#department').val();
+            const payemnt = $('#payemnt').val();
+
 
             $.ajax({
                 url: 'fetch_filtered_salary.php',
                 method: 'POST',
-                data: { company_num, department},
+                data: { company_num, department, payemnt},
                 success: function (data) {
                     dataTable.clear().draw();
                     dataTable.rows.add($(data)).draw(); // Add new rows

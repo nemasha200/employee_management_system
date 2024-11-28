@@ -13,7 +13,8 @@ if (!isset($_SESSION['admin_id'])) {
 include 'db_connect.php';
 $user_id = $_GET['user_id'];
 
-$getuser = mysqli_query($con, "SELECT `id`, `company_num`, `department`, `name`, `epf`, `basic`, `bra`, `fa_travelling_amount`, `fa_budget_amount`, `fa_retravel_amount`, `fa_vehicle_amount`, `fa_fual_amount`, `fa_logging_amount`, `fa_attendance_amount`, `fa_travel_exp_amount`, `fa_pettah_amount`, `fa_bakery_amount`, `fa_ insentive_amount`, `fd_welfare_amount`, `fd_medical_amount`, `fd_other1`, `fd_other2`, `fd_other3`, `payemnt`, `account_num`, `bank_name`, `branch_name`  FROM `salary` WHERE `id`='$user_id'");
+$getuser = mysqli_query($con, "SELECT `id`, `company_num`, `department`, `name`, `epf`, `basic`, `bra`, `fa_travelling_amount`, `fa_budget_amount`, `fa_retravel_amount`, `fa_vehicle_amount`, `fa_fual_amount`, 
+`fa_logging_amount`, `fa_attendance_amount`, `fa_travel_exp_amount`, `fa_pettah_amount`, `fa_bakery_amount`, `fa_insentive_amount`, `fd_welfare_amount`, `fd_medical_amount`, `fd_other1`, `fd_other2`, `fd_other3`, `payemnt`, `account_num`, `bank_name`, `branch_name`  FROM `salary` WHERE `id`='$user_id'");
 $res_user = mysqli_fetch_array($getuser);
 ?>
 
@@ -306,7 +307,7 @@ $res_user = mysqli_fetch_array($getuser);
                     <label class="form-check-label" for="allowance5">Performance Incentive</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Amount" name="amount11" value="<?php echo $res_user['fa_ insentive_amount']; ?>" >
+                    <input type="text" class="form-control" placeholder="Amount" name="amount11" value="<?php echo $res_user['fa_insentive_amount']; ?>" >
 
                 </div>
             </div>

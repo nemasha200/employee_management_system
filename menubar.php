@@ -170,6 +170,7 @@ if (!isset($_SESSION['admin_id'])) {
             border-radius: 15px;
             margin-bottom: 15px;
             position: relative;
+            border-radius: 0px;
         }
 
         .employee-system-section h5 {

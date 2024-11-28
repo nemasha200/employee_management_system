@@ -297,7 +297,7 @@ include 'db_connect.php';
                     <label class="form-check-label" for="allowance5">Performance Incentive</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Amount" name="amount11" value="<?php echo $res_user['fa_ insentive_amount']; ?>" readonly>
+                    <input type="text" class="form-control" placeholder="Amount" name="amount11" value="<?php echo $res_user['fa_insentive_amount']; ?>" readonly>
 
                 </div>
             </div>
