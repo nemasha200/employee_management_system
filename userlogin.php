@@ -121,7 +121,6 @@ session_start();
         </select>
       </div>
       <input type="submit" value="Login to System" class="btn btn-primary btn-block">
-      <a href="user.php" class="login-link">Don't have an account? Register here</a>
     </form>
   </div>
   <div class="text">
@@ -135,30 +134,45 @@ session_start();
 
   <script>
     $(document).ready(function() {
-      <?php
-      if (isset($_GET['status'])) {
-        if ($_GET['status'] == 'success') {
-          echo "Swal.fire({
-            icon: 'success',
-            title: 'Login Successful!',
-            text: 'Redirecting to the dashboard...',
-            showConfirmButton: false,
-            timer: 1500
-          }).then(() => {
-            window.location.href = 'menubar.php';
-          });";
-        } else if ($_GET['status'] == 'error') {
-          echo "Swal.fire({
-            icon: 'error',
-            title: 'Login Failed!',
-            text: 'Invalid username, password, or type.',
-            showConfirmButton: false,
-            timer: 1500
-          });";
-        }
-      }
-      ?>
-    });
+    <?php if (isset($_GET['status'])): ?>
+        <?php if ($_GET['status'] == 'success'): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                text: 'Redirecting to the dashboard...',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                window.location.href = 'menubar.php';
+            });
+        <?php elseif ($_GET['status'] == 'error'): ?>
+            <?php
+            $errorMsg = '';
+            if (isset($_GET['error'])) {
+                switch ($_GET['error']) {
+                    case 'username':
+                        $errorMsg = 'Invalid username.';
+                        break;
+                    case 'password':
+                        $errorMsg = 'Invalid password.';
+                        break;
+                    case 'type':
+                        $errorMsg = 'Invalid user type.';
+                        break;
+                }
+            }
+            ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed!',
+                text: '<?php echo $errorMsg; ?>',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        <?php endif; ?>
+    <?php endif; ?>
+});
+
   </script>
 
 </body>

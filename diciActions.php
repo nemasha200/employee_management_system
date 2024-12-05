@@ -170,7 +170,7 @@ include 'db_connect.php';
                             <label for="fullNameInitials">Disciplinary issue :</label>
                             <input type="text" class="form-control" id="reason" name="reason" placeholder="Enter Issue">
             </div>
-</div>
+        </div>
 
 <div class="form-row">
             
@@ -179,6 +179,7 @@ include 'db_connect.php';
                             <input type="text" class="form-control" id="reason1" name="reason1" placeholder="Enter Action">
             </div>
 </div>
+
             <div class="form-group">
                     <label for="imageUpload">Upload File : (Only Allowed pdf, jpg, jpeg, png formates)</label>
                             <input type="file" class="form-control-file" id="group" name="photo">
@@ -186,10 +187,11 @@ include 'db_connect.php';
                             <div class="message" id="message"></div>
 
                 </div>
+                
                 <div class="form-group">
                     <label for="remark">Remark :</label>
                     <textarea class="form-control" id="remark" name="remark" rows="2" placeholder="Enter remark"></textarea>
-                </div>
+            </div>
                 <button type="submit" class="btn btn-primary btn-small">Submit</button>
             </form>
         </div>
