@@ -36,7 +36,7 @@ include 'db_connect.php';
 
 
  
-    <a href="logintype.php" class="logout-btn">Logout</a>   
+    <a href="userlogin.php" class="logout-btn">Logout</a>   
 
 
    

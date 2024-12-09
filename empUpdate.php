@@ -154,23 +154,20 @@ $res_user = mysqli_fetch_array($getuser);
 </div>
 
 
-            <div class="form-group">
-                    <label for="dropdown">Company :</label>
-                    <select class="form-control" id="company" name="company">
-                    <?php
-                    $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                        <option value="<?php echo $resCom['com_number'] . '/' . $resCom['com_name']. '/' . $resCom['location']; ?>"
-                            <?php echo ($resCom['com_number'] . '/' . $resCom['com_name']. '/' . $resCom['location']== $res_user['comp_num']) ? 'selected' : ''; ?>>
-                            <?php echo $resCom['com_number'] . '/' . $resCom['com_name'] . '/' . $resCom['location']; ?>
-                        </option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                    </select>
-                </div>
+<div class="form-group">
+                        <label for="company"><strong>Company:</strong></label>
+                        <select class="form-control" id="company" name="company" required>
+                            <option value="">Select a Company</option>
+                            <?php
+                            $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
+                            while ($resCom = mysqli_fetch_array($getEmp)) {
+                                $value = $resCom['com_number'] . '/' . $resCom['com_name'] . '/' . $resCom['location'];
+                                $selected = ($res_user['comp_num'] == $resCom['com_number']) ? 'selected' : '';
+                                echo "<option value='$value' $selected>$value</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
 
            
 
@@ -838,3 +835,4 @@ $res_user = mysqli_fetch_array($getuser);
 <?php
 }
 ?>
+

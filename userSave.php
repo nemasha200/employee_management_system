@@ -27,15 +27,15 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     $mail->isSMTP();                                           
-    $mail->Host = 'smtp.gmail.com';                         
+    $mail->Host = 'smtppro.zoho.com';                         
     $mail->SMTPAuth = true;                                    
-    $mail->Username = 'thusithalherath@gmail.com';                  
-    $mail->Password = 'hilfqnktjurdlnxt';                  
+    $mail->Username = 'it@raigam.lk';                  
+    $mail->Password = 'It#78195$';                  
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        
     $mail->Port = 587;                                         
 
     // Recipients
-    $mail->setFrom('thusithalherath@gmail.com', 'Raigam Employee Management System');   
+    $mail->setFrom('it@raigam.lk', 'Raigam Employee Management System');   
     $mail->addAddress($email, $firstname . ' ' . $lastname);   // Recipient's email and name
 
     // Content
