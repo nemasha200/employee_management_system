@@ -279,9 +279,9 @@ include 'db_connect.php';
                     $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
                     while ($resCom = mysqli_fetch_array($getEmp)) {
                     ?>
-                        <option value="<?php echo $resCom['com_name']; ?>"
+                        <option value="<?php echo $resCom['com_number'] . '/' . $resCom['com_name']; ?>"
                             <?php echo ($resCom['com_name'] == $res_user['trans_company']) ? 'selected' : ''; ?>>
-                            <?php echo $resCom['com_name']; ?>
+                            <?php echo $resCom['com_number'] . '/' . $resCom['com_name']; ?>
                         </option>
                     <?php
                     }

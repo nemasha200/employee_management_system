@@ -164,7 +164,7 @@ if (!isset($_SESSION['admin_id'])) {
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Emp number</th>
+                    <th>Employee Number</th>
                     <th>Name</th>
                     <th>Company</th>
                     <th>Department</th>

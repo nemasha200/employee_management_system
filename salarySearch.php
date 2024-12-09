@@ -169,7 +169,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <th>Department</th>
                     <th>EPF number</th>
 
-                    <th>name</th>
+                    <th>Name</th>
 
                    
 

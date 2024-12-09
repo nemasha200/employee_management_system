@@ -155,17 +155,19 @@ $res_user = mysqli_fetch_array($getuser);
 
 
 <div class="form-group">
-                        <label for="company"><strong>Company:</strong></label>
+                        <label for="company">Company:</label>
                         <select class="form-control" id="company" name="company" required>
-                            <option value="">Select a Company</option>
-                            <?php
-                            $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
-                            while ($resCom = mysqli_fetch_array($getEmp)) {
-                                $value = $resCom['com_number'] . '/' . $resCom['com_name'] . '/' . $resCom['location'];
-                                $selected = ($res_user['comp_num'] == $resCom['com_number']) ? 'selected' : '';
-                                echo "<option value='$value' $selected>$value</option>";
-                            }
-                            ?>
+                        <?php
+                    $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
+                    while ($resCom = mysqli_fetch_array($getEmp)) {
+                    ?>
+                        <option value="<?php echo $resCom['com_number'] . '/' . $resCom['com_name']; ?>"
+                            <?php echo ($resCom['com_name'] == $res_user['comp_num']) ? 'selected' : ''; ?>>
+                            <?php echo $resCom['com_number'] . '/' . $resCom['com_name']; ?>
+                        </option>
+                    <?php
+                    }
+                    ?>
                         </select>
                     </div>
 
