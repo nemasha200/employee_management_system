@@ -112,7 +112,7 @@ include 'db_connect.php';
     <div class="mainContainer">
     <div class="container mt-5">
         <!-- <button class="back-button" onclick="window.history.back();">&larr;</button> -->
-        <h1 class="text-black">Company Details</h1>
+        <h3 class="text-black">Company Details</h1>
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
                 <tr>

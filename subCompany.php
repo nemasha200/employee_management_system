@@ -163,8 +163,8 @@ if (!isset($_SESSION['admin_id'])) {
 
              
             <div class="form-group col-md-12">
-                <label for="companyNumber">Company Number</label>
-                <input type="text" class="form-control" id="companyNumber" name="compnum" placeholder="Enter company number" >
+                <label for="companyNumber">Company Number :</label>
+                <input type="number" class="form-control" id="companyNumber" name="compnum" placeholder="Enter company number" >
                 
             </div>
 
@@ -180,7 +180,7 @@ if (!isset($_SESSION['admin_id'])) {
         
 
         <div class="form-group col-md-12">
-            <label for="companyName">Company Name</label>
+            <label for="companyName">Company Name :</label>
             <input type="text" class="form-control" id="companyName" name="compname" placeholder="Enter company name" >
         </div>
 
@@ -190,7 +190,7 @@ if (!isset($_SESSION['admin_id'])) {
 
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="location">Location</label>
+                <label for="location">Location :</label>
                 <input type="text" class="form-control" id="Location" name="location" placeholder="Enter location" >
             </div>
 

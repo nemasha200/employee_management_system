@@ -105,15 +105,15 @@ session_start();
     <form id="loginForm" method="POST" action="userlogSubmit.php">
       <div class="form-group">
         <label for="username">User Name:</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" >
       </div>
       <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password" required>
+        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password" >
       </div>
       <div class="form-group">
         <label for="type">Type:</label>
-        <select class="form-control" id="type" name="type" required>
+        <select class="form-control" id="type" name="type" >
           <option value="" disabled selected>Select user type</option>
           <option value="Admin">Admin</option>
           <option value="Super Admin">Super Admin</option>
@@ -131,6 +131,47 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      let username = document.getElementById('username').value.trim();
+      let password = document.getElementById('pwd').value.trim();
+      let type = document.getElementById('type').value;
+
+      if (!username) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Validation Error!',
+          text: 'Please fill in the username.',
+          showConfirmButton: true,
+        });
+        event.preventDefault();
+        return;
+      }
+
+      if (!password) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Validation Error!',
+          text: 'Please fill in the password.',
+          showConfirmButton: true,
+        });
+        event.preventDefault();
+        return;
+      }
+
+      if (!type) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Validation Error!',
+          text: 'Please select a user type.',
+          showConfirmButton: true,
+        });
+        event.preventDefault();
+        return;
+      }
+    });
+  </script>
 
   <script>
     $(document).ready(function() {

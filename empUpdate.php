@@ -138,20 +138,21 @@ $res_user = mysqli_fetch_array($getuser);
             <h5><u>Employee Personal Details</u></h5><br>
 
             <div class="form-group">
-                        <label for="employeeType"><strong>Employee Category :<span style="color:red">*</span></strong></label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="employeeType" value="Staff" <?php echo ($res_user['emp_type'] == 'Staff') ? 'checked' : ''; ?> required>
-                            <label class="form-check-label">Staff</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="employeeType" value="Sales" <?php echo ($res_user['emp_type'] == 'Sales') ? 'checked' : ''; ?>>
-                            <label class="form-check-label">Sales</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="employeeType" value="Factory" <?php echo ($res_user['emp_type'] == 'Factory') ? 'checked' : ''; ?>>
-                            <label class="form-check-label">Factory</label>
-                        </div>
-                    </div>
+    <label for="employeeType"><strong>Employee Category :<span style="color:red">*</span></strong></label>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="employeeType" value="Staff" <?php echo ($res_user['emp_type'] == 'Staff') ? 'checked' : ''; ?> required>
+        <label class="form-check-label">Staff</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="employeeType" value="Sales" <?php echo ($res_user['emp_type'] == 'Sales') ? 'checked' : ''; ?> required>
+        <label class="form-check-label">Sales</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="employeeType" value="Factory" <?php echo ($res_user['emp_type'] == 'Factory') ? 'checked' : ''; ?> required>
+        <label class="form-check-label">Factory</label>
+    </div>
+</div>
+
 
             <div class="form-group">
                     <label for="dropdown">Company :</label>
@@ -195,9 +196,10 @@ $res_user = mysqli_fetch_array($getuser);
                             <label for="epfNumber">EPF Number :<span style="color:red">*</span></label>
                             <input type="text" value="<?php echo $res_user['epf']; ?>" class="form-control" id="epfNumber" name="epfnumber" placeholder="Enter EPF number">
                 </div>
-
+              
+                
                  <!-- Gender -->
-                 <div class="form-group">
+                 <div class="form-group col-md-5">
                         <label for="sex"><strong>Sex :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="sex" value="Male" <?php echo ($res_user['sex'] == 'Male') ? 'checked' : ''; ?>>
@@ -213,7 +215,7 @@ $res_user = mysqli_fetch_array($getuser);
                       
 
                      <!-- Marital Status -->
-                    <div class="form-group">
+                    <div class="form-group col-md-5">
                         <label for="marital"><strong>Marital Status :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="marital" value="single" <?php echo ($res_user['marital_status'] == 'single') ? 'checked' : ''; ?>>
@@ -303,6 +305,10 @@ $res_user = mysqli_fetch_array($getuser);
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" name="qualifications[]" value="NVQ/Naita" <?php echo (strpos($res_user['qulifications'], 'NVQ/Naita') !== false) ? 'checked' : ''; ?>>
                             <label class="form-check-label">NVQ/Naita</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="qualifications[]" value="Other Qulifications" <?php echo (strpos($res_user['qulifications'], 'Other Qualifications') !== false) ? 'checked' : ''; ?>>
+                            <label class="form-check-label">Other Qualifications</label>
                         </div>
                     </div>
 
@@ -460,7 +466,7 @@ $res_user = mysqli_fetch_array($getuser);
                               
            <!-- Employee Status -->
            <div class="form-group col-md-7">
-                        <label for="empstatus">Employee Status :</label>
+                        <label for="empstatus">Employee Status :<span style="color:red">*</span></label>
                         <select class="form-control"  id="empstatus" name="empstatus">
                             <option value="permanent" <?php echo ($res_user['emp_status'] == 'permanent') ? 'selected' : ''; ?>>Permanent</option>
                             <option value="ftc" <?php echo ($res_user['emp_status'] == 'ftc') ? 'selected' : ''; ?>>FTC</option>
@@ -498,11 +504,11 @@ $res_user = mysqli_fetch_array($getuser);
             <div class="form-group col-md-5">
                         <label for="ot">OT :</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ot" value="yes" <?php echo ($res_user['ot'] == 'yes') ? 'checked' : ''; ?>>
+                            <input class="form-check-input" type="radio" name="ot" value="Yes" <?php echo ($res_user['ot'] == 'Yes') ? 'checked' : ''; ?>>
                             <label class="form-check-label">Yes</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ot" value="no" <?php echo ($res_user['ot'] == 'no') ? 'checked' : ''; ?>>
+                            <input class="form-check-input" type="radio" name="ot" value="No" <?php echo ($res_user['ot'] == 'No') ? 'checked' : ''; ?>>
                             <label class="form-check-label">No</label>
                         </div>
             </div>    
@@ -629,115 +635,188 @@ $res_user = mysqli_fetch_array($getuser);
             }
 
             if (!fullName) {
-                Swal.fire({
-                    title: 'Validation Error!',
-                    text: 'Please enter a Full Name.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!fullNameInitials) {
-                Swal.fire({
-                    title: 'Validation Error!',
-                    text: 'Please enter a Name with Initials.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!nicNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  NIC Number',
+                text: 'Please select an FullName.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
+        }
+
+
+        if (!fullName || !/^[A-Z][a-z]*( [A-Z][a-z]*)*$/.test(fullName)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Full Name must have the first letter of each name capitalized (e.g., "John Doe").',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!fullNameInitials) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select  Name with Initials.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!fullNameInitials || !/^[A-Z](\.[A-Z])*\.? [a-zA-Z\s]+$/.test(fullNameInitials)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please enter a valid Name with Initials (e.g., "A.B. Smith").',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!nicNumber) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select  NIC.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        
+
+
+
+        if (!nicNumber || (!/^\d{9}[Vv]$/.test(nicNumber) && !/^\d{12}$/.test(nicNumber))) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'NIC Number must be either 9 digits followed by "V" or 12 digits.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
         }
 
         if (!address1) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Permanant Address',
+                text: 'Please enter a Permanent Address.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!address2) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Current Address',
+                text: 'Please enter a Current Address.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
-
-       
 
         if (!phoneNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Mobile Number',
+                text: 'Please enter a phone Number.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
+        }
+
+        if (!phoneNumber || phoneNumber.length !== 10 || !/^\d{10}$/.test(phoneNumber)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Phone Number must be exactly 10 digits long.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
         }
 
         if (!doj) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Date Of Join',
+                text: 'Please enter a Date of Joining.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!department) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Department',
+                text: 'Please select a Department.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
+        }
+
+        if (!designation) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Designation.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!designation) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Designation.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!grade) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Grade.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
         }
 
         if (!jobCategory) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Job Category',
+                text: 'Please select a Job Category.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!empstatus) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Employee Status',
+                text: 'Please select an Employee Status.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!remark1) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Remark',
+                text: 'Please enter a Remark.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
 

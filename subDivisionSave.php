@@ -14,14 +14,14 @@ include 'db_connect.php';
 
 
 $divisionumber = $_POST['divisionumber'];
-$divisioname = $_POST['divisioname'];
+$jobname = $_POST['jobname'];
 
 
 
 
-mysqli_query($con,"INSERT INTO `sub_division`(`Job_title`, `grade`) VALUES ('$divisionumber','$divisioname')");
+mysqli_query($con,"INSERT INTO `sub_division`(`Job_title`, `grade`) VALUES ('$divisionumber','$jobname')");
  
- header("Location: subDivision.php");
+ header("Location: subDivisionSearch.php");
 exit();
 
 

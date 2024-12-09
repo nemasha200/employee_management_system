@@ -33,7 +33,7 @@ if (!isset($_SESSION['admin_id'])) {
                                 WHERE emp_num = '$empnumber'"; // Replace 'empnumber' with the correct column name
 
         if (mysqli_query($con, $updateEmployerQuery)) {
-            header("Location: promotion.php");
+            header("Location: promoSearch.php");
             exit();
         } else {
             echo "Error updating employer table: " . mysqli_error($con);

@@ -171,7 +171,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <th>Job Title</th>
                     <th>View</th>
                     <th>Update</th>
-                    <th>InActive</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>

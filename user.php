@@ -56,7 +56,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form class="registration-form" id="registrationForm" method="POST" action="userSave.php">
-                    <h2 class="text-center">User Registration <img src="log.png" alt="Logo"></h2>
+                    <h2 class="text-center">User Registration <img src="log.png" alt="Logo" width="60px" height="auto"></h2>
                     <div class="form-group">
                         <label for="title">Title</label>
                         <select class="form-control" id="title" name="title">
@@ -121,10 +121,10 @@
             const email = document.getElementById('email').value.trim();
             const contact = document.getElementById('contact').value.trim();
             const username = document.getElementById('username').value.trim();
-
             const password = document.getElementById('password').value.trim();
             const conpassword = document.getElementById('conpassword').value.trim();
 
+            // Validation checks
             if (!firstName) {
                 Swal.fire({
                     title: 'Validation Error',
@@ -145,12 +145,11 @@
                 return;
             }
 
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-            if (!emailPattern.test(email)) {
+            if (!email.includes('@')) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Invalid Email',
-                    text: 'Please enter a valid Gmail address (e.g., firstname.lastname@gmail.com).',
+                    text: 'Email must include "@" symbol.',
                     confirmButtonText: 'OK'
                 });
                 return;
@@ -165,7 +164,6 @@
                 });
                 return;
             }
-            
 
             if (contact.length !== 10 || isNaN(contact)) {
                 Swal.fire({
@@ -187,12 +185,23 @@
                 return;
             }
 
-            const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$/;
-            if (!passwordPattern.test(password)) {
+            // Password validation: Minimum length and strong password
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (password.length < 8) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Invalid Password',
-                    text: 'Password must be exactly 8 characters long, containing at least one uppercase letter, one lowercase letter, one number, and one special symbol.',
+                    title: 'Password Error',
+                    text: 'Password must be at least 8 characters long.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!passwordRegex.test(password)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Error',
+                    text: 'Password must contain at least one uppercase letter, one number, and one special character.',
                     confirmButtonText: 'OK'
                 });
                 return;
@@ -208,6 +217,7 @@
                 return;
             }
 
+            // Final confirmation
             Swal.fire({
                 title: 'Confirm Submission',
                 text: 'Are you sure you want to submit?',

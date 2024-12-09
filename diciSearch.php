@@ -159,7 +159,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 <div class="mainContainer">
     <div class="container">
-        <h3 class="text-whit">Diciplinary Details</h3>
+        <h3 class="text-whit">Disciplinary Details</h3>
 
         <table id="tableID" class="table table-striped table-bordered">
             <thead>

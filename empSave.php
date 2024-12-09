@@ -107,7 +107,7 @@ if (!isset($_SESSION['admin_id'])) {
 
     // Execute the query and check if data was inserted successfully
     if (mysqli_query($con, $query)) {
-        header("Location: employer.php"); // Redirect to the employer page
+        header("Location: empSearch.php"); // Redirect to the employer page
         exit();
     } else {
         // Output an error message if the query fails

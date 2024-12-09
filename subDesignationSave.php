@@ -21,7 +21,7 @@ $designationame = $_POST['designationame'];
 
 mysqli_query($con,"INSERT INTO `sub_designation`(`desi_num`, `desi_name`) VALUES ('$designationum','$designationame')");
  
- header("Location: subDesignation.php");
+ header("Location: subDesignationSearch.php");
 exit();
 
 

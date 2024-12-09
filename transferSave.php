@@ -27,14 +27,14 @@ if (!isset($_SESSION['admin_id'])) {
             VALUES ('$empnumber', '$nameinitial', '$designation', '$employment', '$exdepartment', '$excompany', 
             '$transdep', '$transcom', '$designation1', '$dob1', '$dob2', '$dob3', '$remark')";
 
-    if (mysqli_query($con, $insertTransQuery)) { // Correct variable name here
-        // Update the employer table
+    if (mysqli_query($con, $insertTransQuery)) { // Correct variable name here 
+    // Update the employer table
         $updateEmployerQuery = "UPDATE employer 
                                 SET comp_num = '$transcom', department = '$transdep', designation = '$designation1'
                                 WHERE emp_num = '$empnumber'";
 
         if (mysqli_query($con, $updateEmployerQuery)) { // Properly handle the second query
-            header("Location: transers.php");
+            header("Location: transferSearch.php");
             exit();
         } else {
             echo "Error: " . $updateEmployerQuery . "<br>" . mysqli_error($con);

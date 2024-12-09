@@ -61,7 +61,7 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
     if (mysqli_query($con, $query)) {
-        header("Location: clearance.php");
+        header("Location: clearSearch.php");
         exit();
     } else {
         echo "Error: " . mysqli_error($con);

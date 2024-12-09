@@ -53,7 +53,7 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
     if (mysqli_query($con, $query)) {
-        header("Location: diciActions.php");
+        header("Location: diciSearch.php");
         exit();
     } else {
         echo "Error: " . mysqli_error($con);

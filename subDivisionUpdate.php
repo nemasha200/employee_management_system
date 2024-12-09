@@ -162,7 +162,7 @@ $res_user = mysqli_fetch_array($getuser);
 <div class="container form-container">
     <h2 class="text-center">Job Grades Registration Form</h2>
     <a href="subDivisionSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View updated Jobgrades</button>
+            <button type="button" class="btn btn-primary btn-small">View updated JobGrades</button>
         </a><br><br>
         <form id="registrationForm" method="POST" action="subDivisionSubmitUpdate.php">
 
@@ -174,8 +174,8 @@ $res_user = mysqli_fetch_array($getuser);
              
             <div class="form-group col-md-12">
 
-            <label for="divisionNumber">Reference Number</label>
-            <input type="text"    value="<?php echo $res_user['Job_title']; ?>"  class="form-control" id="divisionNumber" name="divisionumber" placeholder="Enter division number">
+            <label for="divisionNumber">Reference Number :</label>
+            <input type="number"    value="<?php echo $res_user['Job_title']; ?>"  class="form-control" id="divisionNumber" name="divisionumber" placeholder="Enter division number">
              
             </div>
 
@@ -191,7 +191,7 @@ $res_user = mysqli_fetch_array($getuser);
         
 
         <div class="form-group col-md-12">
-        <label for="divisionName">Job Grades</label>
+        <label for="divisionName">Job Grade :</label>
         <input type="text"  value="<?php echo $res_user['grade']; ?>"  class="form-control" id="divisionName" name="divisioname" placeholder="Enter division name">
                 
                  
@@ -200,6 +200,7 @@ $res_user = mysqli_fetch_array($getuser);
         </div>
 
 
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
 
         
@@ -212,7 +213,24 @@ $res_user = mysqli_fetch_array($getuser);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
 
+        // Show SweetAlert2 notification
+        Swal.fire({
+            title: 'Success!',
+            text: 'Job grade has been updated successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // After clicking OK, submit the form
+                this.submit();
+            }
+        });
+    });
+</script>
 
 
 

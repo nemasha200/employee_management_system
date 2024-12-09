@@ -151,7 +151,7 @@ if (!isset($_SESSION['admin_id'])) {
 <div class="container form-container">
         <h2 class="text-center">Designation Registration Form</h2>
         <a href="subDesignationSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View designations</button>
+            <button type="button" class="btn btn-primary btn-small">View Designations</button>
         </a>  <br><br>
         <form id="registrationForm" method="POST" action="subDesignationSave.php">
 
@@ -163,8 +163,8 @@ if (!isset($_SESSION['admin_id'])) {
 
              
             <div class="form-group col-md-12">
-            <label for="designationNumber">Reference Number</label>
-            <input type="text" class="form-control" id="designationNumber" name="designationum" placeholder="Enter Reference number">
+            <label for="designationNumber">Reference Number :</label>
+            <input type="number" class="form-control" id="designationNumber" name="designationum" placeholder="Enter Reference number">
             </div>
 
           
@@ -179,7 +179,7 @@ if (!isset($_SESSION['admin_id'])) {
         
 
         <div class="form-group col-md-12">
-        <label for="designationName">Designation</label>
+        <label for="designationName">Designation :</label>
         <input type="text" class="form-control" id="designationName" name="designationame" placeholder="Enter designation" >
 
         </div>

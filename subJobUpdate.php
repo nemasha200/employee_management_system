@@ -176,8 +176,8 @@ $res_user = mysqli_fetch_array($getuser);
              
             <div class="form-group col-md-12">
 
-            <label for="departmentNumber">Reference Number</label>
-            <input type="text"  value="<?php echo $res_user['jobcat_num']; ?>" class="form-control" id="jobnum" name="jobnum" >
+            <label for="departmentNumber">Reference Number :</label>
+            <input type="number"  value="<?php echo $res_user['jobcat_num']; ?>" class="form-control" id="jobnum" name="jobnum" >
             
             </div>
 
@@ -193,7 +193,7 @@ $res_user = mysqli_fetch_array($getuser);
         
 
         <div class="form-group col-md-12">
-        <label for="departmentName">Job Title</label>
+        <label for="departmentName">Job Title :</label>
         <input type="text" value="<?php echo $res_user['jobcat_name']; ?>" class="form-control" id="jobname" name="jobname">
         
         </div>
@@ -202,6 +202,7 @@ $res_user = mysqli_fetch_array($getuser);
 
 
 
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
         
         <button type="submit" class="btn btn-primary btn-small">Update</button>                                                     
@@ -213,7 +214,24 @@ $res_user = mysqli_fetch_array($getuser);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
 
+        // Show SweetAlert2 notification
+        Swal.fire({
+            title: 'Success!',
+            text: 'Job category has been updated successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // After clicking OK, submit the form
+                this.submit();
+            }
+        });
+    });
+</script>
 
 
 

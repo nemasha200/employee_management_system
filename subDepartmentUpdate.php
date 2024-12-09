@@ -160,7 +160,7 @@ $res_user = mysqli_fetch_array($getuser);
 <div class="container form-container">
     <h2 class="text-center">Department Registration Form</h2><br><br>
     <a href="subDepartmentSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View updated departments</button>
+            <button type="button" class="btn btn-primary btn-small">View updated Departments</button>
         </a>
         <form id="registrationForm" method="POST" action="subDepartmentSubmitUpdate.php">
 
@@ -174,8 +174,8 @@ $res_user = mysqli_fetch_array($getuser);
              
             <div class="form-group col-md-12">
 
-            <label for="companyNumber">Department Number</label>
-            <input type="text" value="<?php echo $res_user['dep_num']; ?>" class="form-control" id="DepartmentNumber" name="Departmentnum" placeholder="Enter Department number">
+            <label for="companyNumber">Department Number :</label>
+            <input type="number" value="<?php echo $res_user['dep_num']; ?>" class="form-control" id="DepartmentNumber" name="Departmentnum" placeholder="Enter Department number">
            
             </div>
 
@@ -191,22 +191,15 @@ $res_user = mysqli_fetch_array($getuser);
         
 
         <div class="form-group col-md-12">
-        <label for="companyName">Department Name</label>
+        <label for="companyName">Department Name :</label>
                 <input type="text" value="<?php echo $res_user['dep_name']; ?>" class="form-control" id="DepartmentName" name="Departmentname" placeholder="Enter Department name">
         </div>
 
         </div>
 
 
-<!-- 
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="location">Location</label>
-                <input type="text"  value="<?php echo $res_user['location']; ?>" class="form-control" id="Location" name="location" placeholder="Enter location" >
-                </div>
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
-           
-        </div> -->
 
         
         <button type="submit" class="btn btn-primary btn-small">Update</button>                                                     
@@ -218,7 +211,24 @@ $res_user = mysqli_fetch_array($getuser);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
 
+        // Show SweetAlert2 notification
+        Swal.fire({
+            title: 'Success!',
+            text: 'Department has been updated successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // After clicking OK, submit the form
+                this.submit();
+            }
+        });
+    });
+</script>
 
 
 

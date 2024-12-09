@@ -283,12 +283,12 @@ include 'db_connect.php';
 </div>
 
 <div class="form-group col-md-4">
-<label for="phoneNumber1">Landphone Number :<span style="color:red">*</span></label>
+<label for="phoneNumber1">Landphone Number :</label>
 <input type="text" class="form-control" id="phoneNumber1" name="landnumber" placeholder="Enter landphone number">
 </div>
 
 <div class="form-group col-md-4">
-<label for="phoneNumber1">Office Number :<span style="color:red">*</span></label>
+<label for="phoneNumber1">Office Number :</label>
 <input type="text" class="form-control" id="phoneNumber2" name="officenumber" placeholder="Enter Office number">
 </div>
 
@@ -465,11 +465,11 @@ include 'db_connect.php';
 <div class="form-group col-md-3">
 <label for="headerGiven"><strong>OT :</strong></label>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="ot" id="yes" value="Male">
+<input class="form-check-input" type="radio" name="ot" id="yes" value="Yes">
 <label class="form-check-label" for="male">Yes</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="ot" id="no" value="Female">
+<input class="form-check-input" type="radio" name="ot" id="no" value="No">
 <label class="form-check-label" for="female">No</label>
 </div>
 </div>         
@@ -536,9 +536,10 @@ include 'db_connect.php';
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 
 <script>
-    document.getElementById('empForm').addEventListener('submit', function(event) {
+    document.getElementById('empForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
+        // Fetch values from the form
         var dropdown = document.getElementById('dropdown').value.trim();
         var employNumber = document.getElementById('employNumber').value.trim();
         var epfNumber = document.getElementById('epfNumber').value.trim();
@@ -548,10 +549,6 @@ include 'db_connect.php';
         var address1 = document.getElementById('address1').value.trim();
         var address2 = document.getElementById('address2').value.trim();
         var phoneNumber = document.getElementById('phoneNumber').value.trim();
-        var phoneNumber1 = document.getElementById('phoneNumber1').value.trim();
-
-        var phoneNumber2 = document.getElementById('phoneNumber2').value.trim();
-
         var doj = document.getElementById('doj').value.trim();
         var department = document.getElementById('department').value.trim();
         var designation = document.getElementById('designation').value.trim();
@@ -560,10 +557,7 @@ include 'db_connect.php';
         var empstatus = document.getElementById('empstatus').value.trim();
         var remark1 = document.getElementById('remark1').value.trim();
 
-
-
-
-
+        // Validation checks
         if (!dropdown) {
             Swal.fire({
                 title: 'Validation Error!',
@@ -577,7 +571,7 @@ include 'db_connect.php';
         if (!employNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a Employee Number.',
+                text: 'Please select an Employee Number.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
@@ -587,205 +581,198 @@ include 'db_connect.php';
         if (!epfNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a EPF Number.',
+                text: 'Please select an EPF Number.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+        if (!fullName) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select an FullName.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
             return false;
         }
 
-        if (!fullName) {
+
+        if (!fullName || !/^[A-Z][a-z]*( [A-Z][a-z]*)*$/.test(fullName)) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Full name',
+                text: 'Full Name must have the first letter of each name capitalized (e.g., "John Doe").',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!fullNameInitials) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Name with Initials',
+                text: 'Please select  Name with Initials.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
-        // Assuming `fullNameInitials` is the name input value
-if (!fullNameInitials || !/^[A-Z](\.[A-Z])*\.? [a-zA-Z\s]+$/.test(fullNameInitials)) {
-    Swal.fire({
-        title: 'Validation Error!',
-        text: 'Please enter a valid Name with Initials (e.g., "A.B. Smith").',
-        icon: 'error',
-        confirmButtonText: 'OK'
-    });
-    return false;
-}
 
-        
+        if (!fullNameInitials || !/^[A-Z](\.[A-Z])*\.? [a-zA-Z\s]+$/.test(fullNameInitials)) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please enter a valid Name with Initials (e.g., "A.B. Smith").',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
 
         if (!nicNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  NIC Number',
+                text: 'Please select  NIC.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
-        // if (!nicNumber || (nicNumber.length !== 10 && nicNumber.length !== 12)) {
-        //     Swal.fire({
-        //         title: 'Validation Error!',
-        //         text: 'NIC Number must be exactly 10 or 13 characters long.',
-        //         icon: 'error',
-        //         confirmButtonText: 'OK'
-        //     });
-        //     return false;   
-        // }
+        
 
-        if (!nicNumber || (!/^\d{9}[V]$/.test(nicNumber) && !/^\d{12}$/.test(nicNumber))) {
-    Swal.fire({
-        title: 'Validation Error!',
-        text: 'NIC Number must be either 9 digits followed by "V" or 12 digits.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-    });
-    return false;
-}
 
+
+        if (!nicNumber || (!/^\d{9}[Vv]$/.test(nicNumber) && !/^\d{12}$/.test(nicNumber))) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'NIC Number must be either 9 digits followed by "V" or 12 digits.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
 
         if (!address1) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Permanant Address',
+                text: 'Please enter a Permanent Address.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!address2) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Current Address',
+                text: 'Please enter a Current Address.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
-
-       
 
         if (!phoneNumber) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Mobile Number',
+                text: 'Please enter a phone Number.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
-        if (!phoneNumber || (phoneNumber.length !== 10)) {
+        if (!phoneNumber || phoneNumber.length !== 10 || !/^\d{10}$/.test(phoneNumber)) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Phone Number must be exactly 10 numbers long.',
+                text: 'Phone Number must be exactly 10 digits long.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
-         }
-
-       
-         if (!phoneNumber1 || (phoneNumber1.length !== 10)) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Land Number must be exactly 10 numbers long.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;   
-         }
-
-        
-         if (!phoneNumber2 || (phoneNumber2.length !== 10)) {
-            Swal.fire({
-                title: 'Validation Error!',
-                text: 'Office Number must be exactly 10 numbers long.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;   
-         }
+            return false;
+        }
 
         if (!doj) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Date Of Join',
+                text: 'Please enter a Date of Joining.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!department) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Department',
+                text: 'Please select a Department.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
+        }
+
+        if (!designation) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Designation.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!designation) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Designation.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        if (!grade) {
+            Swal.fire({
+                title: 'Validation Error!',
+                text: 'Please select a Grade.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
         }
 
         if (!jobCategory) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Job Category',
+                text: 'Please select a Job Category.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!empstatus) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Employee Status',
+                text: 'Please select an Employee Status.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
         if (!remark1) {
             Swal.fire({
                 title: 'Validation Error!',
-                text: 'Please select a  Remark',
+                text: 'Please enter a Remark.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            return false;   
+            return false;
         }
 
-       
-
-
-
-
-
-        
-
-       
-        
-
-       
-
-
-
+        // Success message and form submission
         Swal.fire({
             title: 'Success!',
             text: 'Form submitted successfully.',
@@ -793,11 +780,13 @@ if (!fullNameInitials || !/^[A-Z](\.[A-Z])*\.? [a-zA-Z\s]+$/.test(fullNameInitia
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.submit(); 
+                this.submit();
             }
         });
     });
 </script>
+
+
 </body>
 </html>
 <?php

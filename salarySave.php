@@ -46,7 +46,7 @@ $query = "INSERT INTO `salary`(`company_num`, `department`, `name`, `epf`, `basi
           VALUES ('$company', '$department', '$nameinitial', '$epfnumber', '$basic', '$bra', '$amount1', '$amount2', '$amount3', '$amount4', '$amount5', '$amount6', '$amount7', '$amount8', '$amount9', '$amount10', '$amount11', '$amount12', '$amount13', '$amount14', '$amount15', '$amount16', '$payment', '$account', '$bank', '$branch')";
 
 if (mysqli_query($con, $query)) {
-    header("Location: empSalary.php");
+    header("Location: salarySearch.php");
     exit();
 } else {
     echo "Error: " . mysqli_error($con); 

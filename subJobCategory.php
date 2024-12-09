@@ -151,7 +151,7 @@ if (!isset($_SESSION['admin_id'])) {
 <div class="container form-container">
         <h2 class="text-center">Job Title Registration Form</h2>
         <a href="subJobSearch.php">
-            <button type="button" class="btn btn-primary btn-small">View Job Title Details</button>
+            <button type="button" class="btn btn-primary btn-small">View Job Titles</button>
         </a><br><br>
         <form id="registrationForm" method="POST" action="subJobSave.php">
 
@@ -163,8 +163,8 @@ if (!isset($_SESSION['admin_id'])) {
 
              
             <div class="form-group col-md-12">
-            <label for="departmentNumber">Reference Number</label>
-            <input type="text" class="form-control" id="jobnum" name="jobnum" placeholder="Enter reference number">
+            <label for="departmentNumber">Reference Number :</label>
+            <input type="number" class="form-control" id="jobnum" name="jobnum" placeholder="Enter reference number">
            
             </div>
 
@@ -180,7 +180,7 @@ if (!isset($_SESSION['admin_id'])) {
         
 
         <div class="form-group col-md-12">
-        <label for="departmentName">Job Title</label>
+        <label for="departmentName">Job Title :</label>
         <input type="text" class="form-control" id="joname" name="jobname" placeholder="Enter job Title ">
 
         </div>

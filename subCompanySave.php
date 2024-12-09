@@ -22,7 +22,7 @@ $location = $_POST['location'];
 
 mysqli_query($con,"INSERT INTO `sub_company`(`com_number`, `com_name`, `location`) VALUES ('$compnum','$compname','$location')");
  
- header("Location: subCompany.php");
+ header("Location: subCompanySearch.php");
 exit();
 
 

@@ -162,7 +162,7 @@ include 'db_connect.php';
             
             <h2 class="text-center">Promotion Evaluation Marks</h2>
             <a href="evaluationSearch.php">
-                <button type="button" class="btn btn-primary btn-small">View Evaluations</button>
+                <button type="button" class="btn btn-primary btn-small">View Evaluation marks</button>
             </a>
             <form id="registrationForm" method="POST" action="evaluationSave.php">
                 

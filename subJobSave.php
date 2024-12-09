@@ -21,7 +21,7 @@ $jobname = $_POST['jobname'];
 
 mysqli_query($con,"INSERT INTO `sub_jobcat`(`jobcat_num`, `jobcat_name`) VALUES ('$jobnum','$jobname')");
  
- header("Location: subJobCategory.php");
+ header("Location: subjobSearch.php");
 exit();
 
 

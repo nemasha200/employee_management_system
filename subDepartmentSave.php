@@ -21,7 +21,7 @@ $Departmentname = $_POST['Departmentname'];
 
 mysqli_query($con,"INSERT INTO `sub_department`(`dep_num`, `dep_name`) VALUES ('$Departmentnum','$Departmentname')");
  
- header("Location: subDepartment.php");
+ header("Location: subDepartmentSearch.php");
 exit();
 
 
