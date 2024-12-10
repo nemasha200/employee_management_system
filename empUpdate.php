@@ -13,11 +13,21 @@ if (!isset($_SESSION['admin_id'])) {
 include 'db_connect.php';
 $user_id = $_GET['user_id'];
 
-$getuser = mysqli_query($con, "SELECT `empid`,  `comp_num`, `emp_type`, `emp_num`, `epf`, `sex`, `marital_status`,
- `full_name`, `initial_name`, `dob`, `nic`, `drive_lic_num`, `permanat_address`, `current_address`,
-  `qulifications`, `mobile`, `landnumber`, `office_number`, `doj`, `recruitment_type`, `department`,
-   `designation`, `grade`, `job_title`, `last_promo`, `emp_status`, `vehicle_num`, `img`, `ot`, `remark1`, `remark2`, `remark3` FROM `employer` WHERE empid = '$user_id'");
-$res_user = mysqli_fetch_array($getuser);
+// Use a prepared statement to fetch employer details
+$stmt = $con->prepare("SELECT empid, comp_num, emp_type, emp_num, epf, sex, marital_status, full_name, initial_name,
+    dob, nic, drive_lic_num, permanat_address, current_address, qulifications, mobile, landnumber, office_number,
+    doj, recruitment_type, department, designation, grade, job_title, last_promo, emp_status, vehicle_num, img,
+    ot, remark1, remark2, remark3 FROM employer WHERE empid = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$res_user = $stmt->get_result()->fetch_assoc();
+
+// Parse the `comp_num` into parts
+$comp_parts = explode('/', $res_user['comp_num']);
+$comp_number = $comp_parts[0]; // Extract com_number
+$comp_name = $comp_parts[1];   // Extract com_name
+$location = $comp_parts[2];   // Extract location
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,10 +141,6 @@ $res_user = mysqli_fetch_array($getuser);
                 </a>  
                 <form id="registrationForm" method="POST" action="empSubmitUpdate.php" enctype="multipart/form-data">
 
-               
-                    
-        
-
             <h5><u>Employee Personal Details</u></h5><br>
 
             <div class="form-group">
@@ -157,17 +163,17 @@ $res_user = mysqli_fetch_array($getuser);
 <div class="form-group">
                         <label for="company">Company:</label>
                         <select class="form-control" id="company" name="company" required>
-                        <?php
-                    $getEmp = mysqli_query($con, "SELECT * FROM sub_company");
-                    while ($resCom = mysqli_fetch_array($getEmp)) {
-                    ?>
-                        <option value="<?php echo $resCom['com_number'] . '/' . $resCom['com_name']; ?>"
-                            <?php echo ($resCom['com_name'] == $res_user['comp_num']) ? 'selected' : ''; ?>>
-                            <?php echo $resCom['com_number'] . '/' . $resCom['com_name']; ?>
-                        </option>
-                    <?php
-                    }
-                    ?>
+                            <?php
+                            $getEmp = mysqli_query($con, "SELECT com_number, com_name, location FROM sub_company");
+                            while ($resCom = mysqli_fetch_array($getEmp)) {
+                                $value = $resCom['com_number'] . '/' . $resCom['com_name'] . '/' . $resCom['location'];
+                          
+                                $selected = ($resCom['com_number'] == $comp_number 
+                                    && $resCom['com_name'] == $comp_name 
+                                    && $resCom['location'] == $location) ? 'selected' : '';
+                                echo "<option value='$value' $selected>{$resCom['com_number']}/{$resCom['com_name']}/{$resCom['location']}</option>";
+                            }
+                            ?>
                         </select>
                     </div>
 
