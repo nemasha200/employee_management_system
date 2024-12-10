@@ -235,7 +235,8 @@ if (!isset($_SESSION['admin_id'])) {
 <?php
     // Get session variables for user authentication and privileges
     $username = $_SESSION['username'];
-    $admin_id = $_SESSION['admin_id'];
+    $admin_id = $_SESSION['admin_id'];                    
+
 
     // Fetch user privileges from the database
     $stmt = mysqli_query($con, "SELECT DISTINCT menu_id FROM user_priviledge WHERE username='$username'");
@@ -295,9 +296,9 @@ if (!isset($_SESSION['admin_id'])) {
             <b>Employee Registration System</b>
         </h1>
     </div>
-</div>
+</div> 
 
-<!-- Dashboard statistics -->
+<!-- Dashboard statistics -->                                             
 <div class="container employee-system-section">
     <div class="row">
         <!-- Total Employees -->

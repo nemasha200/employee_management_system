@@ -159,7 +159,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 <div class="mainContainer">
     <div class="container">
-        <h3 class="text-whit">Salary Details</h3>
+        <h3 class="text-whit">Employee Benifits Details</h3>
 
         <table id="tableID" class="table table-striped table-bordered">
             <thead>
@@ -174,7 +174,9 @@ if (!isset($_SESSION['admin_id'])) {
                    
 
                     <th>View</th>
-                    <th>Update</th>                </tr>
+                    <th>Update</th>  
+                
+                </tr>
             </thead>
         <tbody>
                 <?php
