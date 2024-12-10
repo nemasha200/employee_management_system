@@ -125,7 +125,7 @@ $res_user = mysqli_fetch_array($getuser);
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-10 form-container">
-                <h2 class="text-center">Employee Remunaration</h2>
+                <h2 class="text-center">Employee Remuneration</h2>
                 <a href="salarySearch.php">
                     <button type="button" class="btn btn-primary btn-small">View Updated Benifits</button>
                 </a>  

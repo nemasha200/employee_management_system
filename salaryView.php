@@ -118,7 +118,7 @@ include 'db_connect.php';
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-10 form-container"> 
-                <h2 class="text-center">Employee Remunaration</h2>
+                <h2 class="text-center">Employee Remuneration</h2>
                  
                 <form>
 
