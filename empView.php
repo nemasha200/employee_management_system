@@ -162,7 +162,7 @@ if(isset($_GET['user_id'])) {
                       
 
             <div class="form-group col-md-5">
-                <label for="headerGiven"><strong>Sex :</strong></label>
+                <label for="headerGiven"><strong>Gender :</strong></label>
                 <input type="text" class="form-control" id="headerGiven" name="headerGiven" value="<?php echo $res_user['sex']; ?>" readonly>
 
                 

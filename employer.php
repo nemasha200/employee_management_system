@@ -174,7 +174,7 @@ include 'db_connect.php';
 
 <div class="form-row">
 <div class="form-group col-md-5">
-<label for="headerGiven"><strong>Sex :</strong></label>
+<label for="headerGiven"><strong>Gender :</strong></label>
 <div class="form-check form-check-inline">
 <input class="form-check-input" type="radio" name="sex" id="Male" value="Male">
 <label class="form-check-label" for="male">Male</label>

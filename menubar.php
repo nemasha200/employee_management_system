@@ -40,7 +40,7 @@ if (!isset($_SESSION['admin_id'])) {
             padding-right: 15px;
             padding-left: 15px;
             margin-right: initial;
-            margin-left: 400px;
+            margin-left: 28%;
         }
 
         .card {

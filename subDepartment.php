@@ -89,7 +89,7 @@ if (!isset($_SESSION['admin_id'])) {
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: auto;
-        margin-left: 620px;
+        margin-left: 38%;
         width: 700px;
     }
 

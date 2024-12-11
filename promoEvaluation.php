@@ -97,7 +97,7 @@ include 'db_connect.php';
             width: calc(100% - 250px); /* Adjust width for sidebar */
             max-width: 800px;
             margin: auto;
-            left: 120px;
+            left: 5%;
         }
 
         .form-control {

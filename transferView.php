@@ -100,7 +100,6 @@ include 'db_connect.php';
         }
 
         .form-container {
-            margin-left: 250px; /* Adjusted for sidebar width */
             padding: 30px;
             background-color: lightblue;
             border-radius: 10px;
@@ -109,7 +108,7 @@ include 'db_connect.php';
             max-width: 800px;
             margin: auto;
             margin: auto;
-            margin-left: 570px;
+            margin-left: 35%;
         }
 
         .form-control {

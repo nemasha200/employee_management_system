@@ -96,7 +96,7 @@ include 'db_connect.php';
         width: calc(100% - 250px); 
         max-width: 800px;
         margin: auto;
-        margin-left: 600px;
+        margin-left: 35%;
     }
 
     .form-control {
@@ -260,8 +260,8 @@ include 'db_connect.php';
                 <label for="action">Type :</label>
                 <select class="form-control" id="action" name="action">
                     <option value="" disabled selected>Select an option</option>
-                    <option value="promotion">Promotion</option>
-                    <option value="demotion">Demotion</option>
+                    <option value="Promotion">Promotion</option>
+                    <option value="Demotion">Demotion</option>
                 </select>
             </div>
             <div class="form-group col-md-4">

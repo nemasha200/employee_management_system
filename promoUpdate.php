@@ -94,7 +94,6 @@ include 'db_connect.php';
         }
 
         .form-container {
-            margin-left: 250px; /* Adjusted for sidebar width */
             padding: 20px;
             background-color: whitesmoke;
             border-radius: 10px;
@@ -102,7 +101,7 @@ include 'db_connect.php';
             width: calc(100% - 250px); /* Adjust width for sidebar */
             max-width: 800px;
             margin: auto;
-            margin-left: 570px;
+            margin-left: 35%;
         }
 
         .form-control, select, textarea {
@@ -232,8 +231,8 @@ include 'db_connect.php';
                 <label for="recruitmentType">Promo Action</label>
                 <select class="form-control" id="action" name="action">
                     <option value="" disabled selected>Select an option</option>
-                    <option value="promotion"<?php echo ($res_user['promo_action'] == 'promotion') ? 'selected' : ''; ?>>Promotion</option>
-                    <option value="demotion" <?php echo ($res_user['promo_action'] == 'demotion') ? 'selected' : ''; ?>>Demotion</option>
+                    <option value="Promotion"<?php echo ($res_user['promo_action'] == 'Promotion') ? 'selected' : ''; ?>>Promotion</option>
+                    <option value="Demotion" <?php echo ($res_user['promo_action'] == 'Demotion') ? 'selected' : ''; ?>>Demotion</option>
                 </select>
             </div>
 

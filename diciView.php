@@ -54,7 +54,7 @@ if(isset($_GET['user_id'])) {
             width: calc(100% - 250px); /* Adjust width for sidebar */
             max-width: 800px;
             margin: auto;
-            margin-left: 600px;
+            margin-left: 35%;
         }
 
         .form-control {

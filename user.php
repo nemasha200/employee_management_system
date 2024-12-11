@@ -171,5 +171,133 @@
             });
         });
     </script>
+
+<script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const firstName = document.getElementById('firstName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const conpassword = document.getElementById('conpassword').value.trim();
+
+            // Validation checks
+            if (!firstName) {
+                Swal.fire({
+                    title: 'Validation Error',
+                    text: 'First Name is required.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!email) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Email is required.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!email.includes('@')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Email',
+                    text: 'Email must include "@" symbol.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!contact) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Contact number is required.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (contact.length !== 10 || isNaN(contact)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Contact',
+                    text: 'Phone number must be exactly 10 digits long and contain only numbers.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!username) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Username is required.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            // Password validation: Minimum length and strong password
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (password.length < 8) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Error',
+                    text: 'Password must be at least 8 characters long.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (!passwordRegex.test(password)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Error',
+                    text: 'Password must contain at least one uppercase letter, one number, and one special character.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (password !== conpassword) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Mismatch',
+                    text: 'Passwords do not match.',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+             // Final confirmation
+    Swal.fire({
+        title: 'Confirm Submission',
+        text: 'Are you sure you want to submit?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Submit',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Simulate email sending process
+            setTimeout(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Email Sent!',
+                    text: 'Registration email was successfully sent.',
+                    confirmButtonText: 'OK'
+                });
+                form.submit();
+            }, 1000); // Simulates email delay
+        }
+    });
+});
+</script>
 </body>
 </html>

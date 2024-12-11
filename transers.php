@@ -98,7 +98,7 @@ include 'db_connect.php';
         width: calc(100% - 250px); 
         max-width: 800px;
         margin: auto;
-        margin-left: 600px;
+        margin-left: 35%;
            
            
         }

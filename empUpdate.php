@@ -204,7 +204,7 @@ $comp_name = $comp_parts[1];   // Extract com_name
                 
                  <!-- Gender -->
                  <div class="form-group col-md-5">
-                        <label for="sex"><strong>Sex :</strong></label>
+                        <label for="sex"><strong>Gender :</strong></label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="sex" value="Male" <?php echo ($res_user['sex'] == 'Male') ? 'checked' : ''; ?>>
                             <label class="form-check-label">Male</label>

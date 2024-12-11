@@ -98,7 +98,6 @@ include 'db_connect.php';
         }
 
         .form-container {
-            margin-left: 250px; 
         padding: 50px;
         background-color: whitesmoke;
         border-radius: 10px;
@@ -106,8 +105,8 @@ include 'db_connect.php';
         width: calc(100% - 250px); 
         max-width: 800px;
         margin: auto;
-        margin-left: 600px;
-        }
+        margin-left: 35%;
+    }
 
         .form-control {
             color: white;
