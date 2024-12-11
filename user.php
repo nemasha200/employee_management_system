@@ -6,6 +6,7 @@
     <title>User Registration Form</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
@@ -46,6 +47,31 @@
             background-color: #c82333;
             color: white;
         }
+       
+    /* Existing styles here */
+    .toggle-password i {
+        color: white; /* Set the icon color to black */
+    }
+    .toggle-password:hover i {
+        color: black; /* Optional: Add hover effect */
+    }
+
+  
+    /* Existing styles here */
+    .toggle-password {
+        background-color: white; /* Set the background color to gray */
+        border: none; /* Remove border */
+    }
+    .toggle-password:hover {
+        background-color: darkgray; /* Optional: Add hover effect */
+    }
+    .toggle-password i {
+        color: black; /* Set the icon color to black */
+    }
+</style>
+
+</style>
+
     </style>
 </head>
 <body>
@@ -97,11 +123,25 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password<span style="color:red">*</span></label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary toggle-password" type="button">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="conpassword">Confirm Password<span style="color:red">*</span></label>
-                        <input type="password" class="form-control" id="conpassword" name="conpassword" placeholder="Enter confirm password">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="conpassword" name="conpassword" placeholder="Enter confirm password">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary toggle-password" type="button">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-red btn-small">Submit</button>
@@ -114,119 +154,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const firstName = document.getElementById('firstName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const contact = document.getElementById('contact').value.trim();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const conpassword = document.getElementById('conpassword').value.trim();
-
-            // Validation checks
-            if (!firstName) {
-                Swal.fire({
-                    title: 'Validation Error',
-                    text: 'First Name is required.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!email) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Validation Error',
-                    text: 'Email is required.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!email.includes('@')) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid Email',
-                    text: 'Email must include "@" symbol.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!contact) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Validation Error',
-                    text: 'Contact number is required.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (contact.length !== 10 || isNaN(contact)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid Contact',
-                    text: 'Phone number must be exactly 10 digits long and contain only numbers.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!username) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Validation Error',
-                    text: 'Username is required.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            // Password validation: Minimum length and strong password
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (password.length < 8) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Password Error',
-                    text: 'Password must be at least 8 characters long.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (!passwordRegex.test(password)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Password Error',
-                    text: 'Password must contain at least one uppercase letter, one number, and one special character.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (password !== conpassword) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Password Mismatch',
-                    text: 'Passwords do not match.',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            // Final confirmation
-            Swal.fire({
-                title: 'Confirm Submission',
-                text: 'Are you sure you want to submit?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, Submit',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
+        // Show/Hide Password Toggle
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentNode.previousElementSibling;
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
                 }
             });
         });

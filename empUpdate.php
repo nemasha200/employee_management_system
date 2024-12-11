@@ -26,7 +26,7 @@ $res_user = $stmt->get_result()->fetch_assoc();
 $comp_parts = explode('/', $res_user['comp_num']);
 $comp_number = $comp_parts[0]; // Extract com_number
 $comp_name = $comp_parts[1];   // Extract com_name
-$location = $comp_parts[2];   // Extract location
+
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +68,7 @@ $location = $comp_parts[2];   // Extract location
             max-width: 1000px;
             margin: 20px auto; 
             overflow-y: auto; 
-            margin-left: 300px;
+            margin-left: 250px;
 }
         .form-control {
             color: white;
@@ -166,12 +166,11 @@ $location = $comp_parts[2];   // Extract location
                             <?php
                             $getEmp = mysqli_query($con, "SELECT com_number, com_name, location FROM sub_company");
                             while ($resCom = mysqli_fetch_array($getEmp)) {
-                                $value = $resCom['com_number'] . '/' . $resCom['com_name'] . '/' . $resCom['location'];
+                                $value = $resCom['com_number'] . '/' . $resCom['com_name'];
                           
                                 $selected = ($resCom['com_number'] == $comp_number 
-                                    && $resCom['com_name'] == $comp_name 
-                                    && $resCom['location'] == $location) ? 'selected' : '';
-                                echo "<option value='$value' $selected>{$resCom['com_number']}/{$resCom['com_name']}/{$resCom['location']}</option>";
+                                    && $resCom['com_name'] == $comp_name ) ? 'selected' : '';
+                                echo "<option value='$value' $selected>{$resCom['com_number']}/{$resCom['com_name']}</option>";
                             }
                             ?>
                         </select>
