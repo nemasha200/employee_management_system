@@ -35,12 +35,12 @@ if (!isset($_SESSION['admin_id'])) {
         .container {
             padding: 60px;
             border-radius: 20px;
-            background-color: transparent;
+            background-color: #cfccc880;
             width: 100%;
             padding-right: 15px;
             padding-left: 15px;
             margin-right: initial;
-            margin-left: 28%;
+            margin-left: 25%;
         }
 
         .card {
@@ -225,6 +225,12 @@ if (!isset($_SESSION['admin_id'])) {
             left: 120px; 
         }
 
+        .center-text {
+    text-align: center;
+    ;
+}
+
+
     </style>
 </head>
 
@@ -300,6 +306,8 @@ if (!isset($_SESSION['admin_id'])) {
 
 <!-- Dashboard statistics -->                                             
 <div class="container employee-system-section">
+<h5><center>Welcome to the Employee Registration System...</center></h5>
+   
     <div class="row">
         <!-- Total Employees -->
         <div class="col-md-6">
@@ -336,6 +344,13 @@ if (!isset($_SESSION['admin_id'])) {
                 </div>
             </div>
         </div>
+
+<!--         
+        <p style="text-align: center;">
+    This platform allows you to efficiently manage employee data, 
+    access relevant statistics, and maintain seamless operations. Please navigate through the menu for further actions.
+</p> -->
+
     </div>
 </div>
 
