@@ -181,7 +181,7 @@ if(isset($_GET['user_id'])) {
             </div>
 
             <div class="form-group col-md-">
-                            <label for="fullName">Full Name<span style="color:red">*</span></label>
+                            <label for="fullName">Full Name</label>
                             <input type="text" class="form-control" id="fullName" name="fullname" value="<?php echo $res_user['full_name']; ?>" readonly>
                         </div>
             <div class="form-group col-md-">
